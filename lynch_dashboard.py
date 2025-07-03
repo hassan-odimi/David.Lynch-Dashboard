@@ -8,48 +8,47 @@ from about import show_about
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
 
 # ----------------- Load data -----------------
-with open("David Lynch Collection Data.json", encoding="utf-8") as f:
-    data = json.load(f)
+@st.cache_data
+def load_data():
+    with open("David Lynch Collection Data.json", encoding="utf-8") as f:
+        data = json.load(f)
 
-sold_prices = []
-estimated_low = []
-estimated_high = []
-estimated_avg = []
-estimated_price_raw = []
-titles = []
-urls = []
-images = []
+    sold_prices, estimated_low, estimated_high, estimated_avg = [], [], [], []
+    estimated_price_raw, titles, urls, images = [], [], [], []
 
-for item in data:
-    sold = int(item["Sold Price"].replace("$", "").replace(",", "").strip())
-    est_range = item["Estimated Price"].replace("$", "").replace(",", "").strip()
-    if "-" in est_range:
-        est_low, est_high = est_range.split("-")
-        est_low = int(est_low.strip())
-        est_high = int(est_high.strip())
-        est_avg = (est_low + est_high) / 2
-    else:
-        est_low = est_high = est_avg = int(est_range.strip())
+    for item in data:
+        sold = int(item["Sold Price"].replace("$", "").replace(",", "").strip())
+        est_range = item["Estimated Price"].replace("$", "").replace(",", "").strip()
+        if "-" in est_range:
+            est_low, est_high = est_range.split("-")
+            est_low, est_high = int(est_low.strip()), int(est_high.strip())
+            est_avg = (est_low + est_high) / 2
+        else:
+            est_low = est_high = est_avg = int(est_range.strip())
 
-    sold_prices.append(sold)
-    estimated_low.append(est_low)
-    estimated_high.append(est_high)
-    estimated_avg.append(est_avg)
-    estimated_price_raw.append(item["Estimated Price"])
-    titles.append(item["Title"])
-    urls.append(item["Item URL"])
-    images.append(item["Item Image"])
+        sold_prices.append(sold)
+        estimated_low.append(est_low)
+        estimated_high.append(est_high)
+        estimated_avg.append(est_avg)
+        estimated_price_raw.append(item["Estimated Price"])
+        titles.append(item["Title"])
+        urls.append(item["Item URL"])
+        images.append(item["Item Image"])
 
-df = pd.DataFrame({
-    "Title": titles,
-    "Sold Price": sold_prices,
-    "Estimated Low": estimated_low,
-    "Estimated High": estimated_high,
-    "Estimate Avg": estimated_avg,
-    "Estimated Price": estimated_price_raw,
-    "URL": urls,
-    "Image": images
-})
+    df = pd.DataFrame({
+        "Title": titles,
+        "Sold Price": sold_prices,
+        "Estimated Low": estimated_low,
+        "Estimated High": estimated_high,
+        "Estimate Avg": estimated_avg,
+        "Estimated Price": estimated_price_raw,
+        "URL": urls,
+        "Image": images
+    })
+    return df
+
+df = load_data()
+
 
 # ----------------- Detect category -----------------
 def detect_category(title):
