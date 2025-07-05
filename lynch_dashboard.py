@@ -172,7 +172,10 @@ with tab1:
                     this.eGui = document.createElement('a');
                     this.eGui.setAttribute('href', params.value);
                     this.eGui.setAttribute('target', '_blank');
-                    this.eGui.innerText = "Open";
+                    this.eGui.setAttribute('title', 'Open item details in new tab');
+                    this.eGui.style.display = 'inline-flex';
+                    this.eGui.style.alignItems = 'center';
+                    this.eGui.innerHTML = '🔗 Open details page';
                 }
                 getGui() {
                     return this.eGui;

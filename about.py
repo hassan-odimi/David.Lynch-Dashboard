@@ -28,7 +28,7 @@ def show_about():
         st.markdown("""
         ### A Personal Reflection
 
-        *I am fascinated by cinema that defies convention and invites deeper reflection.*
+        I am fascinated by cinema that defies convention and invites deeper reflection.
         Only a few have done so like **David Lynch**. I have always admired his wonderfully strange personality, which reminds me of my grandfather’s eccentric spirit.
         His work — with its surreal imagery and layered narratives — has profoundly influenced modern art and cinema.
 
