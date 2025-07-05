@@ -1,12 +1,16 @@
-# Ignore Python virtual environments
+# Ignore virtual environment
 venv/
 
-# Ignore Python cache files
+# Ignore Python bytecode
 __pycache__/
 *.py[cod]
 
-# Ignore VSCode settings if you don't want them
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore VSCode workspace settings (optional)
 .vscode/
 
-# Ignore system files
+# OS junk
 .DS_Store
+Thumbs.db
