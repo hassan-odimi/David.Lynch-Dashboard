@@ -1,0 +1,16 @@
+# David Lynch Collection Dashboard Requirements
+# Core dashboard framework
+streamlit>=1.28.0
+
+# Data processing and manipulation
+pandas>=1.5.0
+numpy>=1.24.0
+
+# Interactive visualizations
+plotly>=5.15.0
+
+# Interactive data tables
+streamlit-aggrid>=0.3.4
+
+# File handling for exports
+tempfile  # Built-in Python module
