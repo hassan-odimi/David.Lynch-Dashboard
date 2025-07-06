@@ -11,6 +11,3 @@ plotly>=5.15.0
 
 # Interactive data tables
 streamlit-aggrid>=0.3.4
-
-# File handling for exports
-tempfile  # Built-in Python module
