@@ -66,25 +66,6 @@ df = load_data()
 # ----------------- Create Sidebar Filters -----------------
 selected_categories, keyword = create_sidebar_filters(df)
 
-# Add this to your sidebar in main_dashboard.py for debugging
-st.sidebar.markdown("---")
-st.sidebar.markdown("**Theme Testing**")
-current_theme = theme_manager.get_current_theme()
-st.sidebar.write(f"Current theme: {current_theme}")
-st.sidebar.write(f"AgGrid theme: {theme_manager.get_aggrid_theme()}")
-
-if st.sidebar.button("🌓 Toggle Theme"):
-    from theme_utils import toggle_theme
-    toggle_theme()
-    st.rerun()
-
-# Show current colors for debugging
-if current_theme == 'dark':
-    st.sidebar.write("Should be dark mode")
-    st.sidebar.markdown('<div style="background-color: #0e1117; color: #fafafa; padding: 10px;">Dark theme sample</div>', unsafe_allow_html=True)
-else:
-    st.sidebar.write("Should be light mode") 
-    st.sidebar.markdown('<div style="background-color: #ffffff; color: #212529; padding: 10px; border: 1px solid #ccc;">Light theme sample</div>', unsafe_allow_html=True)
 # ----------------- Apply Filters to Data -----------------
 filtered_df = get_filtered_data(df, selected_categories, keyword)
 

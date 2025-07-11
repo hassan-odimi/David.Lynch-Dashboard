@@ -37,14 +37,14 @@ class ThemeManager:
         }
     
     def get_current_theme(self):
-        """Detect current Streamlit theme with fallback"""
+        """Detect current Streamlit theme with auto-initialization"""
         
-        # Check if user manually set preference
-        if hasattr(st.session_state, 'theme_preference'):
-            return st.session_state.theme_preference
+        # Auto-initialize theme preference if not set
+        if not hasattr(st.session_state, 'theme_preference'):
+            # Default to dark since that's what was working
+            st.session_state.theme_preference = 'dark'
         
-        # Default to light theme for now
-        return 'light'
+        return st.session_state.theme_preference
     
     def get_theme_css(self, theme_name):
         """Generate CSS for AgGrid theming with maximum override force"""
