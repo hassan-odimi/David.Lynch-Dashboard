@@ -4,7 +4,6 @@ Handles dynamic theme detection and AgGrid styling
 """
 
 import streamlit as st
-from st_aggrid import AgGridTheme
 
 class ThemeManager:
     """Manages theme detection and AgGrid styling"""
@@ -38,98 +37,107 @@ class ThemeManager:
         }
     
     def get_current_theme(self):
-        """Detect current Streamlit theme with fallbacks"""
-        try:
-            # Try official API first (Streamlit 1.46.0+)
-            if hasattr(st.context, 'theme'):
-                return st.context.theme.type
-        except:
-            pass
+        """Detect current Streamlit theme with fallback"""
         
-        try:
-            # Fallback: Check session state for user preference
-            if 'theme_preference' in st.session_state:
-                return st.session_state.theme_preference
-        except:
-            pass
+        # Check if user manually set preference
+        if hasattr(st.session_state, 'theme_preference'):
+            return st.session_state.theme_preference
         
-        # Default fallback
+        # Default to light theme for now
         return 'light'
     
-    @st.cache_data
-    def get_theme_css(_self, theme_name):
-        """Generate cached CSS for AgGrid theming"""
-        theme = _self.themes.get(theme_name, _self.themes['light'])
+    def get_theme_css(self, theme_name):
+        """Generate CSS for AgGrid theming with maximum override force"""
+        theme = self.themes.get(theme_name, self.themes['light'])
         colors = theme['colors']
         
         return f"""
         <style>
-        /* AgGrid theme customization */
-        .ag-theme-{theme['aggrid_theme']} {{
-            --ag-background-color: {colors['background']};
-            --ag-foreground-color: {colors['text']};
-            --ag-header-background-color: {colors['header']};
-            --ag-header-foreground-color: {colors['text']};
-            --ag-border-color: {colors['border']};
-            --ag-row-hover-color: {colors['hover']};
-            --ag-selected-row-background-color: {colors['selected']};
-            --ag-cell-horizontal-border: 1px solid {colors['border']};
-            --ag-row-border-color: {colors['border']};
-            border-radius: 8px;
-            font-family: "Source Sans Pro", sans-serif;
+        /* Nuclear option - override everything AgGrid related */
+        div[data-testid="stAgGrid"] {{
+            background-color: {colors['background']} !important;
+        }}
+        
+        div[data-testid="stAgGrid"] > div {{
+            background-color: {colors['background']} !important;
+        }}
+        
+        /* Target all possible AgGrid containers */
+        .ag-theme-alpine,
+        .ag-theme-balham,
+        .ag-theme-alpine *,
+        .ag-theme-balham * {{
+            background-color: {colors['background']} !important;
+            color: {colors['text']} !important;
+        }}
+        
+        /* Specific overrides for main containers */
+        .ag-root-wrapper,
+        .ag-root,
+        .ag-body-viewport,
+        .ag-center-cols-container,
+        .ag-body-horizontal-scroll-viewport,
+        .ag-body-vertical-scroll-viewport {{
+            background-color: {colors['background']} !important;
+            color: {colors['text']} !important;
+        }}
+        
+        /* Row overrides */
+        .ag-row,
+        .ag-row-even,
+        .ag-row-odd,
+        .ag-cell {{
+            background-color: {colors['background']} !important;
+            color: {colors['text']} !important;
+            border-color: {colors['border']} !important;
+        }}
+        
+        /* Alternate row coloring for better visibility */
+        .ag-row-odd .ag-cell {{
+            background-color: {colors['surface']} !important;
         }}
         
         /* Header styling */
-        .ag-theme-{theme['aggrid_theme']} .ag-header {{
-            border-bottom: 2px solid {colors['border']};
+        .ag-header,
+        .ag-header-row,
+        .ag-header-cell {{
+            background-color: {colors['header']} !important;
+            color: {colors['text']} !important;
+            border-color: {colors['border']} !important;
         }}
         
-        .ag-theme-{theme['aggrid_theme']} .ag-header-cell-label {{
+        .ag-header-cell-label {{
             color: {colors['text']} !important;
             font-weight: 600 !important;
-            font-size: 14px !important;
         }}
         
-        /* Cell styling */
-        .ag-theme-{theme['aggrid_theme']} .ag-cell {{
-            border-right: 1px solid {colors['border']};
-            display: flex !important;
-            align-items: center !important;
+        /* Pagination */
+        .ag-paging-panel {{
+            background-color: {colors['surface']} !important;
+            color: {colors['text']} !important;
+            border-color: {colors['border']} !important;
         }}
         
-        /* Pagination styling */
-        .ag-theme-{theme['aggrid_theme']} .ag-paging-panel {{
-            background-color: {colors['surface']};
-            border-top: 1px solid {colors['border']};
-            color: {colors['text']};
-        }}
-        
-        /* Links and buttons */
-        .ag-theme-{theme['aggrid_theme']} a {{
+        /* Links remain red */
+        .ag-cell a {{
             color: #ff4b4b !important;
-            text-decoration: none;
-        }}
-        
-        .ag-theme-{theme['aggrid_theme']} a:hover {{
-            text-decoration: underline;
         }}
         </style>
         """
     
     def get_aggrid_theme(self):
-        """Get the appropriate AgGrid theme enum"""
+        """Get the appropriate AgGrid theme as string"""
         current_theme = self.get_current_theme()
-        theme_name = self.themes[current_theme]['aggrid_theme']
-        
-        # Map string to AgGridTheme enum
-        theme_map = {
-            'alpine': AgGridTheme.ALPINE,
-            'balham': AgGridTheme.BALHAM,
-            'material': AgGridTheme.MATERIAL,
-            'streamlit': AgGridTheme.STREAMLIT
-        }
-        
-        return theme_map.get(theme_name, AgGridTheme.ALPINE)
+        if current_theme == 'dark':
+            return 'streamlit'  # Try streamlit theme instead of balham
+        else:
+            return 'alpine'
 
 # Global theme manager instance
 theme_manager = ThemeManager()
+
+# Simple function for manual theme testing
+def toggle_theme():
+    """Toggle between light and dark theme for testing"""
+    current = theme_manager.get_current_theme()
+    st.session_state.theme_preference = 'dark' if current == 'light' else 'light'
