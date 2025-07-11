@@ -4,6 +4,7 @@ Interactive Streamlit dashboard for exploring the David Lynch Collection auction
 """
 
 import streamlit as st
+from theme_utils import theme_manager
 
 # Import our custom modules
 from data_processing import load_data, get_filtered_data, calculate_summary_stats
@@ -23,6 +24,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# Apply global theme styling
+current_theme = theme_manager.get_current_theme()
+theme_css = theme_manager.get_theme_css(current_theme)
+st.markdown(theme_css, unsafe_allow_html=True)
 
 # Enhanced styling for better tab experience
 st.markdown("""
@@ -57,6 +62,14 @@ df = load_data()
 
 # ----------------- Create Sidebar Filters -----------------
 selected_categories, keyword = create_sidebar_filters(df)
+
+# Add to sidebar (optional - for testing)
+st.sidebar.markdown("---")
+st.sidebar.markdown("**Theme Settings**")
+if st.sidebar.button("🌓 Toggle Theme (Test)", help="Toggle between light/dark for testing"):
+    current = theme_manager.get_current_theme()
+    st.session_state.theme_preference = 'dark' if current == 'light' else 'light'
+    st.rerun()
 
 # ----------------- Apply Filters to Data -----------------
 filtered_df = get_filtered_data(df, selected_categories, keyword)
