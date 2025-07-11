@@ -68,6 +68,13 @@ selected_categories, keyword = create_sidebar_filters(df)
 
 # ----------------- Apply Filters to Data -----------------
 filtered_df = get_filtered_data(df, selected_categories, keyword)
+# Apply price filter if set
+if hasattr(st.session_state, 'price_filter') and st.session_state.price_filter:
+    min_price, max_price = st.session_state.price_filter
+    filtered_df = filtered_df[
+        (filtered_df["Sold Price"] >= min_price) & 
+        (filtered_df["Sold Price"] <= max_price)
+    ]
 
 # ----------------- Calculate Summary Statistics -----------------
 stats = calculate_summary_stats(filtered_df)

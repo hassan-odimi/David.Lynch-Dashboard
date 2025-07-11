@@ -10,7 +10,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
 
 def create_sidebar_filters(df):
     """
-    Create sidebar filters for category selection and keyword search.
+    Create clean sidebar filters with professional UX.
     
     Args:
         df (pd.DataFrame): The main dataset
@@ -18,41 +18,142 @@ def create_sidebar_filters(df):
     Returns:
         tuple: (selected_categories, keyword) - user filter selections
     """
-    st.sidebar.header("Filter Data")
-    categories = sorted(df["Category"].unique())
+    # Clean header
+    st.sidebar.header("Collection Filters")
     
-    # Category filter with expandable section
-    with st.sidebar.expander("Filter by Category", expanded=True):
-        
-        # Initialize session state for category selection
-        if "selected_categories" not in st.session_state:
-            st.session_state.selected_categories = {category: True for category in categories}
-        
-        # Select/Clear all buttons
-        with st.container():
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button("✅ Select All"):
-                    for category in categories:
-                        st.session_state.selected_categories[category] = True
-            with col2:
-                if st.button("❌ Clear All"):
-                    for category in categories:
-                        st.session_state.selected_categories[category] = False
-        
-        # Individual category checkboxes
-        for category in categories:
-            st.session_state.selected_categories[category] = st.checkbox(
-                category,
-                value=st.session_state.selected_categories[category],
-                key=f"category_{category}"
-            )
+    # Search with clear button
+    st.sidebar.markdown("### Search Collection")
+    
+    # Initialize search in session state
+    if "search_keyword" not in st.session_state:
+        st.session_state.search_keyword = ""
+    
+    col1, col2 = st.sidebar.columns([4, 1])
+    
+    with col1:
+        keyword = st.text_input(
+            "Search by keyword in title", 
+            value=st.session_state.search_keyword,
+            placeholder="e.g., coffee, camera, script...",
+            label_visibility="collapsed",
+            key=f"search_input_{st.session_state.get('search_clear_counter', 0)}"
+        )
+    
+    with col2:
+        if st.button("Clear", use_container_width=True, type="secondary"):
+            st.session_state.search_keyword = ""
+            # Force the text input to update by using a unique key
+            if 'search_clear_counter' not in st.session_state:
+                st.session_state.search_clear_counter = 0
+            st.session_state.search_clear_counter += 1
+            st.rerun()
+    
+    # Update session state when input changes
+    if keyword != st.session_state.search_keyword:
+        st.session_state.search_keyword = keyword
+    
+    keyword = st.session_state.search_keyword
+    
+    st.sidebar.markdown("---")
+    
+    # Category filtering
+    st.sidebar.markdown("### Filter by Category")
+    
+    categories = sorted(df["Category"].unique())
+    category_counts = df["Category"].value_counts()
+    
+    # Initialize session state for category selection
+    if "selected_categories" not in st.session_state:
+        st.session_state.selected_categories = {category: True for category in categories}
+    
+    # Selection buttons
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        if st.button("Select All", use_container_width=True):
+            for category in categories:
+                st.session_state.selected_categories[category] = True
+            st.rerun()
+    
+    with col2:
+        if st.button("Clear All", use_container_width=True):
+            for category in categories:
+                st.session_state.selected_categories[category] = False
+            st.rerun()
+    
+    # Improved category grouping - include Props & Memorabilia in main groups
+    creative_categories = ["Scripts & Screenplays", "Books & Reference", "Posters & Prints", "Props & Memorabilia"]
+    equipment_categories = ["Cameras & Camcorders", "Lighting Equipment", "Instruments & Audio"]
+    personal_categories = ["Coffee & Kitchen", "Records & Music", "Furniture"]
+    other_categories = [cat for cat in categories if cat not in creative_categories + equipment_categories + personal_categories]
+    
+    # Creative & Literary items
+    with st.sidebar.expander("**Creative & Literary**", expanded=True):
+        for category in creative_categories:
+            if category in categories:
+                count = category_counts.get(category, 0)
+                st.session_state.selected_categories[category] = st.checkbox(
+                    f"{category} ({count})",
+                    value=st.session_state.selected_categories[category],
+                    key=f"category_{category}"
+                )
+    
+    # Equipment & Technology
+    with st.sidebar.expander("**Equipment & Technology**", expanded=True):
+        for category in equipment_categories:
+            if category in categories:
+                count = category_counts.get(category, 0)
+                st.session_state.selected_categories[category] = st.checkbox(
+                    f"{category} ({count})",
+                    value=st.session_state.selected_categories[category],
+                    key=f"category_{category}"
+                )
+    
+    # Personal & Lifestyle
+    with st.sidebar.expander("**Personal & Lifestyle**", expanded=True):
+        for category in personal_categories:
+            if category in categories:
+                count = category_counts.get(category, 0)
+                st.session_state.selected_categories[category] = st.checkbox(
+                    f"{category} ({count})",
+                    value=st.session_state.selected_categories[category],
+                    key=f"category_{category}"
+                )
+    
+    # Other items
+    if other_categories:
+        with st.sidebar.expander("**Other Items**", expanded=False):
+            for category in other_categories:
+                count = category_counts.get(category, 0)
+                st.session_state.selected_categories[category] = st.checkbox(
+                    f"{category} ({count})",
+                    value=st.session_state.selected_categories[category],
+                    key=f"category_{category}"
+                )
     
     # Get selected categories
     selected_categories = [c for c, checked in st.session_state.selected_categories.items() if checked]
     
-    # Keyword search input
-    keyword = st.sidebar.text_input("Search by keyword in title", "")
+    # Price range filter - expanded by default
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### Price Range Filter")
+    
+    min_price = int(df["Sold Price"].min())
+    max_price = int(df["Sold Price"].max())
+    
+    price_range = st.sidebar.slider(
+        "Filter by sold price",
+        min_value=min_price,
+        max_value=max_price,
+        value=(min_price, max_price),
+        format="$%d",
+        help="Drag to set minimum and maximum price range"
+    )
+    
+    # Store price filter in session state
+    if price_range != (min_price, max_price):
+        st.session_state.price_filter = price_range
+    else:
+        st.session_state.price_filter = None
     
     return selected_categories, keyword
 
