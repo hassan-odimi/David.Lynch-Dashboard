@@ -59,23 +59,28 @@ st.markdown("""
 *Explore the fascinating world of David Lynch through the auction data of his personal collection.*
 """)
 
-# ----------------- Load Data -----------------
-# This uses caching to avoid reloading data on every interaction
-df = load_data()
+# Add loading for data loading (after st.set_page_config())
+with st.spinner("🔄 Loading David Lynch Collection data..."):
+    df = load_data()
 
-# ----------------- Create Sidebar Filters -----------------
+# Add loading for filter application (after getting filters)
 selected_categories, keyword = create_sidebar_filters(df)
 
-# ----------------- Apply Filters to Data -----------------
-filtered_df = get_filtered_data(df, selected_categories, keyword)
-price_filter = getattr(st.session_state, 'price_filter', None)
-filtered_df = get_filtered_data(df, selected_categories, keyword, price_filter)
+# Show loading when applying filters
+if selected_categories or keyword or hasattr(st.session_state, 'price_filter'):
+    with st.spinner("🔍 Applying filters..."):
+        price_filter = getattr(st.session_state, 'price_filter', None)
+        filtered_df = get_filtered_data(df, selected_categories, keyword, price_filter)
+        stats = calculate_summary_stats(filtered_df)
+else:
+    filtered_df = df
+    stats = calculate_summary_stats(df)
 
-# ----------------- Calculate Summary Statistics -----------------
-stats = calculate_summary_stats(filtered_df)
-
-# ----------------- Display Filter Information -----------------
-display_filter_info(selected_categories, keyword, len(df), len(filtered_df))
+# Display filter information with loading feedback
+if filtered_df.empty:
+    st.warning("⚠️ No items match your current filters. Try adjusting your selection.")
+else:
+    display_filter_info(selected_categories, keyword, len(df), len(filtered_df))
 
 # ----------------- Create Tab Navigation -----------------
 tab1, tab2, tab3, tab4, tab5 = create_tab_navigation()
@@ -84,24 +89,22 @@ tab1, tab2, tab3, tab4, tab5 = create_tab_navigation()
 with tab1:
     st.header("📋 Browse Collection")
     
-    # Add contextual help
     with st.expander("💡 How to use this table", expanded=False):
         st.markdown("""
         - **Click column headers** to sort
-        - **Use the sidebar** to filter by category or search keywords
+        - **Use the sidebar** to filter by category or search keywords  
         - **Click item images** to view full-size
         - **Use 'Open details'** to view original auction listings
         """)
     
-    # Show summary statistics at the top
-    create_summary_display(stats)
-
-    # Display the interactive data table
-    st.subheader("Detailed Data Table")
     if not filtered_df.empty:
-        create_data_table(filtered_df)
-        
-        # Provide download options
+        with st.spinner("📋 Loading collection table..."):
+            create_summary_display(stats)
+            
+        st.subheader("Detailed Data Table")
+        with st.spinner("🔄 Preparing interactive table..."):
+            create_data_table(filtered_df)
+            
         st.subheader("Export Data")
         create_download_buttons(filtered_df)
     else:
@@ -112,7 +115,6 @@ with tab2:
     st.header("🗺️ Collection Map")
     
     if not filtered_df.empty:
-        # Add interpretation guide
         col_info, col_chart = st.columns([1, 2])
         
         with col_info:
@@ -130,26 +132,27 @@ with tab2:
             """)
         
         with col_chart:
-            fig_tree = create_treemap(filtered_df)
-            st.plotly_chart(fig_tree, use_container_width=True)
+            with st.spinner("🗺️ Generating collection map..."):
+                fig_tree = create_treemap(filtered_df)
+                st.plotly_chart(fig_tree, use_container_width=True)
     else:
         st.warning("No data available for the treemap with current filters.")
+
 # ----------------- Scatter Plot Tab -----------------
 with tab3:
-    st.header("📈 Price Analysis")
+    st.header("💰 Price Explorer")
     
     if not filtered_df.empty:
         st.markdown("""
         This scatter plot compares the estimated average price with the actual sold price 
         for each item. Items above the diagonal line sold for more than estimated, while 
-        items below sold for less. The logarithmic scale helps visualize the wide range of prices.
+        items below sold for less.
         """)
         
-        # Create and display the scatter plot
-        fig_scatter = create_scatter_plot(filtered_df)
-        st.plotly_chart(fig_scatter, use_container_width=True)
+        with st.spinner("📈 Analyzing price patterns..."):
+            fig_scatter = create_scatter_plot(filtered_df)
+            st.plotly_chart(fig_scatter, use_container_width=True)
         
-        # Add interpretation help
         st.markdown("""
         **How to read this chart:**
         - Points above the diagonal indicate items that sold above their estimated average
@@ -160,19 +163,18 @@ with tab3:
         st.warning("No data available for the scatter plot with current filters.")
 
 # ----------------- Insights Tab -----------------
-# ----------------- Insights Tab -----------------
 with tab4:
     st.header("🔍 Collection Insights")
     
     if not filtered_df.empty:
-        # Quick metrics at top (no duplication with Tab 1)
+        # Quick metrics (no loading needed - fast calculation)
         col1, col2, col3 = st.columns(3)
         
-        # Calculate insights data
-        over_estimate = filtered_df[filtered_df["Sold Price"] > filtered_df["Estimate Avg"]]
-        under_estimate = filtered_df[filtered_df["Sold Price"] < filtered_df["Estimate Avg"]]
-        over_percentage = (len(over_estimate) / len(filtered_df)) * 100
-        avg_premium = ((over_estimate["Sold Price"] - over_estimate["Estimate Avg"]) / over_estimate["Estimate Avg"] * 100).mean() if len(over_estimate) > 0 else 0
+        with st.spinner("📊 Calculating insights..."):
+            over_estimate = filtered_df[filtered_df["Sold Price"] > filtered_df["Estimate Avg"]]
+            under_estimate = filtered_df[filtered_df["Sold Price"] < filtered_df["Estimate Avg"]]
+            over_percentage = (len(over_estimate) / len(filtered_df)) * 100
+            avg_premium = ((over_estimate["Sold Price"] - over_estimate["Estimate Avg"]) / over_estimate["Estimate Avg"] * 100).mean() if len(over_estimate) > 0 else 0
         
         with col1:
             st.metric("Above Estimate", f"{over_percentage:.0f}%", f"{len(over_estimate)} items")
@@ -189,15 +191,15 @@ with tab4:
         
         st.markdown("---")
         
-        # Tabbed sections to avoid overwhelming layout
         insight_tab1, insight_tab2, insight_tab3 = st.tabs(["📊 Market Performance", "🖼️ Top Items", "📈 Price Patterns"])
         
         with insight_tab1:
             st.markdown("#### Estimate vs Actual Performance")
             st.markdown("How auction estimates compared to final sale prices for the most valuable items.")
             
-            fig_dumbbell = create_dumbbell_chart(filtered_df, n_items=10)
-            st.plotly_chart(fig_dumbbell, use_container_width=True, key="dumbbell_insights")
+            with st.spinner("📊 Creating performance analysis..."):
+                fig_dumbbell = create_dumbbell_chart(filtered_df, n_items=10)
+                st.plotly_chart(fig_dumbbell, use_container_width=True, key="dumbbell_insights")
             
             st.markdown("#### Market Insights")
             st.markdown(f"""
@@ -210,33 +212,35 @@ with tab4:
             st.markdown("#### Visual Gallery: Collection Highlights")
             st.markdown("The most valuable and distinctive pieces from the filtered selection.")
             
-            show_item_gallery(filtered_df, n_items=8, columns=4)
+            with st.spinner("🖼️ Loading collection highlights..."):
+                show_item_gallery(filtered_df, n_items=8, columns=4)
         
         with insight_tab3:
             st.markdown("#### Price Distribution Analysis")
             
-            # Side-by-side comparison
             col_left, col_right = st.columns(2)
             
             with col_left:
                 st.markdown("**Highest Values**")
-                fig_expensive = create_horizontal_bar_chart(
-                    filtered_df, 
-                    "Top 10 Most Expensive", 
-                    n_items=10, 
-                    ascending=False
-                )
-                st.plotly_chart(fig_expensive, use_container_width=True, key="expensive_insights")
+                with st.spinner("📈 Analyzing top items..."):
+                    fig_expensive = create_horizontal_bar_chart(
+                        filtered_df, 
+                        "Top 10 Most Expensive", 
+                        n_items=10, 
+                        ascending=False
+                    )
+                    st.plotly_chart(fig_expensive, use_container_width=True, key="expensive_insights")
             
             with col_right:
                 st.markdown("**Best Value Finds**")
-                fig_cheapest = create_horizontal_bar_chart(
-                    filtered_df, 
-                    "Top 10 Cheapest", 
-                    n_items=10, 
-                    ascending=True
-                )
-                st.plotly_chart(fig_cheapest, use_container_width=True, key="cheapest_insights")
+                with st.spinner("💰 Finding best values..."):
+                    fig_cheapest = create_horizontal_bar_chart(
+                        filtered_df, 
+                        "Top 10 Cheapest", 
+                        n_items=10, 
+                        ascending=True
+                    )
+                    st.plotly_chart(fig_cheapest, use_container_width=True, key="cheapest_insights")
     else:
         st.warning("No data available for insights with current filters.")
 # ----------------- About Tab -----------------

@@ -6,6 +6,22 @@ Contains reusable UI components and data table configurations
 import streamlit as st
 import tempfile
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
+import contextlib
+import time
+
+@contextlib.contextmanager
+def loading_spinner(text="Loading..."):
+    """Context manager for showing loading spinners"""
+    placeholder = st.empty()
+    with placeholder.container():
+        st.spinner(text)
+        yield
+    placeholder.empty()
+
+def show_loading_message(message, duration=0.5):
+    """Show a brief loading message"""
+    with st.spinner(message):
+        time.sleep(duration)
 
 
 def create_sidebar_filters(df):
@@ -149,6 +165,11 @@ def create_sidebar_filters(df):
         help="Drag to set minimum and maximum price range"
     )
     
+    if st.session_state.get('price_filter') or keyword or len([c for c, checked in st.session_state.selected_categories.items() if checked]) < len(categories):
+        with st.sidebar.container():
+            st.markdown("---")
+            st.info("🔄 **Filters active** - Results updating...")
+
     # Store price filter in session state
     if price_range != (min_price, max_price):
         st.session_state.price_filter = price_range
