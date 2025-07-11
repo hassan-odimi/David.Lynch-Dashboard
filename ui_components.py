@@ -56,10 +56,9 @@ def create_sidebar_filters(df):
     
     return selected_categories, keyword
 
-
 def create_data_table(df):
     """
-    Create a theme-responsive interactive data table using AgGrid.
+    Create an interactive data table using AgGrid with dynamic theming.
     
     Args:
         df (pd.DataFrame): The filtered dataset to display
@@ -84,17 +83,9 @@ def create_data_table(df):
     )
     
     # Basic grid configuration
-    gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=50)
+    gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=100)
     gb.configure_side_bar()
-    gb.configure_default_column(
-        groupable=True, 
-        value=True, 
-        enableRowGroup=True, 
-        editable=False,
-        resizable=True,
-        sortable=True,
-        filter=True
-    )
+    gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, editable=False)
     
     # Grid behavior settings
     gb.configure_grid_options(
@@ -143,7 +134,7 @@ def create_data_table(df):
                     this.eGui.setAttribute('title', 'Open item details in new tab');
                     this.eGui.style.display = 'inline-flex';
                     this.eGui.style.alignItems = 'center';
-                    this.eGui.innerHTML = '🔗 View Details';
+                    this.eGui.innerHTML = '🔗 Open details page';
                 }
                 getGui() {
                     return this.eGui;
@@ -168,9 +159,6 @@ def create_data_table(df):
                         ">
                             <img src="${params.value}" style="
                                 width: 100px;
-                                height: 100px;
-                                object-fit: cover;
-                                border-radius: 4px;
                                 transition: transform 0.2s ease;
                                 display: block;
                                 margin: 0 auto;
@@ -187,16 +175,16 @@ def create_data_table(df):
         """)
     )
     
-    # Display the grid with theme-responsive settings
+    # Display the grid with dynamic theme
     try:
         AgGrid(
             df_display[["Image", "Title", "Sold Price", "Estimated Price", "Estimate Avg", "Category", "Link"]],
             gridOptions=gb.build(),
-            theme=theme_manager.get_aggrid_theme(),
             enable_enterprise_modules=False,
             allow_unsafe_jscode=True,
             update_mode="NO_UPDATE",
             fit_columns_on_grid_load=True,
+            theme=theme_manager.get_aggrid_theme(),  # Dynamic theme!
             height=600,
             key="data_table_main"
         )
@@ -204,7 +192,6 @@ def create_data_table(df):
         st.error(f"Table failed to load: {e}")
         # Fallback to native Streamlit dataframe
         st.dataframe(df_display[["Title", "Sold Price", "Estimated Price", "Category"]], use_container_width=True)
-
 
 def create_summary_display(stats):
     """

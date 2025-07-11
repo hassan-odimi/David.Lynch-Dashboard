@@ -25,9 +25,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 # Apply global theme styling
-current_theme = theme_manager.get_current_theme()
-theme_css = theme_manager.get_theme_css(current_theme)
-st.markdown(theme_css, unsafe_allow_html=True)
+try:
+    current_theme = theme_manager.get_current_theme()
+    theme_css = theme_manager.get_theme_css(current_theme)
+    st.markdown(theme_css, unsafe_allow_html=True)
+except Exception:
+    pass  # Fallback gracefully if theme manager fails
 
 # Enhanced styling for better tab experience
 st.markdown("""
