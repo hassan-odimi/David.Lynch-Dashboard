@@ -297,19 +297,20 @@ def create_data_table(df):
         """)
     )
     
-    # Display the grid with dynamic theme
+# Display the grid with dynamic theme
     try:
-        AgGrid(
-            df_display[["Image", "Title", "Sold Price", "Estimated Price", "Estimate Avg", "Category", "Link"]],
-            gridOptions=gb.build(),
-            enable_enterprise_modules=False,
-            allow_unsafe_jscode=True,
-            update_mode="NO_UPDATE",
-            fit_columns_on_grid_load=True,
-            theme=theme_manager.get_aggrid_theme(),  # Dynamic theme!
-            height=600,
-            key="data_table_main"
-        )
+        with st.spinner(f"📊 Loading interactive table with {len(df_display)} items..."):
+            AgGrid(
+                df_display[["Image", "Title", "Sold Price", "Estimated Price", "Estimate Avg", "Category", "Link"]],
+                gridOptions=gb.build(),
+                enable_enterprise_modules=False,
+                allow_unsafe_jscode=True,
+                update_mode="NO_UPDATE",
+                fit_columns_on_grid_load=True,
+                theme=theme_manager.get_aggrid_theme(),  # Dynamic theme!
+                height=600,
+                key="data_table_main"
+            )
     except Exception as e:
         st.error(f"Table failed to load: {e}")
         # Fallback to native Streamlit dataframe
