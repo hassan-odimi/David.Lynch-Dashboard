@@ -131,6 +131,11 @@ def create_dumbbell_chart(df, n_items=10):
     
     return fig_dumbbell
 
+@st.cache_data
+def _prepare_gallery_data(df, n_items):
+    """Cache the gallery data preparation to avoid reprocessing on filter changes"""
+    return df.nlargest(n_items, "Sold Price").sort_values("Sold Price", ascending=False).reset_index(drop=True)
+
 def show_item_gallery(df, n_items=10, columns=4):
     """
     Display a visual gallery of top items with images, titles, and prices.
@@ -140,8 +145,8 @@ def show_item_gallery(df, n_items=10, columns=4):
         n_items (int): Number of items to display
         columns (int): Number of columns in the gallery layout
     """
-    # Get top items sorted by price
-    sorted_df = df.nlargest(n_items, "Sold Price").sort_values("Sold Price", ascending=False).reset_index(drop=True)
+    # Use cached data preparation - this prevents resorting when filters haven't changed
+    sorted_df = _prepare_gallery_data(df, n_items)
     
     # Create column layout
     cols = st.columns(columns)

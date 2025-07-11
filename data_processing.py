@@ -103,18 +103,15 @@ def detect_category(title):
     return "Other"
 
 
-def get_filtered_data(df, selected_categories, keyword=""):
+@st.cache_data
+def get_filtered_data(df, selected_categories, keyword="", price_filter=None):
     """
-    Filter the DataFrame based on selected categories and keyword search.
+    Filter the DataFrame based on selected categories, keyword search, and price range.
+    Now with caching for better performance.
+    """
+    # Convert lists to tuples for hashing
+    selected_categories = tuple(sorted(selected_categories))
     
-    Args:
-        df (pd.DataFrame): The main dataset
-        selected_categories (list): List of categories to include
-        keyword (str): Search term to filter titles
-        
-    Returns:
-        pd.DataFrame: Filtered DataFrame
-    """
     # Filter by categories
     filtered_df = df[df["Category"].isin(selected_categories)]
     
@@ -124,19 +121,26 @@ def get_filtered_data(df, selected_categories, keyword=""):
             filtered_df["Title"].str.contains(keyword, case=False, na=False)
         ]
     
+    # Apply price filter if provided
+    if price_filter:
+        min_price, max_price = price_filter
+        filtered_df = filtered_df[
+            (filtered_df["Sold Price"] >= min_price) & 
+            (filtered_df["Sold Price"] <= max_price)
+        ]
+    
     return filtered_df
 
 
+@st.cache_data
 def calculate_summary_stats(df):
     """
     Calculate summary statistics for the filtered dataset.
-    
-    Args:
-        df (pd.DataFrame): The filtered dataset
-        
-    Returns:
-        dict: Dictionary containing summary statistics
+    Now cached for better performance.
     """
+    # Convert DataFrame to a hashable representation
+    df_hash = hash(str(df.values.tobytes()))
+    
     if df.empty:
         return {
             "total_items": 0,
