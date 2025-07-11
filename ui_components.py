@@ -209,15 +209,14 @@ def create_summary_display(stats):
     
     # Main summary section
     st.markdown(f"""
-    ### Quick Collection Insights
+    ### Quick Insights
     
     - **Total Items:** {stats["total_items"]:,}
     - **Total Sold Value:** ${stats["total_value"]:,.0f}
     - **Average Sold Price:** ${stats["average_price"]:,.0f}
     - **Price Range:** ${stats["min_price"]:,.0f} - ${stats["max_price"]:,.0f}
     - **Most Expensive Item:** *{stats["most_expensive"]["Title"]}* (${stats["most_expensive"]["Sold Price"]:,.0f})
-    - **Cheapest Item:** *{stats["cheapest"]["Title"]}* (${stats["cheapest"]["Sold Price"]:,.0f})
-    - **Most Common Category:** {stats["most_common_category"]}
+    - **Least Expensive Item:** *{stats["cheapest"]["Title"]}* (${stats["cheapest"]["Sold Price"]:,.0f})
     """)
 
 
@@ -264,17 +263,12 @@ def create_download_buttons(df):
 
 
 def create_tab_navigation():
-    """
-    Create the main tab navigation for the dashboard.
-    
-    Returns:
-        tuple: Streamlit tab objects for each section
-    """
+    """Create enhanced tab navigation with better labels and icons."""
     return st.tabs([
-        "📑 Data Table", 
-        "🌳 Treemap", 
-        "📈 Scatter Plot", 
-        "🔍 Insights", 
+        "📋 Browse Collection", 
+        "🗺️ Collection Map", 
+        "💰 Price Explorer", 
+        "🔍 Key Insights", 
         "ℹ️ About"
     ])
 

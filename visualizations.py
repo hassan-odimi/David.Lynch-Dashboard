@@ -88,39 +88,31 @@ def create_horizontal_bar_chart(df, title_text, n_items=10, ascending=False):
 
 
 def create_dumbbell_chart(df, n_items=10):
-    """
-    Create a dumbbell chart comparing estimated vs sold prices for top items.
-    
-    Args:
-        df (pd.DataFrame): Dataset containing price information
-        n_items (int): Number of top items to display
-        
-    Returns:
-        plotly.graph_objects.Figure: Dumbbell chart figure
-    """
-    # Get top expensive items sorted by sold price
+    """Create a dumbbell chart comparing estimated vs sold prices for top items."""
     top_expensive = df.nlargest(n_items, "Sold Price").sort_values("Sold Price", ascending=False)
     
-    # Create base scatter plot for estimated prices
     fig_dumbbell = px.scatter(
         top_expensive,
         x="Estimate Avg",
         y="Title",
         color_discrete_sequence=["gray"],
-        symbol_sequence=["circle"],
-        labels={"Estimate Avg": "Estimate Avg ($)", "Title": "Item"}
+        labels={"Estimate Avg": "Price ($)", "Title": "Item"},
+        title=""  # Remove title to avoid conflicts
     )
     
-    # Add scatter points for sold prices
+    # Update traces with explicit names
+    fig_dumbbell.data[0].name = "Estimated"
+    
+    # Add sold prices
     fig_dumbbell.add_scatter(
         x=top_expensive["Sold Price"],
         y=top_expensive["Title"],
         mode='markers',
         marker=dict(color="gold", size=8),
-        name="Sold Price"
+        name="Actual Sale"
     )
     
-    # Connect estimated and sold prices with lines
+    # Connect with lines
     for _, row in top_expensive.iterrows():
         fig_dumbbell.add_shape(
             type="line",
@@ -131,17 +123,13 @@ def create_dumbbell_chart(df, n_items=10):
             line=dict(color="lightgray", width=2)
         )
     
-    # Update layout for better presentation
     fig_dumbbell.update_layout(
-        title="Top 10: Sold vs Estimated Avg",
-        xaxis_title="Price ($)",
-        yaxis_title="",
         height=600,
-        showlegend=True
+        showlegend=True,
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
     
     return fig_dumbbell
-
 
 def show_item_gallery(df, n_items=10, columns=4):
     """

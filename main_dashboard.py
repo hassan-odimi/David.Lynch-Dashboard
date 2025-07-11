@@ -24,6 +24,27 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Enhanced styling for better tab experience
+st.markdown("""
+<style>
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 8px 8px 0px 0px;
+    }
+    .metric-container {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 0.5rem 0;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # ----------------- Main Title and Introduction -----------------
 st.title("🎬 David Lynch Collection Dashboard")
 st.markdown("""
@@ -51,11 +72,20 @@ tab1, tab2, tab3, tab4, tab5 = create_tab_navigation()
 
 # ----------------- Data Table Tab -----------------
 with tab1:
-    st.header("📑 Collection Data Table")
+    st.header("📋 Browse Collection")
+    
+    # Add contextual help
+    with st.expander("💡 How to use this table", expanded=False):
+        st.markdown("""
+        - **Click column headers** to sort
+        - **Use the sidebar** to filter by category or search keywords
+        - **Click item images** to view full-size
+        - **Use 'Open details'** to view original auction listings
+        """)
     
     # Show summary statistics at the top
     create_summary_display(stats)
-    
+
     # Display the interactive data table
     st.subheader("Detailed Data Table")
     if not filtered_df.empty:
@@ -69,22 +99,31 @@ with tab1:
 
 # ----------------- Treemap Tab -----------------
 with tab2:
-    st.header("🌳 Collection Treemap")
+    st.header("🗺️ Collection Map")
     
     if not filtered_df.empty:
-        st.markdown("""
-        This treemap visualization shows the hierarchical structure of the collection, 
-        with items grouped by category and sized by their sold price. The color intensity 
-        represents the logarithmic scale of the sold price, helping you identify the most 
-        valuable items at a glance.
-        """)
+        # Add interpretation guide
+        col_info, col_chart = st.columns([1, 2])
         
-        # Create and display the treemap
-        fig_tree = create_treemap(filtered_df)
-        st.plotly_chart(fig_tree, use_container_width=True)
+        with col_info:
+            st.markdown("""
+            **Reading this visualisation:**
+            
+            🔶 **Size** = Sale price  
+            🎨 **Colour** = Price intensity  
+            📦 **Groups** = Categories
+            
+            **What to look for:**
+            - Largest rectangles = highest-value items
+            - Darkest colours = premium pieces
+            - Category distribution patterns
+            """)
+        
+        with col_chart:
+            fig_tree = create_treemap(filtered_df)
+            st.plotly_chart(fig_tree, use_container_width=True)
     else:
         st.warning("No data available for the treemap with current filters.")
-
 # ----------------- Scatter Plot Tab -----------------
 with tab3:
     st.header("📈 Price Analysis")
@@ -111,104 +150,85 @@ with tab3:
         st.warning("No data available for the scatter plot with current filters.")
 
 # ----------------- Insights Tab -----------------
+# ----------------- Insights Tab -----------------
 with tab4:
     st.header("🔍 Collection Insights")
     
     if not filtered_df.empty:
-        # Visual gallery of top expensive items
-        st.markdown("### Visual Gallery: Top 10 Most Expensive Items")
-        st.markdown("""
-        Here's a visual exploration of the most valuable pieces in the filtered collection. 
-        Each card shows the item's image, title, final sale price, and provides a direct link 
-        to the original auction listing for more details.
-        """)
+        # Quick metrics at top (no duplication with Tab 1)
+        col1, col2, col3 = st.columns(3)
         
-        show_item_gallery(filtered_df, n_items=10, columns=4)
+        # Calculate insights data
+        over_estimate = filtered_df[filtered_df["Sold Price"] > filtered_df["Estimate Avg"]]
+        under_estimate = filtered_df[filtered_df["Sold Price"] < filtered_df["Estimate Avg"]]
+        over_percentage = (len(over_estimate) / len(filtered_df)) * 100
+        avg_premium = ((over_estimate["Sold Price"] - over_estimate["Estimate Avg"]) / over_estimate["Estimate Avg"] * 100).mean() if len(over_estimate) > 0 else 0
         
-        # Most expensive items bar chart
-        st.markdown("### Top 10 Most Expensive Items")
-        fig_expensive = create_horizontal_bar_chart(
-            filtered_df, 
-            "Top 10 Most Expensive Items", 
-            n_items=10, 
-            ascending=False
-        )
-        st.plotly_chart(fig_expensive, use_container_width=True)
+        with col1:
+            st.metric("Above Estimate", f"{over_percentage:.0f}%", f"{len(over_estimate)} items")
         
-        # Cheapest items bar chart
-        st.markdown("### Top 10 Cheapest Items")
-        fig_cheapest = create_horizontal_bar_chart(
-            filtered_df, 
-            "Top 10 Cheapest Items", 
-            n_items=10, 
-            ascending=True
-        )
-        st.plotly_chart(fig_cheapest, use_container_width=True)
-        
-        # Dumbbell chart comparing estimates vs actual sales
-        st.markdown("### Estimate vs Sold Price Comparison")
-        st.markdown("""
-        This dumbbell chart shows how the actual sold prices compared to the estimated 
-        average prices for the top 10 most expensive items. Gray dots represent estimated 
-        prices, gold dots show actual sold prices, and the connecting lines illustrate 
-        the difference between expectation and reality.
-        """)
-        
-        fig_dumbbell = create_dumbbell_chart(filtered_df, n_items=10)
-        st.plotly_chart(fig_dumbbell, use_container_width=True)
-        
-        # Additional insights section
-        st.markdown("### Key Insights")
-        
-        # Calculate some interesting statistics
-        if len(filtered_df) > 0:
-            # Items that sold above/below estimate
-            over_estimate = filtered_df[filtered_df["Sold Price"] > filtered_df["Estimate Avg"]]
-            under_estimate = filtered_df[filtered_df["Sold Price"] < filtered_df["Estimate Avg"]]
-            
-            over_percentage = (len(over_estimate) / len(filtered_df)) * 100
-            under_percentage = (len(under_estimate) / len(filtered_df)) * 100
-            
-            # Average premium/discount
-            if len(over_estimate) > 0:
-                avg_premium = ((over_estimate["Sold Price"] - over_estimate["Estimate Avg"]) / over_estimate["Estimate Avg"] * 100).mean()
+        with col2:
+            if avg_premium > 0:
+                st.metric("Average Premium", f"+{avg_premium:.0f}%")
             else:
-                avg_premium = 0
-                
-            if len(under_estimate) > 0:
-                avg_discount = ((under_estimate["Estimate Avg"] - under_estimate["Sold Price"]) / under_estimate["Estimate Avg"] * 100).mean()
-            else:
-                avg_discount = 0
+                st.metric("Average Premium", "0%")
+        
+        with col3:
+            highest_category = filtered_df["Category"].value_counts().idxmax()
+            st.metric("Top Category", highest_category, f"{filtered_df['Category'].value_counts().iloc[0]} items")
+        
+        st.markdown("---")
+        
+        # Tabbed sections to avoid overwhelming layout
+        insight_tab1, insight_tab2, insight_tab3 = st.tabs(["📊 Market Performance", "🖼️ Top Items", "📈 Price Patterns"])
+        
+        with insight_tab1:
+            st.markdown("#### Estimate vs Actual Performance")
+            st.markdown("How auction estimates compared to final sale prices for the most valuable items.")
             
-            # Display insights
-            col1, col2 = st.columns(2)
+            fig_dumbbell = create_dumbbell_chart(filtered_df, n_items=10)
+            st.plotly_chart(fig_dumbbell, use_container_width=True, key="dumbbell_insights")
             
-            with col1:
-                st.metric(
-                    "Items Sold Above Estimate", 
-                    f"{len(over_estimate)}", 
-                    f"{over_percentage:.1f}% of total"
+            st.markdown("#### Market Insights")
+            st.markdown(f"""
+            - **{over_percentage:.0f}%** of items exceeded their estimates
+            - Average premium on over-performing items: **{avg_premium:.0f}%**
+            - The "Lynch factor" drove significant collector interest beyond functional value
+            """)
+        
+        with insight_tab2:
+            st.markdown("#### Visual Gallery: Collection Highlights")
+            st.markdown("The most valuable and distinctive pieces from the filtered selection.")
+            
+            show_item_gallery(filtered_df, n_items=8, columns=4)
+        
+        with insight_tab3:
+            st.markdown("#### Price Distribution Analysis")
+            
+            # Side-by-side comparison
+            col_left, col_right = st.columns(2)
+            
+            with col_left:
+                st.markdown("**Highest Values**")
+                fig_expensive = create_horizontal_bar_chart(
+                    filtered_df, 
+                    "Top 10 Most Expensive", 
+                    n_items=10, 
+                    ascending=False
                 )
-                if avg_premium > 0:
-                    st.metric(
-                        "Average Premium", 
-                        f"+{avg_premium:.1f}%"
-                    )
+                st.plotly_chart(fig_expensive, use_container_width=True, key="expensive_insights")
             
-            with col2:
-                st.metric(
-                    "Items Sold Below Estimate", 
-                    f"{len(under_estimate)}", 
-                    f"{under_percentage:.1f}% of total"
+            with col_right:
+                st.markdown("**Best Value Finds**")
+                fig_cheapest = create_horizontal_bar_chart(
+                    filtered_df, 
+                    "Top 10 Cheapest", 
+                    n_items=10, 
+                    ascending=True
                 )
-                if avg_discount > 0:
-                    st.metric(
-                        "Average Discount", 
-                        f"-{avg_discount:.1f}%"
-                    )
+                st.plotly_chart(fig_cheapest, use_container_width=True, key="cheapest_insights")
     else:
         st.warning("No data available for insights with current filters.")
-
 # ----------------- About Tab -----------------
 with tab5:
     show_about()
