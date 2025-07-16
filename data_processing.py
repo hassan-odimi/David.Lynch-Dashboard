@@ -26,7 +26,7 @@ def load_data():
     for item in data:
         # Clean and convert sold price to integer
         sold = int(item["Sold Price"].replace("$", "").replace(",", "").strip())
-        
+
         # Process estimated price range
         est_range = item["Estimated Price"].replace("$", "").replace(",", "").strip()
         if "-" in est_range:
@@ -47,23 +47,25 @@ def load_data():
         images.append(item["Item Image"])
 
     # Create DataFrame with all processed data
-    df = pd.DataFrame({
-        "Title": titles,
-        "Sold Price": sold_prices,
-        "Estimated Low": estimated_low,
-        "Estimated High": estimated_high,
-        "Estimate Avg": estimated_avg,
-        "Estimated Price": estimated_price_raw,
-        "URL": urls,
-        "Image": images
-    })
-    
+    df = pd.DataFrame(
+        {
+            "Title": titles,
+            "Sold Price": sold_prices,
+            "Estimated Low": estimated_low,
+            "Estimated High": estimated_high,
+            "Estimate Avg": estimated_avg,
+            "Estimated Price": estimated_price_raw,
+            "URL": urls,
+            "Image": images,
+        }
+    )
+
     # Add category classification
     df["Category"] = df["Title"].apply(detect_category)
-    
+
     # Add log transformation for visualization purposes
     df["Log Sold Price"] = np.log10(df["Sold Price"] + 1)
-    
+
     return df
 
 
@@ -71,15 +73,15 @@ def detect_category(title):
     """
     Automatically categorize items based on keywords in their titles.
     This function uses pattern matching to classify David Lynch collection items.
-    
+
     Args:
         title (str): The title of the auction item
-        
+
     Returns:
         str: The detected category name
     """
     title = title.lower()
-    
+
     # Define category keywords - organized by most specific to general
     category_keywords = {
         "Scripts & Screenplays": ["script", "screenplay"],
@@ -89,16 +91,24 @@ def detect_category(title):
         "Posters & Prints": ["poster", "signed poster"],
         "Furniture": ["sofa", "chair", "table", "furniture"],
         "Coffee & Kitchen": ["mug", "cup", "coffee maker", "espresso"],
-        "Instruments & Audio": ["guitar", "bass", "keyboard", "drum", "microphone", "audio", "speaker"],
+        "Instruments & Audio": [
+            "guitar",
+            "bass",
+            "keyboard",
+            "drum",
+            "microphone",
+            "audio",
+            "speaker",
+        ],
         "Records & Music": ["record", "album", "vinyl"],
-        "Props & Memorabilia": ["prop", "memorabilia", "production slate"]
+        "Props & Memorabilia": ["prop", "memorabilia", "production slate"],
     }
-    
+
     # Check each category for matching keywords
     for category, keywords in category_keywords.items():
         if any(keyword in title for keyword in keywords):
             return category
-    
+
     # Default category if no matches found
     return "Other"
 
@@ -111,24 +121,24 @@ def get_filtered_data(df, selected_categories, keyword="", price_filter=None):
     """
     # Convert lists to tuples for hashing
     selected_categories = tuple(sorted(selected_categories))
-    
+
     # Filter by categories
     filtered_df = df[df["Category"].isin(selected_categories)]
-    
+
     # Apply keyword filter if provided
     if keyword:
         filtered_df = filtered_df[
             filtered_df["Title"].str.contains(keyword, case=False, na=False)
         ]
-    
+
     # Apply price filter if provided
     if price_filter:
         min_price, max_price = price_filter
         filtered_df = filtered_df[
-            (filtered_df["Sold Price"] >= min_price) & 
-            (filtered_df["Sold Price"] <= max_price)
+            (filtered_df["Sold Price"] >= min_price)
+            & (filtered_df["Sold Price"] <= max_price)
         ]
-    
+
     return filtered_df
 
 
@@ -140,7 +150,7 @@ def calculate_summary_stats(df):
     """
     # Convert DataFrame to a hashable representation
     df_hash = hash(str(df.values.tobytes()))
-    
+
     if df.empty:
         return {
             "total_items": 0,
@@ -150,9 +160,9 @@ def calculate_summary_stats(df):
             "max_price": 0,
             "most_expensive": None,
             "cheapest": None,
-            "most_common_category": "N/A"
+            "most_common_category": "N/A",
         }
-    
+
     stats = {
         "total_items": df.shape[0],
         "total_value": df["Sold Price"].sum(),
@@ -161,7 +171,7 @@ def calculate_summary_stats(df):
         "max_price": df["Sold Price"].max(),
         "most_expensive": df.loc[df["Sold Price"].idxmax()],
         "cheapest": df.loc[df["Sold Price"].idxmin()],
-        "most_common_category": df["Category"].value_counts().idxmax()
+        "most_common_category": df["Category"].value_counts().idxmax(),
     }
-    
+
     return stats
