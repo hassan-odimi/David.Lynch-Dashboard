@@ -392,6 +392,7 @@ def create_tab_navigation():
         "🗺️ Collection Map", 
         "💰 Price Explorer", 
         "🔍 Key Insights", 
+        "📚 Lynch Library",
         "ℹ️ About"
     ])
 

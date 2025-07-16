@@ -17,6 +17,7 @@ from ui_components import (
     create_download_buttons, create_tab_navigation, display_filter_info
 )
 from about import show_about
+from books_tab import show_books_tab
 
 # ----------------- Page Configuration -----------------
 st.set_page_config(
@@ -83,7 +84,7 @@ else:
     display_filter_info(selected_categories, keyword, len(df), len(filtered_df))
 
 # ----------------- Create Tab Navigation -----------------
-tab1, tab2, tab3, tab4, tab5 = create_tab_navigation()
+tab1, tab2, tab3, tab4, tab5, tab6 = create_tab_navigation()
 
 # ----------------- Data Table Tab -----------------
 with tab1:
@@ -243,8 +244,12 @@ with tab4:
                     st.plotly_chart(fig_cheapest, use_container_width=True, key="cheapest_insights")
     else:
         st.warning("No data available for insights with current filters.")
+
+# ----------------- Lynch Library Tab -----------------
+with tab5:  # New tab
+    show_books_tab()
 # ----------------- About Tab -----------------
-with tab5:
+with tab6:
     show_about()
 
 # ----------------- Footer -----------------

@@ -1,0 +1,1888 @@
+{
+  "collection_metadata": {
+    "title": "David Lynch Personal Book Collection",
+    "auction_house": "Julien's Auctions",
+    "auction_event": "Turner Classic Movies Present The David Lynch Collection",
+    "total_lots": 62,
+    "total_value": 351975,
+    "total_books_identified": 315,
+    "date_compiled": "2025-01-11"
+  },
+  "lots": [
+    {
+      "lot_title": "Film Reference and Biography Books",
+      "sold_price": 10400,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Film & Cinema",
+      "subcategory": "Film Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426315/david-lynch-film-reference-and-biography-books",
+      "books": [
+        {
+          "title": "Los Proverbios chinos de F.W. Murnau",
+          "author": "F.W. Murnau",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Production Design Book",
+          "author": "Peter Ettedgui",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Cinematography Book",
+          "author": "Peter Ettedgui",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Biography of Marlon Brando",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Luis Bunuel",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Woody Allen",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Maya Deren",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Billy Wilder",
+          "author": "Unknown",
+          "type": "Biography"
+        }
+      ]
+    },
+    {
+      "lot_title": "World Cinema Reference Books",
+      "sold_price": 7800,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Film & Cinema",
+      "subcategory": "World Cinema",
+      "url": "https://www.juliensauctions.com/en/items/1426317/david-lynch-world-cinema-reference-books",
+      "books": [
+        {
+          "title": "Tulse Luper in Turin",
+          "author": "Peter Greenaway",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Archivos de Filmoteca (II/8)",
+          "author": "Various",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Shepperton Studios: A Visual Celebration",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Art I Cinema: 120 Anys D'Intercanvis",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "25 Camerimage Film Festival",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Federico Fellini & La Fondation Fellini",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Chema Prado: Fotografias",
+          "author": "Chema Prado",
+          "type": "Photography"
+        },
+        {
+          "title": "Painting with Light",
+          "author": "John Alton",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Art and Film Since 1945: Hall of Mirrors",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Jacques Tourneur (Festival Internacional de Cine de San Sebastian)",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "The Official 50th Anniversary Pictorial History of The Wizard of Oz",
+          "author": "Unknown",
+          "type": "Film Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Film Director Biography Books",
+      "sold_price": 11700,
+      "estimated_price": "250-350",
+      "estimate_avg": 300,
+      "category": "Film & Cinema",
+      "subcategory": "Director Biographies",
+      "url": "https://www.juliensauctions.com/en/items/1426295/david-lynch-film-director-biography-books",
+      "books": [
+        {
+          "title": "Biography of Bunuel",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Fellini",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Hitchcock",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Kubrick",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Truffaut",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Biography of Welles",
+          "author": "Unknown",
+          "type": "Biography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Hollywood Biography and Reference Books with Donald Lynch Inscribed Book",
+      "sold_price": 22750,
+      "estimated_price": "400-600",
+      "estimate_avg": 500,
+      "category": "Film & Cinema",
+      "subcategory": "Hollywood Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426316/david-lynch-hollywood-biography-and-reference-books-with-donald-lynch-inscribed-book",
+      "books": [
+        {
+          "title": "Russ Tamblyn: Dancing on the Edge",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Richard Beymer: Impostor",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "1983: Go to Hollywood / Make a Movie",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Beyond Words",
+          "author": "Unknown",
+          "type": "General"
+        },
+        {
+          "title": "Trance-Formation of America",
+          "author": "Unknown",
+          "type": "General"
+        },
+        {
+          "title": "Access Denied for Reasons of National Security",
+          "author": "Unknown",
+          "type": "General"
+        },
+        {
+          "title": "Captain Beefheart",
+          "author": "Unknown",
+          "type": "Music Biography"
+        },
+        {
+          "title": "Crackpot: The Obsessions of John Waters",
+          "author": "John Waters",
+          "type": "Film Biography"
+        },
+        {
+          "title": "Life in a Mental Hospital",
+          "author": "Unknown",
+          "type": "General"
+        },
+        {
+          "title": "Tell Me Something Good",
+          "author": "Unknown",
+          "type": "General"
+        },
+        {
+          "title": "Hollywood: The Oral History",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Fury on Earth: A Biography of Wilhelm Reich",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "The Real Wizard of Oz",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Designs on Film: Cathy Whitlock and the Art Directors Guild",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "City of Nets",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Kafka Goes to the Movies",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Settings and Costumes of the Modern Stage",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Poitier: The Measure of a Man",
+          "author": "Sidney Poitier",
+          "type": "Biography"
+        },
+        {
+          "title": "Hopper",
+          "author": "Tom Folsom",
+          "type": "Biography"
+        },
+        {
+          "title": "TLA Film, Video & DVD Guide",
+          "author": "Unknown",
+          "type": "Film Reference",
+          "notes": "with post-its indicating Lynch's films"
+        },
+        {
+          "title": "Les Grossman: A True Hollywood Legend",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "The Black Dahlia Files",
+          "author": "Unknown",
+          "type": "True Crime"
+        },
+        {
+          "title": "Hollywood Gold",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Foyer Pleasure: The Golden Age of Cinema Lobby Cards",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Hollywood Gold: The Award Winning Movies",
+          "author": "Unknown",
+          "type": "Film Reference",
+          "notes": "inscribed by Lynch's father: 'To David -- May yours be o...'"
+        }
+      ]
+    },
+    {
+      "lot_title": "Photography Reference Books",
+      "sold_price": 4550,
+      "estimated_price": "400-600",
+      "estimate_avg": 500,
+      "category": "Photography",
+      "subcategory": "Photography Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426327/david-lynch-photography-reference-books",
+      "books": [
+        {
+          "title": "Beautes (Frac Auvergne)",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "New / Aesthetics / Fashion / Art / Ethics / Tech / Futures",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "It's Different, I Like It!",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Don Van Vliet",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "American Illustration 1982/83",
+          "author": "Unknown",
+          "type": "Illustration"
+        },
+        {
+          "title": "Heads",
+          "author": "Alex Kayser",
+          "type": "Photography"
+        },
+        {
+          "title": "Baselitz",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "William Eggleston",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Andy Warhol Photographs: Social Disease '76-'79",
+          "author": "Andy Warhol",
+          "type": "Photography"
+        },
+        {
+          "title": "Odd Nerdrum",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Still Lovers",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Moord in Rotterdam",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "No Smoking",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "James Rosenquist",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Luc Sante",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Strindberg: Painter and Photographer",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "George Tooker",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Visual Explanations",
+          "author": "Edward R. Tufte",
+          "type": "Design"
+        },
+        {
+          "title": "Dennis Stock: Made in USA",
+          "author": "Dennis Stock",
+          "type": "Photography"
+        },
+        {
+          "title": "Robert Stivers Photographs",
+          "author": "Robert Stivers",
+          "type": "Photography"
+        },
+        {
+          "title": "On a Scale that Competes with the World: The Art of Edward and Nancy Reddin",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Jestesmy! That's Us!",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Joel-Peter Witkin",
+          "author": "Unknown",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Photography Books (A)",
+      "sold_price": 13000,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Photography",
+      "subcategory": "Photography Collections",
+      "url": "https://www.juliensauctions.com/en/items/1426543/david-lynch-photography-books-a",
+      "books": [
+        {
+          "title": "Various Photography Books",
+          "author": "Various",
+          "type": "Photography",
+          "notes": "Detailed titles not specified in auction description"
+        }
+      ]
+    },
+    {
+      "lot_title": "Artist Inscribed Photography Books (A)",
+      "sold_price": 3575,
+      "estimated_price": "600-900",
+      "estimate_avg": 750,
+      "category": "Photography",
+      "subcategory": "Inscribed Photography",
+      "url": "https://www.juliensauctions.com/en/items/1426323/david-lynch-artist-inscribed-photography-books-a",
+      "books": [
+        {
+          "title": "Ca",
+          "author": "Nicholas Chow",
+          "type": "Photography",
+          "notes": "Inscribed"
+        },
+        {
+          "title": "Sonia",
+          "author": "Peter Arnell",
+          "type": "Photography",
+          "notes": "Inscribed"
+        },
+        {
+          "title": "Acid Candy",
+          "author": "Mile Andriges",
+          "type": "Photography",
+          "notes": "Inscribed"
+        },
+        {
+          "title": "Alexander de Cadenet",
+          "author": "Edward Lucie-Smith",
+          "type": "Photography",
+          "notes": "inscribed by de Cadenet"
+        }
+      ]
+    },
+    {
+      "lot_title": "Photography Books (B)",
+      "sold_price": 3250,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Photography",
+      "subcategory": "Photography Collections",
+      "url": "https://www.juliensauctions.com/en/items/1426275/david-lynch-photography-books-b",
+      "books": [
+        {
+          "title": "Work by Mika Rottenberg",
+          "author": "Mika Rottenberg",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Ordova",
+          "author": "Ordova",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Viggo Mortensen",
+          "author": "Viggo Mortensen",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Werner Bandel",
+          "author": "Werner Bandel",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Debbie Fleming Caffrey",
+          "author": "Debbie Fleming Caffrey",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Richard Bosman",
+          "author": "Richard Bosman",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Artist Inscribed Photography Books (B)",
+      "sold_price": 3575,
+      "estimated_price": "700-900",
+      "estimate_avg": 800,
+      "category": "Photography",
+      "subcategory": "Inscribed Photography",
+      "url": "https://www.juliensauctions.com/en/items/1426276/david-lynch-artist-inscribed-photography-books-b",
+      "books": [
+        {
+          "title": "The Experience",
+          "author": "Wosinka",
+          "type": "Photography",
+          "notes": "Inscribed"
+        },
+        {
+          "title": "Private Heroes",
+          "author": "Banier",
+          "type": "Photography",
+          "notes": "Inscribed"
+        },
+        {
+          "title": "Philadelphia Then and Now",
+          "author": "Mauger and Skibka",
+          "type": "Photography",
+          "notes": "Inscribed"
+        },
+        {
+          "title": "Quelques Jours dans la vie de Sharon Stone",
+          "author": "Scorceletti",
+          "type": "Photography",
+          "notes": "Inscribed"
+        }
+      ]
+    },
+    {
+      "lot_title": "Photography Books (C)",
+      "sold_price": 4550,
+      "estimated_price": "250-350",
+      "estimate_avg": 300,
+      "category": "Photography",
+      "subcategory": "Photography Collections",
+      "url": "https://www.juliensauctions.com/en/items/1426324/david-lynch-photography-books-c",
+      "books": [
+        {
+          "title": "Collection from Dennis Hopper",
+          "author": "Dennis Hopper",
+          "type": "Photography"
+        },
+        {
+          "title": "Collection from Derk Beckerman",
+          "author": "Derk Beckerman",
+          "type": "Photography"
+        },
+        {
+          "title": "Collection from Bill Henson",
+          "author": "Bill Henson",
+          "type": "Photography"
+        },
+        {
+          "title": "Collection from the Mutter Museum",
+          "author": "Mutter Museum",
+          "type": "Photography"
+        },
+        {
+          "title": "Collection from Museum of Contemporary Crafts",
+          "author": "Museum of Contemporary Crafts",
+          "type": "Photography"
+        },
+        {
+          "title": "Collection from Maison Europeene de la Photographie",
+          "author": "Maison Europeene de la Photographie",
+          "type": "Photography"
+        },
+        {
+          "title": "Collection from Museum Folkwang",
+          "author": "Museum Folkwang",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Contemporary Photography Books",
+      "sold_price": 4550,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Photography",
+      "subcategory": "Contemporary Photography",
+      "url": "https://www.juliensauctions.com/en/items/1426325/david-lynch-contemporary-photography-books",
+      "books": [
+        {
+          "title": "Work by Wallace Berman",
+          "author": "Wallace Berman",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Ansel Adams",
+          "author": "Ansel Adams",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by David Smith",
+          "author": "David Smith",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Diane Arbus",
+          "author": "Diane Arbus",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Julia Reyes Taubman",
+          "author": "Julia Reyes Taubman",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Photography Books (D)",
+      "sold_price": 3575,
+      "estimated_price": "150-250",
+      "estimate_avg": 200,
+      "category": "Photography",
+      "subcategory": "Photography Collections",
+      "url": "https://www.juliensauctions.com/en/items/1426326/david-lynch-photography-books-d",
+      "books": [
+        {
+          "title": "Work by Benjamin Peret",
+          "author": "Benjamin Peret",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Eric Lindbloom",
+          "author": "Eric Lindbloom",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Claire Tabouret",
+          "author": "Claire Tabouret",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Loris Greaud",
+          "author": "Loris Greaud",
+          "type": "Photography"
+        },
+        {
+          "title": "Superstrings and the Search for the Theory of Everything",
+          "author": "Unknown",
+          "type": "Science"
+        }
+      ]
+    },
+    {
+      "lot_title": "Art and Photography Reference Books",
+      "sold_price": 3900,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Art",
+      "subcategory": "Art Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426551/david-lynch-art-and-photography-reference-books",
+      "books": [
+        {
+          "title": "Art-Horror",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Seductive Smoke",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Imagining Los Angeles",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Modern Ruins",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "L.A. Object",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Unpacking the Marciano Collection",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Wasteland",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Secrets of the Great Pyramid",
+          "author": "Unknown",
+          "type": "General"
+        }
+      ]
+    },
+    {
+      "lot_title": "General Art Reference Books",
+      "sold_price": 3250,
+      "estimated_price": "500-700",
+      "estimate_avg": 600,
+      "category": "Art",
+      "subcategory": "Art Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426392/david-lynch-general-art-reference-books",
+      "books": [
+        {
+          "title": "The Printmaking Bible",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "The Illustrated Rumi",
+          "author": "Rumi",
+          "type": "Literature"
+        },
+        {
+          "title": "Caravaggio Bacon",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "The Silent Baroque",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Czech Modernism",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Le Grand Livre des Lunettes",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Bacon's Women",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Front Page: A Collection of Historical Headlines from the Los Angeles Times",
+          "author": "Los Angeles Times",
+          "type": "General"
+        }
+      ]
+    },
+    {
+      "lot_title": "Impressionist and Modern Art Reference Books",
+      "sold_price": 7800,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Art",
+      "subcategory": "Art Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426393/david-lynch-impressionist-and-modern-art-reference-books",
+      "books": [
+        {
+          "title": "Reference work on Munch",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Reference work on Kokoshcka",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Reference work on Magritte",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Reference work on Braque",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Reference work on Duchamp",
+          "author": "Unknown",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Miscellaneous Art Reference Books",
+      "sold_price": 5200,
+      "estimated_price": "400-600",
+      "estimate_avg": 500,
+      "category": "Art",
+      "subcategory": "Art Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426394/david-lynch-miscellaneous-art-reference-books",
+      "books": [
+        {
+          "title": "Legacy of Light",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Sleeping Giant: An Illustrated History of Southern California's Inland Empire",
+          "author": "Unknown",
+          "type": "Regional History"
+        },
+        {
+          "title": "American Theatres of Today",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "L'Art et L'Amour: Japon",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Jean-Michel Frank",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Resistance to Memory",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "The Yanomami Struggle",
+          "author": "Unknown",
+          "type": "Anthropology"
+        },
+        {
+          "title": "McDermott and McGough's History of Photography",
+          "author": "McDermott and McGough",
+          "type": "Photography"
+        },
+        {
+          "title": "Work by Dennis Hopper",
+          "author": "Dennis Hopper",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Work by Julian Schnabel",
+          "author": "Julian Schnabel",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Volumes of Eyemazing",
+          "author": "Various",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Art Reference Books",
+      "sold_price": 5200,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Art",
+      "subcategory": "Art Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426395/david-lynch-art-reference-books",
+      "books": [
+        {
+          "title": "Bosch",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Bosch",
+          "author": "Robert L. Delevoy",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Caravaggio and His Legacy",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Rembrandt? The Master and his Workshop",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Italy",
+          "author": "Sanford Roth",
+          "type": "Photography"
+        },
+        {
+          "title": "Frank O. Gehry Guggenheim Museum Bilbao",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Painting in Britain 1525 to 1975",
+          "author": "Sunderland",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Rembrandt Quest of a Genius",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Renaissance Art",
+          "author": "Bucci-Buhicchi",
+          "type": "Art Reference"
+        },
+        {
+          "title": "History of Italian Renaissance Art",
+          "author": "Frederick Hartt and David G. Wilkins",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Masters of Modern Architecture",
+          "author": "John Peter",
+          "type": "Architecture"
+        },
+        {
+          "title": "Bauhaus",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Desert Images",
+          "author": "Taschen",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Modern Art Reference Books",
+      "sold_price": 4550,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Art",
+      "subcategory": "Modern Art",
+      "url": "https://www.juliensauctions.com/en/items/1426396/david-lynch-modern-art-reference-books",
+      "books": [
+        {
+          "title": "Anxious Visions: Surrealist Art",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Surrealists and Surrealism",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Sortie de Vortex",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Ephemeral Bodies: Wax Sculpture and the Human Figure",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Bay Area Figurative Art: 1950-1965",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "The Brush of Anguish",
+          "author": "Unknown",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Contemporary Art Reference Books",
+      "sold_price": 2925,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Art",
+      "subcategory": "Contemporary Art",
+      "url": "https://www.juliensauctions.com/en/items/1426397/david-lynch-contemporary-art-reference-books",
+      "books": [
+        {
+          "title": "Work on Ed Ruscha",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Work on Gerald Walburg",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Work on Charles Bell",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Annual Magazine Bound Volume",
+          "author": "Unknown",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Art and Eastern Europe Reference Books",
+      "sold_price": 3900,
+      "estimated_price": "250-350",
+      "estimate_avg": 300,
+      "category": "Art",
+      "subcategory": "Eastern European Art",
+      "url": "https://www.juliensauctions.com/en/items/1426398/david-lynch-art-and-eastern-europe-reference-books",
+      "books": [
+        {
+          "title": "EnergaCAMERIMAGE 2023",
+          "author": "Unknown",
+          "type": "Film Festival"
+        },
+        {
+          "title": "A Place for the Arts: MacDowell Colony, 1907-2007",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Władysław Hasior Czas niedomknięty",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Toruń - miasto w Europie • Toruń - a City in Europe",
+          "author": "Unknown",
+          "type": "Regional History"
+        },
+        {
+          "title": "ŁÓDŹ barwy miasta",
+          "author": "Unknown",
+          "type": "Regional History"
+        },
+        {
+          "title": "PRAGUE PRAG PRAHA",
+          "author": "Unknown",
+          "type": "Regional History"
+        },
+        {
+          "title": "Balthus",
+          "author": "Jean Leymarie",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "European Art and Architecture Books",
+      "sold_price": 5850,
+      "estimated_price": "500-700",
+      "estimate_avg": 600,
+      "category": "Art",
+      "subcategory": "European Art",
+      "url": "https://www.juliensauctions.com/en/items/1426399/david-lynch-european-art-and-architecture-books",
+      "books": [
+        {
+          "title": "Les Citoyens",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Chinese Buddhist Bronzes",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Plant Kingdoms: The Photographs of Charles Jones",
+          "author": "Charles Jones",
+          "type": "Photography"
+        },
+        {
+          "title": "Sacred Geometry",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Monet (4-volume set)",
+          "author": "Daniel Wildenstein",
+          "publisher": "Taschen",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Architecture and Design Books",
+      "sold_price": 5200,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Architecture",
+      "subcategory": "Architecture Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426400/david-lynch-architecture-and-design-books",
+      "books": [
+        {
+          "title": "Populuxe",
+          "author": "Thomas Hine",
+          "type": "Design"
+        },
+        {
+          "title": "Garden Ornament 2076",
+          "author": "Kenneth Lynch",
+          "type": "Architecture"
+        },
+        {
+          "title": "Another Science Fiction",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "2000-E Ultramodern Roadside Architecture",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "The Decorative Twenties",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Carlo Mollino",
+          "author": "Giovanni Brino",
+          "type": "Architecture"
+        },
+        {
+          "title": "Modernism: Designing a New World",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "The International Design Yearbook 9",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Paris 1900 Architecture and Design",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Furniture by Architects",
+          "author": "Unknown",
+          "type": "Architecture"
+        }
+      ]
+    },
+    {
+      "lot_title": "Architecture Reference Books",
+      "sold_price": 3900,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Architecture",
+      "subcategory": "Architecture Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426526/david-lynch-architecture-reference-books",
+      "books": [
+        {
+          "title": "Julius Schulman: Modernism Rediscovered (three-volume set)",
+          "author": "Julius Schulman",
+          "type": "Architecture"
+        },
+        {
+          "title": "Architecture and Its Photography",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Lloyd Wright",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Roma Delle Delizie",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Frank Lloyd Wright Drawings",
+          "author": "Unknown",
+          "type": "Architecture"
+        }
+      ]
+    },
+    {
+      "lot_title": "Design Reference Books",
+      "sold_price": 3900,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Design",
+      "subcategory": "Design Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426194/david-lynch-design-reference-books",
+      "books": [
+        {
+          "title": "The Diagrams of Architecture",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Creative Quest",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "A Concrete Atlantis",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "East European Modernism",
+          "author": "Unknown",
+          "type": "Architecture"
+        },
+        {
+          "title": "Close Cover Before Striking",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Pressing Matter",
+          "author": "Unknown",
+          "type": "Design"
+        },
+        {
+          "title": "Death is a Star",
+          "author": "Unknown",
+          "type": "Design"
+        }
+      ]
+    },
+    {
+      "lot_title": "Nude and Erotica Art Books",
+      "sold_price": 9100,
+      "estimated_price": "150-250",
+      "estimate_avg": 200,
+      "category": "Art",
+      "subcategory": "Nude Art",
+      "url": "https://www.juliensauctions.com/en/items/1426193/david-lynch-nude-and-erotica-art-books",
+      "books": [
+        {
+          "title": "Erotica: Une Anthologie Literaire et Artistique",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "1000 Nudes: Uwe Scheid Collection",
+          "author": "Uwe Scheid",
+          "type": "Art Reference",
+          "notes": "2 copies, one with post-it notes"
+        },
+        {
+          "title": "1000 Photo Icons",
+          "author": "Unknown",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Max Ernst Books",
+      "sold_price": 4550,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Art",
+      "subcategory": "Artist Monographs",
+      "url": "https://www.juliensauctions.com/en/items/1426592/david-lynch-max-ernst-books",
+      "books": [
+        {
+          "title": "Books on Max Ernst",
+          "author": "Various",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Book on Vincent Van Gogh",
+          "author": "Unknown",
+          "type": "Art Reference"
+        }
+      ]
+    },
+    {
+      "lot_title": "Art and Culture of France Books",
+      "sold_price": 2600,
+      "estimated_price": "250-350",
+      "estimate_avg": 300,
+      "category": "Art",
+      "subcategory": "French Culture",
+      "url": "https://www.juliensauctions.com/en/items/1426252/david-lynch-art-and-culture-of-france-books",
+      "books": [
+        {
+          "title": "A Vision of Paris",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "L'Arte de Vivre",
+          "author": "Unknown",
+          "type": "Culture"
+        },
+        {
+          "title": "Les Archives du Reve",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Christian Louboutin: The Exhibitionist",
+          "author": "Unknown",
+          "type": "Fashion"
+        },
+        {
+          "title": "Les Chateaux de l'Ile de France",
+          "author": "Unknown",
+          "type": "Architecture"
+        }
+      ]
+    },
+    {
+      "lot_title": "Berlin University Press Art Reference Book Box Sets",
+      "sold_price": 2925,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Art",
+      "subcategory": "Academic Art Reference",
+      "url": "https://www.juliensauctions.com/en/items/1426506/david-lynch-berlin-university-press-art-reference-book-box-sets",
+      "books": [
+        {
+          "title": "Max Ernst",
+          "author": "Werner Spies",
+          "type": "Art Reference",
+          "series": "Werner Spies Collection"
+        },
+        {
+          "title": "Kokoschka",
+          "author": "Werner Spies",
+          "type": "Art Reference",
+          "series": "Werner Spies Collection"
+        },
+        {
+          "title": "Picasso",
+          "author": "Werner Spies",
+          "type": "Art Reference",
+          "series": "Werner Spies Collection"
+        }
+      ]
+    },
+    {
+      "lot_title": "Bernardaud The Boundless Sea Visual Narrative Plates with David Lynch Art and Criticism Books",
+      "sold_price": 9100,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Lynch Works",
+      "subcategory": "Lynch Art & Criticism",
+      "url": "https://www.juliensauctions.com/en/items/1426391/david-lynch-bernardaud-the-boundless-sea-visual-narrative-plates-with-david-lynch-art-and-criticism-books",
+      "books": [
+        {
+          "title": "David Lynch",
+          "author": "Prestel",
+          "publisher": "Prestel",
+          "type": "Art Reference"
+        },
+        {
+          "title": "David Lynch Between Two Worlds",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "David Lynch The Unified Field",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Lynch",
+          "author": "Foundation Cartier",
+          "type": "Art Reference"
+        },
+        {
+          "title": "David Lynch Man Waking From A Dream",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "David Lynch Nudes",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Lynch on Lynch",
+          "author": "Chris Rodley",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Room to Dream",
+          "author": "David Lynch and Kristine McKenna",
+          "type": "Autobiography"
+        },
+        {
+          "title": "Purple Magic",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Mathematics A Beautiful Elsewhere",
+          "author": "Unknown",
+          "type": "Science"
+        },
+        {
+          "title": "Victor Hasselblad",
+          "author": "Unknown",
+          "type": "Photography"
+        }
+      ]
+    },
+    {
+      "lot_title": "Isabella Rossellini Books",
+      "sold_price": 3250,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Biography",
+      "subcategory": "Celebrity Biography",
+      "url": "https://www.juliensauctions.com/en/items/1426486/david-lynch-isabella-rossellini-books",
+      "books": [
+        {
+          "title": "Looking at Me: Isabella Rossellini on Pictures and Photographers",
+          "author": "Isabella Rossellini",
+          "type": "Photography"
+        },
+        {
+          "title": "Isabella Rossellini: Some of Me",
+          "author": "Isabella Rossellini",
+          "type": "Biography"
+        }
+      ]
+    },
+    {
+      "lot_title": "David Lynch Books",
+      "sold_price": 4550,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Lynch Works",
+      "subcategory": "Books About Lynch",
+      "url": "https://www.juliensauctions.com/en/items/1426234/david-lynch-david-lynch-books",
+      "books": [
+        {
+          "title": "David Lynch: Works on Paper",
+          "author": "Foundation Cartier",
+          "type": "Art Reference",
+          "notes": "oversize"
+        },
+        {
+          "title": "David Lynch: The Man from Another Place",
+          "author": "Unknown",
+          "type": "Biography"
+        },
+        {
+          "title": "Reflections: An Oral History of Twin Peaks",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "Lynch on Lynch",
+          "author": "Unknown",
+          "type": "Film Reference"
+        },
+        {
+          "title": "David Lynch Lithos",
+          "author": "Unknown",
+          "type": "Art Reference"
+        },
+        {
+          "title": "David Lynch / Christian Louboutin: Fetish",
+          "author": "Unknown",
+          "type": "Fashion"
+        },
+        {
+          "title": "TM Quiet Time Program Letters",
+          "author": "Various Participants",
+          "type": "Personal",
+          "notes": "bound collection of letters of thanks from participants"
+        }
+      ]
+    },
+    {
+      "lot_title": "Literary Fiction Books",
+      "sold_price": 5850,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Literature",
+      "subcategory": "Fiction",
+      "url": "https://www.juliensauctions.com/en/items/1426454/david-lynch-literary-fiction-books",
+      "books": [
+        {
+          "title": "Works by Charles Bukowski",
+          "author": "Charles Bukowski",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Patrick DeWitt",
+          "author": "Patrick DeWitt",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Raymond Chandler",
+          "author": "Raymond Chandler",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by David Connor",
+          "author": "David Connor",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by William Cooper",
+          "author": "William Cooper",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by David Cronenberg",
+          "author": "David Cronenberg",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Thomas Pynchon",
+          "author": "Thomas Pynchon",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Brad Smith",
+          "author": "Brad Smith",
+          "type": "Literature"
+        }
+      ]
+    },
+    {
+      "lot_title": "Paperback Fiction Books",
+      "sold_price": 5850,
+      "estimated_price": "150-250",
+      "estimate_avg": 200,
+      "category": "Literature",
+      "subcategory": "Paperback Fiction",
+      "url": "https://www.juliensauctions.com/en/items/1426534/david-lynch-paperback-fiction-books",
+      "books": [
+        {
+          "title": "Works by Raymond Chandler",
+          "author": "Raymond Chandler",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Barry Gifford",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Franz Kafka",
+          "author": "Franz Kafka",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Jerzy Kosinski",
+          "author": "Jerzy Kosinski",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Stephen Mitchell",
+          "author": "Stephen Mitchell",
+          "type": "Literature"
+        },
+        {
+          "title": "Works by Annie Proulx",
+          "author": "Annie Proulx",
+          "type": "Literature"
+        }
+      ]
+    },
+    {
+      "lot_title": "Paperback Literature Books",
+      "sold_price": 9100,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Literature",
+      "subcategory": "Paperback Literature",
+      "url": "https://www.juliensauctions.com/en/items/1426546/david-lynch-paperback-literature-books",
+      "books": [
+        {
+          "title": "Atlas Shrugged",
+          "author": "Ayn Rand",
+          "type": "Literature"
+        },
+        {
+          "title": "The Universe and Other Fictions",
+          "author": "Unknown",
+          "type": "Literature"
+        },
+        {
+          "title": "Grimm Selected Tales",
+          "author": "Brothers Grimm",
+          "type": "Literature"
+        },
+        {
+          "title": "Kafka on the Shore",
+          "author": "Haruki Murakami",
+          "type": "Literature"
+        },
+        {
+          "title": "Pulp",
+          "author": "Charles Bukowski",
+          "type": "Literature"
+        },
+        {
+          "title": "Siddhartha",
+          "author": "Hermann Hesse",
+          "type": "Literature"
+        },
+        {
+          "title": "A River Runs Through It",
+          "author": "Norman Maclean",
+          "type": "Literature"
+        },
+        {
+          "title": "Strange Pilgrims",
+          "author": "Gabriel García Márquez",
+          "type": "Literature"
+        },
+        {
+          "title": "The Long Division",
+          "author": "Unknown",
+          "type": "Literature"
+        }
+      ]
+    },
+    {
+      "lot_title": "Barry Gifford Books",
+      "sold_price": 7800,
+      "estimated_price": "200-300",
+      "estimate_avg": 250,
+      "category": "Literature",
+      "subcategory": "Barry Gifford Collection",
+      "url": "https://www.juliensauctions.com/en/items/1426263/david-lynch-barry-gifford-books",
+      "books": [
+        {
+          "title": "New York, 1960",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "Our Kind",
+          "author": "Crispin Hellion Glover",
+          "type": "Literature"
+        },
+        {
+          "title": "Sailor's Holiday",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "The Boy Who Ran Away to Sea",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "Southern Nights",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "Roy's World Stories 1973-2020",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "Disappearances",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "Wild at Heart",
+          "author": "Barry Gifford",
+          "type": "Literature",
+          "notes": "Basis for Lynch's film"
+        },
+        {
+          "title": "The Up-Down",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "New Mysteries of Paris",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        },
+        {
+          "title": "How Chef Peter Died",
+          "author": "Barry Gifford",
+          "type": "Literature"
+        }
+      ]
+    },
+    {
+      "lot_title": "Woodworking Books",
+      "sold_price": 5200,
+      "estimated_price": "100-200",
+      "estimate_avg": 150,
+      "category": "Craftsmanship",
+      "subcategory": "Woodworking",
+      "url": "https://www.juliensauctions.com/en/items/1426497/david-lynch-woodworking-books",
+      "books": [
+        {
+          "title": "A Potter's Book",
+          "author": "Bernard Leach",
+          "type": "Craftsmanship"
+        },
+        {
+          "title": "Cabinetry: The Woodworkers Guide to Building Professional-Looking Cabinets and Shelves",
+          "author": "Unknown",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Cabinetmaking and Millwork",
+          "author": "Unknown",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Band Saw Handbook",
+          "author": "Duginske",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Mastering Woodworking Machines",
+          "author": "Duginske",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Table Saw Basics",
+          "author": "Roger W. Cliffe",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Power Tool Woodworking for Everyone",
+          "author": "Unknown",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Arc Welding",
+          "author": "Unknown",
+          "type": "Metalworking"
+        },
+        {
+          "title": "The Complete Manual of Woodworking",
+          "author": "Unknown",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Wood Bending Made Simple",
+          "author": "Unknown",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Tage Frid Teaches Woodworking Book 1: Joinery",
+          "author": "Tage Frid",
+          "type": "Woodworking"
+        },
+        {
+          "title": "The Maker's Field Guide",
+          "author": "Christopher Armstrong",
+          "type": "Craftsmanship"
+        },
+        {
+          "title": "The Complete Woodworker",
+          "author": "Jones",
+          "type": "Woodworking"
+        },
+        {
+          "title": "The Age of Wood",
+          "author": "Roland Ennos",
+          "type": "Science"
+        },
+        {
+          "title": "The Art of Japanese Joinery",
+          "author": "Seike",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Classics from the New Yankee Workshop",
+          "author": "Abram",
+          "type": "Woodworking"
+        },
+        {
+          "title": "Modern Carpentry",
+          "author": "Unknown",
+          "type": "Woodworking"
+        }
+      ]
+    },
+    {
+      "lot_title": "Popular Culture and Los Angeles Interest Books",
+      "sold_price": 10400,
+      "estimated_price": "100-200",
+      "estimate_avg": 150,
+      "category": "Popular Culture",
+      "subcategory": "Los Angeles Culture",
+      "url": "https://www.juliensauctions.com/en/items/1426248/david-lynch-popular-culture-and-los-angeles-interest-books",
+      "books": [
+        {
+          "title": "Something to Food About",
+          "author": "Questlove",
+          "type": "Culture"
+        },
+        {
+          "title": "Books on Bob Dylan",
+          "author": "Various",
+          "type": "Music Biography"
+        },
+        {
+          "title": "Books on Ben Folds",
+          "author": "Various",
+          "type": "Music Biography"
+        },
+        {
+          "title": "Books on Cai Guo-Chiang",
+          "author": "Various",
+          "type": "Art Reference"
+        },
+        {
+          "title": "Book of Sylvia Plachy's photos",
+          "author": "Sylvia Plachy",
+          "type": "Photography"
+        },
+        {
+          "title": "True Crime Detective",
+          "author": "Unknown",
+          "type": "True Crime"
+        },
+        {
+          "title": "Plastock: Plastic Stock Photography Resource",
+          "author": "Unknown",
+          "type": "Photography"
+        },
+        {
+          "title": "Spiral-bound collection of photocopied Elvis songs",
+          "author": "Elvis Presley",
+          "type": "Music",
+          "notes": "photocopied collection"
+        }
+      ]
+    },
+    {
+      "lot_title": "Camerimage Annual Volumes",
+      "sold_price": 3900,
+      "estimated_price": "300-500",
+      "estimate_avg": 400,
+      "category": "Film & Cinema",
+      "subcategory": "Film Festival Publications",
+      "url": "https://www.juliensauctions.com/en/items/1426209/david-lynch-camerimage-annual-volumes",
+      "books": [
+        {
+          "title": "Camerimage Annual Volumes",
+          "author": "Various",
+          "type": "Film Reference",
+          "notes": "Multiple volumes from international cinematography festival"
+        }
+      ]
+    }
+  ]
+}
