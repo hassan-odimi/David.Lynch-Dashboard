@@ -300,9 +300,8 @@ with tab6:
 st.markdown("---")
 st.markdown(
     """
-<div style='text-align: center; color: #666; font-size: 0.9em;'>
-    <p>Data sourced from <a href='https://www.juliensauctions.com' target='_blank'>Julien's Auctions</a> • 
-    Built with ❤️ using Streamlit and Plotly • 
+<div style='text-align: center; color: #666; font-size: 0.9em;'> 
+    Built with ❤️ using Streamlit & Plotly by
     <a href='https://www.hassan-odimi.se' target='_blank'>Hassan Odimi</a></p>
 </div>
 """,
