@@ -1,98 +1,64 @@
-# David Lynch Collection Dashboard
+# The David Lynch Collection
 
-An interactive Streamlit dashboard for exploring and analyzing data from the David Lynch Collection auction.
+A static site that studies the 441 lots of the David Lynch Collection, sold by Julien's Auctions. It shows every lot with its estimate, sold price and multiple, and adds a library of the books in the sale, a wall of objects that turns into a chart, and a game called Guess the price.
 
-## Project Structure
+Live site: [lynch.hassan-odimi.se](https://lynch.hassan-odimi.se)
 
-```
-lynch_dashboard/
-├── lynch_dashboard.py      # Main application file
-├── data_processing.py      # Data loading and processing functions
-├── visualizations.py       # Chart and visualization functions
-├── ui_components.py        # UI components and table configurations
-├── about.py               # About page content and layout
-├── requirements.txt       # Python dependencies
-├── David Lynch Collection Data.json  # Source data file
-└── assets/               # Images and static assets
-    └── (your image files)
-```
+## The main finding
 
-## Module Overview
+The sale made $4,245,930. The median lot sold for 18.2 times the midpoint of its estimate, and 440 of 441 lots sold above their high estimate. The one exception was the Vladimir Kagan Swan Back Sofa, which sold for $6,500 against an estimate of $8,000 to $10,000. The highest price was a tie at $195,000 between the "Ronnie Rocket" and "Lost Highway" scripts, each 780 times its midpoint.
 
-### `data_processing.py`
-- **Purpose**: Handles all data loading, cleaning, and processing operations
-- **Key Functions**:
-  - `load_data()`: Loads and processes JSON data with caching
-  - `detect_category()`: Automatically categorizes items based on title keywords
-  - `get_filtered_data()`: Applies user filters to the dataset
-  - `calculate_summary_stats()`: Computes statistical summaries
+Whether sold prices include buyer's premium is not known.
 
-### `visualizations.py`
-- **Purpose**: Creates all charts and visual components
-- **Key Functions**:
-  - `create_treemap()`: Hierarchical treemap visualization
-  - `create_scatter_plot()`: Price comparison scatter plot
-  - `create_horizontal_bar_chart()`: Top/bottom items bar charts
-  - `create_dumbbell_chart()`: Estimate vs actual price comparison
-  - `show_item_gallery()`: Visual gallery of top items
+## Repository
 
-### `ui_components.py`
-- **Purpose**: Manages user interface components and interactions
-- **Key Functions**:
-  - `create_sidebar_filters()`: Category and keyword filtering
-  - `create_data_table()`: Interactive AgGrid table with custom formatting
-  - `create_summary_display()`: Statistical summary display
-  - `create_download_buttons()`: CSV/HTML export functionality
+- `site/` is the whole website: plain HTML, CSS and JavaScript, with no build step.
+- `scripts/` holds the data build, the image build and the data tests.
+- `data/` holds the two source JSON files.
+- `archived_auction_data/` and `Lynch Collection Insights.ipynb` are the original collection work.
 
-### `about.py`
-- **Purpose**: Contains the About page content and styling
-- **Features**: Project description, personal information, and custom CSS
+## Rebuild the data
 
-## Key Benefits of This Structure
+The scripts use Python 3. `build_data.py` needs only the standard library, and `build_images.py` needs Pillow.
 
-1. **Modularity**: Each module has a single, clear responsibility
-2. **Reusability**: Functions can be easily reused or modified
-3. **Maintainability**: Changes to one aspect don't affect others
-4. **Testability**: Individual functions can be tested in isolation
-5. **Readability**: Clean imports and logical organization
-
-## Running the Dashboard
-
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Run the dashboard:
-   ```bash
-   streamlit run lynch_dashboard.py
-   ```
-
-## Data Requirements
-
-The dashboard expects a JSON file named `David Lynch Collection Data.json` with the following structure:
-
-```json
-[
-  {
-    "Title": "Item title",
-    "Sold Price": "$1,000",
-    "Estimated Price": "$800-1,200",
-    "Item URL": "https://...",
-    "Item Image": "https://..."
-  }
-]
+```bash
+python3 scripts/test_build_data.py
 ```
 
-## Future Enhancements
+This runs `scripts/build_data.py`, which writes `site/data/`, and then checks the published figures.
 
-With this modular structure, you can easily:
-- Add new visualization types by extending `visualizations.py`
-- Implement additional filters in `ui_components.py`
-- Add data export formats in `ui_components.py`
-- Create new analysis functions in `data_processing.py`
-- Integrate with different data sources by modifying `data_processing.py`
+To download the images again, delete `site/img/lots` and `site/img/thumbs` first, because the script skips files that already exist.
 
-## Design Philosophy
+```bash
+pip install -r requirements.txt
+```
 
-This refactored structure follows the principle of **separation of concerns**, where each module focuses on a specific aspect of the application. This makes the codebase more professional, maintainable, and easier to extend while keeping the core functionality intact.
+```bash
+python3 scripts/build_images.py
+```
+
+## Run it locally
+
+```bash
+python3 -m http.server --directory site
+```
+
+Then open <http://localhost:8000>.
+
+## Deploy
+
+The site is hosted on Cloudflare Pages, and `site/` is the folder to publish.
+
+```bash
+npx wrangler pages deploy site --project-name david-lynch-collection --branch main
+```
+
+## Source and credit
+
+All auction data and lot images come from [Julien's Auctions](https://www.juliensauctions.com/en/auctions/julien-s-auctions-turner-classic-movies-present-the-david-lynch-collection). This is an independent study by [Hassan Odimi](https://www.hassan-odimi.se) and is not affiliated with Julien's Auctions.
+
+The earlier Streamlit version is kept at the git tag `streamlit-v1`.
+
+## Licence
+
+The code is under the MIT licence. It does not cover the data or images. See [LICENSE](LICENSE).

@@ -4,8 +4,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-LOTS_SOURCE = ROOT / "David Lynch Collection Data.json"
-BOOKS_SOURCE = ROOT / "David Lynch Collection - Books.json"
+LOTS_SOURCE = ROOT / "data" / "David Lynch Collection Data.json"
+BOOKS_SOURCE = ROOT / "data" / "David Lynch Collection - Books.json"
 OUT = ROOT / "site" / "data"
 
 # First match wins, so order matters: specific phrases come before the broad
