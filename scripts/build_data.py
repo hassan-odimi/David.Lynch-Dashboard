@@ -60,7 +60,10 @@ def build_lots(source):
             "category": category(item["Title"]),
             "url": item["Item URL"],
         })
-    return sorted(lots, key=lambda lot: (-lot["sold"], int(lot["id"])))
+    lots.sort(key=lambda lot: (-lot["sold"], int(lot["id"])))
+    for position, lot in enumerate(lots):
+        lot["sheet"] = position  # tile position in img/wall.webp, most expensive first
+    return lots
 
 
 def build_books(source, lots):

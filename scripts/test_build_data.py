@@ -18,6 +18,7 @@ def category_of(fragment):
 # Sale figures
 assert len(lots) == 441
 assert len({lot["id"] for lot in lots}) == 441
+assert sorted(lot["sheet"] for lot in lots) == list(range(441))
 assert sum(lot["sold"] for lot in lots) == 4_245_930
 assert statistics.median(lot["sold"] for lot in lots) == 5_200
 exact = [lot["sold"] / ((lot["low"] + lot["high"]) / 2) for lot in lots]
