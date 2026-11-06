@@ -25,7 +25,9 @@ def sized_url(url):
 def download(url):
     request = urllib.request.Request(sized_url(url), headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(request, timeout=60) as response:
-        return Image.open(io.BytesIO(response.read()))
+        image = Image.open(io.BytesIO(response.read()))
+        image.load()  # open() is lazy; surface a corrupt download here
+        return image
 
 
 def local_copy(lot_id):

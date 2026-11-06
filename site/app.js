@@ -103,6 +103,7 @@ async function collection() {
     addFilter(bandBox, 'price', band.key, `${band.label} (${lots.filter((l) => inBand(l, band)).length})`);
   }
 
+  let shownKey;
   function render() {
     search.value = state.q;
     sort.value = state.sort;
@@ -115,7 +116,10 @@ async function collection() {
         && (!band || inBand(lot, band))
         && (lot.title.toLowerCase().includes(words) || pretty(lot.title).toLowerCase().includes(words)))
       .sort(SORTS[state.sort]);
-    grid.replaceChildren(...shown.map((lot) => cards.get(lot.id)));
+    // Keep the same nodes when the list is unchanged, so focus returns to the card after the dialog.
+    const key = shown.map((lot) => lot.id).join();
+    if (key !== shownKey) grid.replaceChildren(...shown.map((lot) => cards.get(lot.id)));
+    shownKey = key;
     grid.hidden = !shown.length;
     empty.hidden = !!shown.length;
     summary.textContent = `${shown.length} of ${lots.length} lots`;
@@ -146,25 +150,28 @@ async function collection() {
   }
 
   // Opening adds a history entry, so the back button closes the dialog.
+  let pushed = false;
   grid.addEventListener('click', (event) => {
     const link = event.target.closest('a.lot');
     if (!link || event.metaKey || event.ctrlKey || event.shiftKey) return;
     event.preventDefault();
     state.lot = new URLSearchParams(link.search).get('lot');
     writeURL('pushState');
+    pushed = true;
     syncDialog();
   });
   dialog.addEventListener('close', () => {
-    if (state.lot) {
-      state.lot = '';
-      writeURL();
-    }
+    if (!state.lot) return;
+    state.lot = '';
+    if (pushed) history.back();
+    else writeURL();
   });
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
   part('close').addEventListener('click', () => dialog.close());
   addEventListener('popstate', () => {
+    pushed = false;
     readURL();
     render();
     syncDialog();
@@ -218,7 +225,7 @@ function wall(lots) {
     const m0 = Math.max(50, 500 / factor);
     const m1 = Math.min(20000, 300000 / factor);
     const line = document.createElementNS(svgNS, 'line');
-    const attrs = { x1: X(m0), y1: Y(m0 * factor), x2: X(m1), y2: Y(m1 * factor), stroke: '#5E564C', 'stroke-width': 1, 'stroke-dasharray': '5 5', 'vector-effect': 'non-scaling-stroke' };
+    const attrs = { x1: X(m0), y1: Y(m0 * factor), x2: X(m1), y2: Y(m1 * factor), stroke: 'currentColor', 'stroke-width': 1, 'stroke-dasharray': '5 5', 'vector-effect': 'non-scaling-stroke' };
     for (const [name, value] of Object.entries(attrs)) line.setAttribute(name, value);
     svg.append(line);
     const text = el('span', { className: 'guide-label', textContent: label });
@@ -284,6 +291,8 @@ function wall(lots) {
   narrow.addEventListener('change', layout);
   layout();
   pick(lots[0], tiles[0]);
+  // Set after the first pick, so the default lot is not announced on load.
+  detail.parentElement.setAttribute('aria-live', 'polite');
 }
 
 const ROUNDS = [
@@ -380,6 +389,8 @@ async function overview() {
     guess(lots);
   } catch {
     document.getElementById('wall-detail').textContent = 'The lots could not be loaded. Reload the page to try again.';
+    document.getElementById('wall-toggle').hidden = true;
+    document.getElementById('guess').hidden = true;
   }
 }
 
@@ -396,14 +407,19 @@ async function library() {
   const list = document.getElementById('books');
   const empty = document.getElementById('empty');
   const authorLabel = { Unknown: 'Author unknown', Various: 'Various authors' };
-  const books = lots.flatMap((lot) => lot.books.map((book) => ({
-    ...book,
-    lot,
-    row: el('li', {},
-      el('span', { className: 'book-title', textContent: pretty(book.title) }),
-      el('span', { className: 'book-author', textContent: pretty(authorLabel[book.author] || book.author) }),
-      el('a', { className: 'book-lot', href: 'collection.html?lot=' + lot.lot, textContent: pretty(lot.title) })),
-  })));
+  const books = lots.flatMap((lot) => lot.books.map((book) => {
+    const title = pretty(book.title);
+    const author = pretty(authorLabel[book.author] || book.author);
+    return {
+      ...book,
+      lot,
+      text: `${book.title} ${title} ${book.author} ${author}`.toLowerCase(),
+      row: el('li', {},
+        el('span', { className: 'book-title', textContent: title }),
+        el('span', { className: 'book-author', textContent: author }),
+        el('a', { className: 'book-lot', href: 'collection.html?lot=' + lot.lot, textContent: pretty(lot.title) })),
+    };
+  }));
 
   const unknown = books.filter((book) => book.author === 'Unknown').length;
   const various = books.filter((book) => book.author === 'Various').length;
@@ -431,7 +447,7 @@ async function library() {
     for (const { button, value } of buttons) button.setAttribute('aria-pressed', state.cat === value);
     const words = state.q.toLowerCase().trim();
     const shown = books.filter((book) => (!state.cat || book.lot.category === state.cat)
-      && `${book.title} ${pretty(book.title)} ${book.author}`.toLowerCase().includes(words));
+      && book.text.includes(words));
     list.replaceChildren(...shown.map((book) => book.row));
     list.hidden = !shown.length;
     empty.hidden = !!shown.length;

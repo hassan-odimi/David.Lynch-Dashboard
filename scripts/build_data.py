@@ -71,9 +71,7 @@ def build_books(source, lots):
     ids = {item_number(lot["url"]): lot["id"] for lot in lots}
     return [{
         "title": lot["lot_title"],
-        "sold": lot["sold_price"],
         "category": lot["category"],
-        "url": lot["url"],
         "lot": ids[item_number(lot["url"])],
         "books": [{"title": book["title"], "author": book["author"]} for book in lot["books"]],
     } for lot in source["lots"]]
