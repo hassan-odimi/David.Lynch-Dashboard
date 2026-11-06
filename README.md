@@ -1,6 +1,6 @@
 # The David Lynch Collection
 
-A static site that studies the 441 lots of the David Lynch Collection, sold by Julien's Auctions. It shows every lot with its estimate, sold price and multiple, and adds a library of the books in the sale, a wall of objects that turns into a chart, and a game called Guess the price.
+A static site that studies the 441 lots of the David Lynch Collection, sold by Julien's Auctions. It shows every lot with its estimate, sold price and multiple, and adds a library of the books in the sale, a wall of objects that turns into a chart, charts by category and estimate, and a bidding game called Guess the price.
 
 Live site: [lynch.hassan-odimi.se](https://lynch.hassan-odimi.se)
 

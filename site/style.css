@@ -69,6 +69,8 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 .guides svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .guides span { position: absolute; white-space: nowrap; }
 .guide-label { z-index: 3; transform: translate(-100%, 4px); padding: 0 6px; background: var(--panel); color: var(--ink); }
+.guide-note { z-index: 3; transform: translate(-100%, 16px); padding: 0 6px; background: var(--panel); color: var(--accent); white-space: nowrap; }
+.charted .tile.below { outline: 2px solid var(--accent); z-index: 2; }
 .tick-x { bottom: 4px; transform: translateX(-50%); }
 .tick-y { left: 8px; transform: translateY(-50%); }
 .tile { position: absolute; padding: 0; border: 0; background-color: #FFFFFF; background-image: url(img/wall.webp); background-size: 2100% 2100%; box-shadow: inset 0 0 0 1px var(--paper); cursor: pointer; transition: left .9s cubic-bezier(.6,0,.2,1), top .9s cubic-bezier(.6,0,.2,1), width .9s ease, height .9s ease; }
@@ -77,6 +79,23 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
 @media (max-width: 699px) { .plot { aspect-ratio: 1; } }
 
+/* Findings */
+.findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 56px; align-items: start; padding: 72px 0 0; }
+.findings .section-title { font-size: 2.25rem; }
+.bars { width: 100%; margin-top: 24px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.bars th, .bars td { padding: 6px 12px 6px 0; border-top: 1px solid var(--panel); text-align: start; font-weight: 400; }
+.bars thead th { border-top: 0; border-bottom: 1px solid var(--ink); font-size: .875rem; color: var(--muted); }
+.bars tbody th { font: .9375rem/1.35 var(--text); }
+.bars tbody th a { display: flex; align-items: center; min-height: 32px; }
+.bars tbody tr { transition: background-color .15s; }
+.bars tbody tr:hover { background: var(--panel); }
+.bar-cell { width: 45%; }
+.bar { display: block; width: var(--size); height: 4px; margin-top: 3px; background: var(--ink); transform-origin: left; }
+@media (prefers-reduced-motion: no-preference) {
+  .bar { transition: transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--order) * 35ms); }
+  .bars:not(.shown) .bar { transform: scaleX(0); }
+}
+
 /* Guess the price */
 .guess { padding: 72px 0; }
 .guess > .help { margin-bottom: 32px; }
@@ -84,9 +103,31 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 .guess-round img { display: block; width: 100%; height: 360px; object-fit: contain; }
 .guess-round h3 { margin: 10px 0 4px; font: 1.875rem/1.2 var(--text); }
 .guess-estimate { margin: 0 0 24px; font-size: 1.125rem; }
-.guess-bands { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
-.guess-bands .choice { min-height: 48px; font-size: 1rem; }
-.guess-bands .right { border-color: var(--accent); background: var(--accent); color: var(--paper); }
+.guess-steps { display: flex; gap: 6px; margin: 0 0 16px; padding: 0; list-style: none; }
+.guess-steps li { flex: 1; height: 3px; background: var(--panel); transition: background-color .3s; }
+.guess-steps .reached { background: var(--ink); }
+.guess-bid { margin: 0; font: 3rem/1.15 var(--display); font-variant-numeric: tabular-nums; }
+.bid-scale { position: relative; }
+.bid-scale input { display: block; width: 100%; height: 44px; margin: 0; background: transparent; appearance: none; -webkit-appearance: none; cursor: grab; }
+.bid-scale input:active { cursor: grabbing; }
+.bid-scale input:disabled { cursor: default; }
+.bid-scale input::-webkit-slider-runnable-track { height: 1px; background: var(--ink); }
+.bid-scale input::-moz-range-track { height: 1px; background: var(--ink); }
+.bid-scale input::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 32px; margin-top: -16px; border: 0; border-radius: 0; background: var(--ink); transition: transform .15s; }
+.bid-scale input::-moz-range-thumb { width: 20px; height: 32px; border: 0; border-radius: 0; background: var(--ink); transition: transform .15s; }
+.bid-scale input:not(:disabled):hover::-webkit-slider-thumb, .bid-scale input:not(:disabled):active::-webkit-slider-thumb { transform: scaleX(1.25); }
+.bid-scale input:not(:disabled):hover::-moz-range-thumb, .bid-scale input:not(:disabled):active::-moz-range-thumb { transform: scaleX(1.25); }
+.bid-band { position: absolute; top: 16px; height: 12px; background: var(--muted); opacity: .45; }
+.bid-marker { position: absolute; top: 2px; width: 3px; height: 40px; margin-left: -1px; background: var(--accent); pointer-events: none; }
+.bid-ticks { position: relative; height: 20px; margin-bottom: 18px; font-size: .8125rem; color: var(--muted); }
+.bid-ticks span { position: absolute; transform: translateX(-50%); }
+.guess-sold { margin: 0; font: 3rem/1.15 var(--display); }
+.guess-sheet { width: 100%; margin-bottom: 24px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.guess-sheet th { padding: 6px 12px 6px 0; font-size: .875rem; font-weight: 400; color: var(--muted); text-align: start; }
+.guess-sheet td { padding: 6px 12px 6px 0; border-top: 1px solid var(--panel); }
+.sheet-lot { display: flex; align-items: center; gap: 12px; min-height: 44px; font: .9375rem/1.35 var(--text); text-decoration: none; overflow-wrap: break-word; }
+.sheet-lot img { flex: none; width: 48px; height: 48px; object-fit: contain; }
+@media (max-width: 559px) { .sheet-lot img { display: none; } }
 .guess-reveal { margin: 22px 0 14px; font: 1.25rem/1.4 var(--text); }
 .guess-reveal:empty { margin: 0; }
 .guess-score { padding: 48px 0; border-block: 1px solid var(--ink); }
@@ -150,5 +191,6 @@ body:has(dialog[open]) { overflow: hidden; }
 @media (max-width: 559px) { .about-creator { grid-template-columns: minmax(0, 1fr); } .about-creator img { max-width: 200px; } }
 
 @media (forced-colors: active) {
-  .choice[aria-pressed="true"], .guess-bands .right { forced-color-adjust: none; }
+  .choice[aria-pressed="true"] { forced-color-adjust: none; }
+  .bar, .guess-steps .reached, .bid-marker { background: CanvasText; }
 }

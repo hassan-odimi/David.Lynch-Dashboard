@@ -243,6 +243,11 @@ function wall(lots) {
     tick.style.top = Y(value) + '%';
     guides.append(tick);
   }
+  const below = lots.find((lot) => lot.sold < lot.low);
+  const note = el('span', { className: 'guide-note', textContent: 'Below estimate' });
+  note.style.left = X((below.low + below.high) / 2) + '%';
+  note.style.top = Y(below.sold) + '%';
+  guides.append(note);
   plot.append(guides);
 
   let picked;
@@ -256,7 +261,13 @@ function wall(lots) {
   }
 
   const tiles = lots.map((lot) => {
-    const tile = el('button', { className: 'tile', type: 'button', tabIndex: -1, onclick: () => pick(lot, tile) });
+    const tile = el('button', {
+      className: lot === below ? 'tile below' : 'tile',
+      type: 'button',
+      tabIndex: -1,
+      onclick: () => pick(lot, tile),
+      onpointerenter: (event) => event.pointerType === 'mouse' && pick(lot, tile),
+    });
     tile.setAttribute('aria-label', pretty(lot.title));
     const column = lot.sheet % 21;
     const row = Math.floor(lot.sheet / 21);
@@ -278,6 +289,7 @@ function wall(lots) {
       style.transitionDelay = (i % columns) * 8 + 'ms';
     });
     guides.hidden = !chart;
+    plot.classList.toggle('charted', chart);
     toggle.textContent = chart ? 'Back to the wall' : 'Turn the wall into a chart';
     help.textContent = chart
       ? 'Across: estimate midpoint. Up: sold price. Both scales are logarithmic.'
@@ -302,70 +314,160 @@ const ROUNDS = [
   { id: '129', alt: 'Long grey-green sofa with a curved back, on metal legs', note: 'The only lot of 441 to sell below its estimate.' },
   { id: '290', alt: 'Carved terracotta incense holder in the shape of a small building', note: '130 times its estimate.' },
 ];
-const GUESS_BANDS = [[1000, '$1,000 or less'], [10000, '$1,001 to $10,000'], [50000, '$10,001 to $50,000'], [Infinity, 'Over $50,000']];
+const BID_MIN = 50;
+const BID_MAX = 300000;
+const BID_STEPS = 400;
+const MAX_POINTS = 100;
+const calm = matchMedia('(prefers-reduced-motion: reduce)');
+const bidShare = (price) => Math.log(price / BID_MIN) / Math.log(BID_MAX / BID_MIN);
+const bidPlace = (price) => `calc(10px + (100% - 20px) * ${bidShare(price)})`; // 20px is the slider thumb
+// Two significant figures: $4,300, not $4,287.
+function roundPrice(value) {
+  const unit = 10 ** (Math.floor(Math.log10(value)) - 1);
+  return Math.round(value / unit) * unit;
+}
+const stepToBid = (step) => roundPrice(BID_MIN * (BID_MAX / BID_MIN) ** (step / BID_STEPS));
+// Exact is 100 points. Ten times out, either way, is 0.
+const bidPoints = (bid, sold) => Math.max(0, Math.round(MAX_POINTS * (1 - Math.abs(Math.log10(bid / sold)))));
+
+function countUp(from, to, ms, frame, done) {
+  if (calm.matches) {
+    frame(to);
+    done();
+    return;
+  }
+  const start = performance.now();
+  requestAnimationFrame(function step(now) {
+    const t = Math.min(1, (now - start) / ms);
+    frame(t === 1 ? to : from * (to / from) ** (1 - (1 - t) ** 3));
+    if (t < 1) requestAnimationFrame(step);
+    else done();
+  });
+}
 
 function guess(lots) {
   const $ = (id) => document.getElementById('guess-' + id);
   const byId = new Map(lots.map((lot) => [lot.id, lot]));
+  const slider = $('slider');
+  const steps = ROUNDS.map(() => el('li'));
   let round = 0;
-  let score = 0;
-  let answered = false;
+  let results = [];
 
-  const buttons = GUESS_BANDS.map(([, label], i) => choiceButton(label, () => answer(i)));
-  $('bands').append(...buttons);
+  $('steps').append(...steps);
+  $('ticks').append(...[100, 1000, 10000, 100000].map((value) => {
+    const tick = el('span', { textContent: money(value) });
+    tick.style.left = bidPlace(value);
+    return tick;
+  }));
+
+  const enter = (node, keyframes) => {
+    if (!calm.matches) node.animate(keyframes, { duration: 350, easing: 'cubic-bezier(.2,.7,.2,1)' });
+  };
+
+  function showBid() {
+    const bid = stepToBid(+slider.value);
+    $('bid').textContent = money(bid);
+    slider.setAttribute('aria-valuetext', money(bid));
+  }
 
   function show() {
     const { id, alt } = ROUNDS[round];
     const lot = byId.get(id);
-    answered = false;
     $('round').hidden = false;
     $('done').hidden = true;
     $('image').src = `img/lots/${id}.webp`;
     $('image').alt = alt;
+    if (ROUNDS[round + 1]) new Image().src = `img/lots/${ROUNDS[round + 1].id}.webp`;
     $('count').textContent = `Lot ${round + 1} of ${ROUNDS.length}`;
     $('title').textContent = pretty(lot.title);
     $('estimate').textContent = 'Estimate ' + estimate(lot);
+    steps.forEach((step, i) => step.classList.toggle('reached', i <= round));
+    $('band').style.left = bidPlace(lot.low);
+    $('band').style.width = `calc((100% - 20px) * ${bidShare(lot.high) - bidShare(lot.low)})`;
+    slider.disabled = false;
+    slider.value = Math.round(bidShare(lot.high) * BID_STEPS);
+    showBid();
+    $('place').hidden = false;
+    $('marker').hidden = true;
+    $('sold').hidden = true;
     $('reveal').textContent = '';
     $('next').hidden = true;
-    for (const button of buttons) button.classList.remove('right');
   }
 
-  function answer(choice) {
-    if (answered) return;
-    answered = true;
-    const lot = byId.get(ROUNDS[round].id);
-    const right = GUESS_BANDS.findIndex(([max]) => lot.sold <= max);
-    if (choice === right) score += 1;
-    buttons[right].classList.add('right');
-    $('reveal').textContent = `${choice === right ? 'Correct.' : 'Not quite.'} Sold for ${money(lot.sold)}. ${ROUNDS[round].note}`;
-    $('next').textContent = round === ROUNDS.length - 1 ? 'See your score' : 'Next lot';
-    $('next').hidden = false;
-    $('next').focus({ preventScroll: true });
+  function next() {
+    show();
+    enter($('image'), [{ opacity: 0, transform: 'translateX(32px)' }, { opacity: 1, transform: 'none' }]);
+    enter($('copy'), [{ opacity: 0 }, { opacity: 1 }]);
+    slider.focus({ preventScroll: true });
   }
 
+  function placeBid() {
+    const { id, note } = ROUNDS[round];
+    const lot = byId.get(id);
+    const bid = stepToBid(+slider.value);
+    const points = bidPoints(bid, lot.sold);
+    results.push({ id, lot, bid, points });
+    slider.disabled = true;
+    $('place').hidden = true;
+    $('marker').hidden = false;
+    $('sold').hidden = false;
+    countUp((lot.low + lot.high) / 2, lot.sold, 1100, (price) => {
+      $('sold').textContent = money(price === lot.sold ? price : roundPrice(price));
+      $('marker').style.left = bidPlace(price);
+    }, () => {
+      const off = Math.max(bid, lot.sold) / Math.min(bid, lot.sold);
+      const verdict = off <= 1.1 ? 'within 10%' : `${times(off)} too ${bid < lot.sold ? 'low' : 'high'}`;
+      $('reveal').textContent = `Sold for ${money(lot.sold)}. You bid ${money(bid)}, ${verdict}: ${points} points. ${note}`;
+      $('next').textContent = round === ROUNDS.length - 1 ? 'See your results' : 'Next lot';
+      $('next').hidden = false;
+      $('next').focus({ preventScroll: true });
+    });
+  }
+
+  function finish() {
+    const total = results.reduce((sum, result) => sum + result.points, 0);
+    const out = `of ${ROUNDS.length * MAX_POINTS}`;
+    $('round').hidden = true;
+    $('done').hidden = false;
+    $('shared').textContent = '';
+    const rows = results.map(({ id, lot, bid, points }) => el('tr', {},
+      el('td', {}, el('a', { className: 'sheet-lot', href: lotHref(lot) },
+        el('img', { className: 'object', src: `img/thumbs/${id}.webp`, alt: '' }),
+        el('span', { textContent: pretty(lot.title) }))),
+      el('td', { textContent: money(bid) }),
+      el('td', { className: 'price', textContent: money(lot.sold) }),
+      el('td', { textContent: points })));
+    $('sheet').tBodies[0].replaceChildren(...rows);
+    if (!calm.matches) {
+      rows.forEach((row, i) => row.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: i * 90, fill: 'backwards' }));
+    }
+    countUp(1, total, 900, (value) => {
+      $('score').textContent = `${Math.round(value)} ${out}`;
+    }, () => {});
+    $('again').focus({ preventScroll: true });
+  }
+
+  $('place').addEventListener('click', placeBid);
+  slider.addEventListener('input', showBid);
   $('next').addEventListener('click', () => {
     if (round === ROUNDS.length - 1) {
-      $('round').hidden = true;
-      $('done').hidden = false;
-      $('score').textContent = `${score} of ${ROUNDS.length}`;
-      $('shared').textContent = '';
-      $('again').focus({ preventScroll: true });
+      finish();
       return;
     }
     round += 1;
-    show();
-    buttons[0].focus({ preventScroll: true });
+    next();
   });
 
   $('again').addEventListener('click', () => {
     round = 0;
-    score = 0;
-    show();
-    buttons[0].focus({ preventScroll: true });
+    results = [];
+    next();
   });
 
   $('share').addEventListener('click', async () => {
-    const text = `I scored ${score} of ${ROUNDS.length} guessing what David Lynch’s belongings sold for.`;
+    const total = results.reduce((sum, result) => sum + result.points, 0);
+    const worst = results.reduce((a, b) => (b.points < a.points ? b : a));
+    const text = `I scored ${total} of ${ROUNDS.length * MAX_POINTS} bidding on David Lynch’s belongings. The one that got away: ${pretty(worst.lot.title)}, ${money(worst.lot.sold)}.`;
     const url = location.origin + location.pathname + '#guess';
     try {
       if (navigator.share) {
@@ -382,16 +484,83 @@ function guess(lots) {
   show();
 }
 
+function median(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  const half = sorted.length >> 1;
+  return sorted.length % 2 ? sorted[half] : (sorted[half - 1] + sorted[half]) / 2;
+}
+
+function barRows(id, rows) {
+  const table = document.getElementById(id);
+  const largest = Math.max(...rows.map((row) => row.size));
+  table.tBodies[0].append(...rows.map((row, i) => {
+    const bar = el('span', { className: 'bar' });
+    bar.style.setProperty('--size', row.size / largest * 100 + '%');
+    bar.style.setProperty('--order', i);
+    return el('tr', {},
+      el('th', { scope: 'row' }, row.href ? el('a', { href: row.href, textContent: row.label }) : row.label),
+      el('td', { textContent: row.lots }),
+      el('td', { className: 'bar-cell' }, el('span', { className: 'price', textContent: row.value }), bar),
+      ...(row.extra ? [el('td', { textContent: row.extra })] : []));
+  }));
+  new IntersectionObserver(([entry], observer) => {
+    if (!entry.isIntersecting) return;
+    table.classList.add('shown');
+    observer.disconnect();
+  }, { threshold: 0.2 }).observe(table);
+}
+
+const ESTIMATE_BANDS = [
+  [0, 300, 'Under $300'],
+  [300, 600, '$300 to $599'],
+  [600, 1000, '$600 to $999'],
+  [1000, 2000, '$1,000 to $1,999'],
+  [2000, 5000, '$2,000 to $4,999'],
+  [5000, Infinity, '$5,000 and over'],
+];
+
+function findings(lots) {
+  const groups = new Map();
+  for (const lot of lots) groups.set(lot.category, [...(groups.get(lot.category) || []), lot]);
+  const total = (group) => group.reduce((sum, lot) => sum + lot.sold, 0);
+  barRows('category-bars', [...groups]
+    .sort(([, a], [, b]) => total(b) - total(a))
+    .map(([name, group]) => ({
+      label: name,
+      href: 'collection.html?cat=' + encodeURIComponent(name),
+      lots: group.length,
+      size: total(group),
+      value: money(total(group)),
+      extra: times(median(group.map((lot) => lot.multiple))),
+    })));
+  barRows('estimate-bars', ESTIMATE_BANDS.map(([min, max, label]) => {
+    const group = lots.filter((lot) => (lot.low + lot.high) / 2 >= min && (lot.low + lot.high) / 2 < max);
+    const multiple = median(group.map((lot) => lot.multiple));
+    return { label, lots: group.length, size: multiple, value: times(multiple) };
+  }));
+}
+
 async function overview() {
   try {
     const lots = await loadJSON('data/lots.json');
     wall(lots);
+    findings(lots);
     guess(lots);
   } catch {
     document.getElementById('wall-detail').textContent = 'The lots could not be loaded. Reload the page to try again.';
     document.getElementById('wall-toggle').hidden = true;
     document.getElementById('guess').hidden = true;
+    document.getElementById('findings').hidden = true;
   }
+}
+
+// Many titles are descriptions, so this searches and does not claim an exact match.
+function searchLink(book, title) {
+  const author = ['Unknown', 'Various'].includes(book.author) ? '' : book.author;
+  const words = /^(work by|collection from)\b/i.test(book.title) ? author : `${book.title} ${author}`;
+  const link = el('a', { className: 'book-lot', href: 'https://openlibrary.org/search?q=' + encodeURIComponent(words.trim()), textContent: 'Search Open Library' });
+  link.setAttribute('aria-label', `Search Open Library for ${title}`);
+  return link;
 }
 
 async function library() {
@@ -417,14 +586,16 @@ async function library() {
       row: el('li', {},
         el('span', { className: 'book-title', textContent: title }),
         el('span', { className: 'book-author', textContent: author }),
-        el('a', { className: 'book-lot', href: 'collection.html?lot=' + lot.lot, textContent: pretty(lot.title) })),
+        el('a', { className: 'book-lot', href: 'collection.html?lot=' + lot.lot, textContent: pretty(lot.title) }),
+        searchLink(book, title)),
     };
   }));
 
   const unknown = books.filter((book) => book.author === 'Unknown').length;
   const various = books.filter((book) => book.author === 'Various').length;
   document.getElementById('library-intro').textContent = `${books.length} books in ${lots.length} lots. `
-    + `${unknown + various} have no named author: ${unknown} are listed as unknown and ${various} as various.`;
+    + `${unknown + various} have no named author: ${unknown} are listed as unknown and ${various} as various. `
+    + 'Search links go to Open Library, an independent catalogue, and may not find the exact edition.';
 
   const counts = {};
   for (const book of books) counts[book.lot.category] = (counts[book.lot.category] || 0) + 1;

@@ -5,7 +5,7 @@ import time
 import urllib.parse
 import urllib.request
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageChops, ImageOps
 
 import build_data
 
@@ -57,6 +57,16 @@ def build_wall(lots):
     sheet.save(IMG / "wall.webp", "WEBP", quality=75, method=6)
 
 
+def build_share():
+    """JPEG link preview, because some apps do not show WebP."""
+    canvas = Image.new("RGB", (1200, 630), "#F4F0E7")
+    lot = ImageOps.contain(Image.open(IMG / "lots" / "15.webp").convert("RGB"), (1120, 570))
+    left, top = (1200 - lot.width) // 2, (630 - lot.height) // 2
+    box = (left, top, left + lot.width, top + lot.height)
+    canvas.paste(ImageChops.multiply(canvas.crop(box), lot), box)
+    canvas.save(IMG / "share.jpg", "JPEG", quality=85)
+
+
 def main():
     (IMG / "lots").mkdir(parents=True, exist_ok=True)
     (IMG / "thumbs").mkdir(parents=True, exist_ok=True)
@@ -78,6 +88,7 @@ def main():
         save(image, thumb, 400)
 
     build_wall(json.loads((build_data.OUT / "lots.json").read_text(encoding="utf-8")))
+    build_share()
     print(f"{len(failed)} lots used the local copy")
     print("\n".join(failed))
 

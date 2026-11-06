@@ -5,7 +5,10 @@
 <meta name="description" content="441 lots from David Lynch's collection, sold by Julien's Auctions for $4,245,930. The typical lot made 18 times its estimate.">
 <meta property="og:title" content="The David Lynch Collection">
 <meta property="og:description" content="441 lots, one sale. The typical lot made 18 times its estimate.">
-<meta property="og:image" content="https://lynch.hassan-odimi.se/img/lots/15.webp">
+<meta property="og:image" content="https://lynch.hassan-odimi.se/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
@@ -71,22 +74,55 @@
     <p><a class="link-block" href="collection.html">Browse all 441 lots in the Collection</a></p>
   </section>
 
+  <section class="findings" id="findings">
+    <div>
+      <h2 class="section-title">Eleven script lots took nearly a fifth of the money</h2>
+      <p class="help">Total sold and median multiple by category. Categories are this study’s own grouping of lot titles. Select one to see its lots.</p>
+      <table class="bars" id="category-bars">
+        <thead><tr><th scope="col">Category</th><th scope="col">Lots</th><th scope="col">Total sold</th><th scope="col">Median multiple</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div>
+      <h2 class="section-title">The lowest estimates ran furthest</h2>
+      <p class="help">Median multiple, grouped by the midpoint of each lot’s estimate. The top groups hold few lots.</p>
+      <table class="bars" id="estimate-bars">
+        <thead><tr><th scope="col">Estimate midpoint</th><th scope="col">Lots</th><th scope="col">Median multiple</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
   <section class="guess" id="guess">
     <h2 class="section-title">Guess the price</h2>
-    <p class="help">Five lots. You see the estimate. Name the band it sold in.</p>
+    <p class="help">Five lots. Drag to bid what you think each one sold for. The closer you get, the more points, up to 100 a lot.</p>
+    <ol class="guess-steps" id="guess-steps" aria-hidden="true"></ol>
     <div class="guess-round" id="guess-round">
       <img class="object" id="guess-image" alt="">
-      <div>
+      <div id="guess-copy">
         <p class="overline" id="guess-count"></p>
         <h3 id="guess-title"></h3>
         <p class="guess-estimate" id="guess-estimate"></p>
-        <div class="guess-bands" id="guess-bands"></div>
+        <label class="overline" for="guess-slider">Your bid</label>
+        <p class="guess-bid" id="guess-bid" aria-hidden="true"></p>
+        <div class="bid-scale">
+          <span class="bid-band" id="guess-band"></span>
+          <input type="range" id="guess-slider" min="0" max="400" step="1">
+          <span class="bid-marker" id="guess-marker" hidden></span>
+        </div>
+        <div class="bid-ticks" id="guess-ticks" aria-hidden="true"></div>
+        <button class="button" type="button" id="guess-place">Place bid</button>
+        <p class="guess-sold price" id="guess-sold" aria-hidden="true" hidden></p>
         <p class="guess-reveal" id="guess-reveal" aria-live="polite"></p>
         <button class="button" type="button" id="guess-next" hidden></button>
       </div>
     </div>
     <div class="guess-score" id="guess-done" hidden>
       <p id="guess-score"></p>
+      <table class="guess-sheet" id="guess-sheet">
+        <thead><tr><th scope="col">Lot</th><th scope="col">Your bid</th><th scope="col">Sold</th><th scope="col">Points</th></tr></thead>
+        <tbody></tbody>
+      </table>
       <div class="guess-actions">
         <button class="button" type="button" id="guess-again">Play again</button>
         <button class="choice" type="button" id="guess-share">Share your score</button>

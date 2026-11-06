@@ -52,4 +52,14 @@ assert build_data.category("Example Drum Kit") == "Music & Audio"
 assert category_of("Prop Matchbooks") != "Books & Magazines"
 assert build_data.category("Photo Matched Electric Guitar") == "Music & Audio"
 
+# Claims in the Overview findings
+scripts = [lot for lot in lots if lot["category"] == "Scripts & Papers"]
+assert len(scripts) == 11
+assert 0.18 < sum(lot["sold"] for lot in scripts) / sum(lot["sold"] for lot in lots) < 0.2
+midpoint = lambda lot: (lot["low"] + lot["high"]) / 2
+bands = [[lot["multiple"] for lot in lots if low <= midpoint(lot) < high]
+         for low, high in ((0, 300), (300, 600), (600, 1000), (1000, 2000), (2000, 5000), (5000, float("inf")))]
+medians = [statistics.median(band) for band in bands]
+assert medians == sorted(medians, reverse=True) and medians[0] > 20 and medians[-1] < 4
+
 print("all checks passed")
