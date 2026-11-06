@@ -58,6 +58,38 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 .exception img { display: block; width: 100%; height: auto; max-height: 360px; object-fit: contain; }
 .exception p { max-width: 480px; font: 1.1875rem/1.55 var(--text); text-wrap: pretty; }
 
+/* Wall */
+.wall { padding: 72px 0 0; }
+.wall-head { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: end; justify-content: space-between; margin-bottom: 24px; }
+.plot { position: relative; width: 100%; aspect-ratio: 32 / 14; background: var(--panel); }
+.guides { position: absolute; inset: 0; font-size: .8125rem; color: var(--muted); }
+.guides svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.guides span { position: absolute; white-space: nowrap; }
+.guide-label { z-index: 3; transform: translate(-100%, 4px); padding: 0 6px; background: var(--panel); color: var(--ink); }
+.tick-x { bottom: 4px; transform: translateX(-50%); }
+.tick-y { left: 8px; transform: translateY(-50%); }
+.tile { position: absolute; padding: 0; border: 0; background-color: #FFFFFF; background-image: url(img/wall.webp); background-size: 2100% 2100%; box-shadow: inset 0 0 0 1px var(--paper); cursor: pointer; transition: left .9s cubic-bezier(.6,0,.2,1), top .9s cubic-bezier(.6,0,.2,1), width .9s ease, height .9s ease; }
+.tile:hover, .tile.picked { outline: 2px solid var(--accent); z-index: 2; }
+.wall-detail { margin: 14px 0 0; min-height: 26px; font: 1.125rem/1.45 var(--text); }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+@media (max-width: 699px) { .plot { aspect-ratio: 1; } }
+
+/* Guess the price */
+.guess { padding: 72px 0; }
+.guess > .help { margin-bottom: 32px; }
+.guess-round { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 56px; align-items: center; padding: 32px 0; border-block: 1px solid var(--ink); }
+.guess-round img { display: block; width: 100%; height: 360px; object-fit: contain; }
+.guess-round h3 { margin: 10px 0 4px; font: 1.875rem/1.2 var(--text); }
+.guess-estimate { margin: 0 0 24px; font-size: 1.125rem; }
+.guess-bands { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+.guess-bands .choice { min-height: 48px; font-size: 1rem; }
+.guess-bands .right { border-color: var(--accent); background: var(--accent); color: var(--paper); }
+.guess-reveal { margin: 22px 0 14px; font: 1.25rem/1.4 var(--text); }
+.guess-reveal:empty { margin: 0; }
+.guess-score { padding: 48px 0; border-block: 1px solid var(--ink); }
+#guess-score { margin: 0 0 18px; font: 3.25rem/1.1 var(--display); }
+.guess-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
 /* Collection */
 .page-head { padding: 56px 0 28px; }
 .page-head h1 { margin: 0; font: 3.5rem/1.1 var(--display); }

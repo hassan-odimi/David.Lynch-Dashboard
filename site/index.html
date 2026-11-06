@@ -57,6 +57,42 @@
       <p><a href="collection.html?lot=129">See the sofa</a></p>
     </div>
   </section>
+  <section class="wall" id="wall">
+    <div class="wall-head">
+      <div>
+        <h2 class="section-title">Every object in the sale</h2>
+        <p class="help" id="wall-help">Most expensive first. Select any object.</p>
+      </div>
+      <button class="button" type="button" id="wall-toggle">Turn the wall into a chart</button>
+    </div>
+    <div class="plot" id="plot"></div>
+    <p class="wall-detail" aria-live="polite"><span id="wall-detail"></span> <a id="wall-link" hidden>See this lot</a></p>
+    <p><a href="collection.html">Browse all 441 lots in the Collection</a></p>
+  </section>
+
+  <section class="guess" id="guess">
+    <h2 class="section-title">Guess the price</h2>
+    <p class="help">Five lots. You see the estimate. Name the band it sold in.</p>
+    <div class="guess-round" id="guess-round">
+      <img class="object" id="guess-image" alt="">
+      <div>
+        <p class="overline" id="guess-count"></p>
+        <h3 id="guess-title"></h3>
+        <p class="guess-estimate" id="guess-estimate"></p>
+        <div class="guess-bands" id="guess-bands"></div>
+        <p class="guess-reveal" id="guess-reveal" aria-live="polite"></p>
+        <button class="button" type="button" id="guess-next" hidden></button>
+      </div>
+    </div>
+    <div class="guess-score" id="guess-done" hidden>
+      <p id="guess-score"></p>
+      <div class="guess-actions">
+        <button class="button" type="button" id="guess-again">Play again</button>
+        <button class="choice" type="button" id="guess-share">Share your score</button>
+      </div>
+      <p class="help" id="guess-shared" role="status"></p>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
