@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Collection: The David Lynch Collection</title>
+<meta name="description" content="Search and filter all 441 lots from the David Lynch sale at Julien's Auctions, with estimate, sold price and multiple.">
+<meta property="og:title" content="Collection: The David Lynch Collection">
+<meta property="og:description" content="Search and filter all 441 lots from the sale.">
+<meta property="og:image" content="https://lynch.hassan-odimi.se/img/lots/15.webp">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="collection">
+<header class="site-header">
+  <nav aria-label="Main">
+    <a class="site-name" href="index.html">The David Lynch Collection</a>
+    <div class="site-links">
+      <a href="collection.html" aria-current="page">Collection</a>
+      <a href="index.html#guess">Guess the price</a>
+      <a href="library.html">Library</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="page-head">
+    <h1>Collection</h1>
+    <p class="help">Every lot in the sale, with what it made against its estimate.</p>
+  </div>
+
+  <form class="controls" id="controls" role="search">
+    <div class="search-row">
+      <label class="field field-search">Search titles
+        <input type="search" id="search" autocomplete="off">
+      </label>
+      <label class="field">Sort by
+        <select id="sort">
+          <option value="price">Highest price</option>
+          <option value="multiple">Highest multiple</option>
+          <option value="low">Lowest price</option>
+          <option value="title">Title</option>
+        </select>
+      </label>
+    </div>
+    <fieldset class="filter"><legend>Category</legend><div id="categories"></div></fieldset>
+    <fieldset class="filter"><legend>Sold price</legend><div id="bands"></div></fieldset>
+  </form>
+
+  <div class="summary">
+    <p id="summary" role="status"></p>
+    <button class="choice" type="button" id="reset">Reset</button>
+  </div>
+  <ul class="lots" id="lots"></ul>
+  <p class="empty" id="empty" hidden>No lots match. Try fewer words, or reset the filters.</p>
+</main>
+
+<footer class="site-footer">
+  <p>Independent study by Hassan Odimi. Not affiliated with Julien’s Auctions. Multiples compare sold price with the midpoint of the estimate.</p>
+</footer>
+</body>
+</html>
