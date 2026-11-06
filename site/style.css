@@ -113,3 +113,35 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 @media (min-width: 700px) {
   .lots { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 48px 24px; }
 }
+
+/* Lot detail */
+.lot-dialog { width: min(960px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); }
+.lot-dialog::backdrop { background: rgb(27 24 21 / .6); }
+.lot-dialog-body { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 32px; align-items: center; padding: 64px 32px 32px; }
+.lot-dialog-close { position: absolute; top: 12px; right: 12px; }
+.lot-dialog img { display: block; width: 100%; max-height: 60dvh; object-fit: contain; }
+.lot-dialog h2 { margin: 10px 0 20px; font: 1.875rem/1.2 var(--text); overflow-wrap: break-word; }
+.lot-dialog dl { margin: 0 0 20px; }
+.lot-dialog dt { font-size: .875rem; color: var(--muted); }
+.lot-dialog dd { margin: 0 0 12px; font: 1.375rem var(--text); }
+body:has(dialog[open]) { overflow: hidden; }
+
+/* Library */
+.books { list-style: none; margin: 0; padding: 0 0 72px; }
+.books li { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 2px 24px; padding: 14px 0; border-bottom: 1px solid var(--panel); }
+.book-title { font: 1.0625rem/1.4 var(--text); overflow-wrap: break-word; }
+.book-author { color: var(--muted); }
+.book-lot { font-size: .875rem; }
+
+/* About */
+.prose h2 { margin: 0 0 12px; font: 2.25rem/1.15 var(--display); }
+.prose p, .prose li { max-width: 68ch; font: 1.0625rem/1.6 var(--text); text-wrap: pretty; }
+.prose ul { padding-inline-start: 20px; }
+.prose li { margin-bottom: 6px; }
+.prose ul + h2 { margin-top: 48px; }
+.about-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 48px; align-items: center; padding-bottom: 56px; }
+.about-split img { display: block; width: 100%; height: auto; }
+.about-text { padding: 56px 0; border-block: 1px solid var(--ink); }
+.about-creator { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 40px; align-items: center; padding: 56px 0 72px; }
+.about-creator img { display: block; width: 100%; height: auto; }
+@media (max-width: 559px) { .about-creator { grid-template-columns: minmax(0, 1fr); } .about-creator img { max-width: 200px; } }

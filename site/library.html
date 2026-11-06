@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Library: The David Lynch Collection</title>
+<meta name="description" content="The books in the David Lynch sale at Julien's Auctions, listed by title and author.">
+<meta property="og:title" content="Library: The David Lynch Collection">
+<meta property="og:description" content="The books in the David Lynch sale at Julien's Auctions, listed by title and author.">
+<meta property="og:image" content="https://lynch.hassan-odimi.se/img/lots/65.webp">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="library">
+<header class="site-header">
+  <nav aria-label="Main">
+    <a class="site-name" href="index.html">The David Lynch Collection</a>
+    <div class="site-links">
+      <a href="collection.html">Collection</a>
+      <a href="index.html#guess">Guess the price</a>
+      <a href="library.html" aria-current="page">Library</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="page-head">
+    <h1>Library</h1>
+    <p class="help" id="library-intro"></p>
+  </div>
+
+  <form class="controls" id="controls" role="search">
+    <label class="field">Search titles and authors
+      <input type="search" id="search" autocomplete="off">
+    </label>
+    <fieldset class="filter"><legend>Category</legend><div id="categories"></div></fieldset>
+  </form>
+
+  <div class="summary">
+    <p id="summary" role="status"></p>
+    <button class="choice" type="button" id="reset">Reset</button>
+  </div>
+  <ul class="books" id="books"></ul>
+  <p class="empty" id="empty" hidden>No books match. Try fewer words, or reset the filters.</p>
+</main>
+
+<footer class="site-footer">
+  <p>Independent study by Hassan Odimi. Not affiliated with Julien’s Auctions. Multiples compare sold price with the midpoint of the estimate.</p>
+</footer>
+</body>
+</html>

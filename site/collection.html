@@ -58,6 +58,23 @@
   </div>
   <ul class="lots" id="lots"></ul>
   <p class="empty" id="empty" hidden>No lots match. Try fewer words, or reset the filters.</p>
+
+  <dialog class="lot-dialog" id="lot-dialog" aria-labelledby="lot-dialog-title">
+    <div class="lot-dialog-body">
+      <button class="choice lot-dialog-close" type="button" id="lot-dialog-close">Close</button>
+      <img class="object" id="lot-dialog-image" alt="">
+      <div>
+        <p class="overline" id="lot-dialog-category"></p>
+        <h2 id="lot-dialog-title"></h2>
+        <dl>
+          <dt>Estimate</dt><dd id="lot-dialog-estimate"></dd>
+          <dt>Sold for</dt><dd class="price" id="lot-dialog-sold"></dd>
+          <dt>Against estimate midpoint</dt><dd class="price" id="lot-dialog-multiple"></dd>
+        </dl>
+        <a id="lot-dialog-source">View the listing on Julien’s Auctions</a>
+      </div>
+    </div>
+  </dialog>
 </main>
 
 <footer class="site-footer">

@@ -61,7 +61,8 @@ async function collection() {
   const counts = {};
   for (const lot of lots) counts[lot.category] = (counts[lot.category] || 0) + 1;
   const categories = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
-  const state = { q: '', cat: '', price: '', sort: 'price' };
+  const state = { q: '', cat: '', price: '', sort: 'price', lot: '' };
+  const byId = new Map(lots.map((lot) => [lot.id, lot]));
 
   function readURL() {
     const params = new URLSearchParams(location.search);
@@ -70,16 +71,18 @@ async function collection() {
     state.cat = known(params.get('cat'), categories);
     state.price = known(params.get('price'), BANDS.map((b) => b.key));
     state.sort = known(params.get('sort'), Object.keys(SORTS)) || 'price';
+    state.lot = byId.has(params.get('lot')) ? params.get('lot') : '';
   }
 
-  function writeURL() {
+  function writeURL(method = 'replaceState') {
     const params = new URLSearchParams();
     if (state.q) params.set('q', state.q);
     if (state.cat) params.set('cat', state.cat);
     if (state.price) params.set('price', state.price);
     if (state.sort !== 'price') params.set('sort', state.sort);
+    if (state.lot) params.set('lot', state.lot);
     const query = params.toString();
-    history.replaceState(null, '', query ? '?' + query : location.pathname);
+    history[method](null, '', query ? '?' + query : location.pathname);
   }
 
   const filterButtons = [];
@@ -123,6 +126,50 @@ async function collection() {
     render();
   }
 
+  const dialog = document.getElementById('lot-dialog');
+  const part = (name) => document.getElementById('lot-dialog-' + name);
+  function syncDialog() {
+    const lot = byId.get(state.lot);
+    if (!lot) {
+      if (dialog.open) dialog.close();
+      return;
+    }
+    part('image').src = `img/lots/${lot.id}.webp`;
+    part('image').alt = pretty(lot.title);
+    part('category').textContent = lot.category;
+    part('title').textContent = pretty(lot.title);
+    part('estimate').textContent = estimate(lot);
+    part('sold').textContent = money(lot.sold);
+    part('multiple').textContent = times(lot.multiple);
+    part('source').href = lot.url;
+    if (!dialog.open) dialog.showModal();
+  }
+
+  // Opening adds a history entry, so the back button closes the dialog.
+  grid.addEventListener('click', (event) => {
+    const link = event.target.closest('a.lot');
+    if (!link || event.metaKey || event.ctrlKey || event.shiftKey) return;
+    event.preventDefault();
+    state.lot = new URLSearchParams(link.search).get('lot');
+    writeURL('pushState');
+    syncDialog();
+  });
+  dialog.addEventListener('close', () => {
+    if (state.lot) {
+      state.lot = '';
+      writeURL();
+    }
+  });
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  part('close').addEventListener('click', () => dialog.close());
+  addEventListener('popstate', () => {
+    readURL();
+    render();
+    syncDialog();
+  });
+
   search.addEventListener('input', () => {
     state.q = search.value;
     update();
@@ -133,12 +180,13 @@ async function collection() {
   });
   document.getElementById('controls').addEventListener('submit', (event) => event.preventDefault());
   document.getElementById('reset').addEventListener('click', () => {
-    Object.assign(state, { q: '', cat: '', price: '', sort: 'price' });
+    Object.assign(state, { q: '', cat: '', price: '', sort: 'price', lot: '' });
     update();
   });
 
   readURL();
   render();
+  syncDialog();
 }
 
 const estimate = (lot) => `${money(lot.low)} to ${money(lot.high)}`;
@@ -335,5 +383,74 @@ async function overview() {
   }
 }
 
-const pages = { overview, collection };
+async function library() {
+  const summary = document.getElementById('summary');
+  let lots;
+  try {
+    lots = await loadJSON('data/books.json');
+  } catch {
+    summary.textContent = 'The books could not be loaded. Reload the page to try again.';
+    return;
+  }
+  const search = document.getElementById('search');
+  const list = document.getElementById('books');
+  const empty = document.getElementById('empty');
+  const authorLabel = { Unknown: 'Author unknown', Various: 'Various authors' };
+  const books = lots.flatMap((lot) => lot.books.map((book) => ({
+    ...book,
+    lot,
+    row: el('li', {},
+      el('span', { className: 'book-title', textContent: pretty(book.title) }),
+      el('span', { className: 'book-author', textContent: pretty(authorLabel[book.author] || book.author) }),
+      el('a', { className: 'book-lot', href: 'collection.html?lot=' + lot.lot, textContent: pretty(lot.title) })),
+  })));
+
+  const unknown = books.filter((book) => book.author === 'Unknown').length;
+  const various = books.filter((book) => book.author === 'Various').length;
+  document.getElementById('library-intro').textContent = `${books.length} books in ${lots.length} lots. `
+    + `${unknown + various} have no named author: ${unknown} are listed as unknown and ${various} as various.`;
+
+  const counts = {};
+  for (const book of books) counts[book.lot.category] = (counts[book.lot.category] || 0) + 1;
+  const categories = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+  const params = new URLSearchParams(location.search);
+  const state = { q: params.get('q') || '', cat: categories.includes(params.get('cat')) ? params.get('cat') : '' };
+
+  const buttons = [['', `All (${books.length})`], ...categories.map((name) => [name, `${name} (${counts[name]})`])]
+    .map(([value, label]) => ({
+      value,
+      button: choiceButton(label, () => {
+        state.cat = value;
+        render();
+      }),
+    }));
+  document.getElementById('categories').append(...buttons.map((b) => b.button));
+
+  function render() {
+    search.value = state.q;
+    for (const { button, value } of buttons) button.setAttribute('aria-pressed', state.cat === value);
+    const words = state.q.toLowerCase().trim();
+    const shown = books.filter((book) => (!state.cat || book.lot.category === state.cat)
+      && `${book.title} ${pretty(book.title)} ${book.author}`.toLowerCase().includes(words));
+    list.replaceChildren(...shown.map((book) => book.row));
+    list.hidden = !shown.length;
+    empty.hidden = !!shown.length;
+    summary.textContent = `${shown.length} of ${books.length} books`;
+    const query = new URLSearchParams(Object.entries(state).filter(([, value]) => value)).toString();
+    history.replaceState(null, '', query ? '?' + query : location.pathname);
+  }
+
+  search.addEventListener('input', () => {
+    state.q = search.value;
+    render();
+  });
+  document.getElementById('controls').addEventListener('submit', (event) => event.preventDefault());
+  document.getElementById('reset').addEventListener('click', () => {
+    Object.assign(state, { q: '', cat: '' });
+    render();
+  });
+  render();
+}
+
+const pages = { overview, collection, library };
 pages[document.body.dataset.page]?.();
