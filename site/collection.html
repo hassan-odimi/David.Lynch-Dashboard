@@ -16,6 +16,7 @@
 <script src="app.js" defer></script>
 </head>
 <body data-page="collection">
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <nav aria-label="Main">
     <a class="site-name" href="index.html">The David Lynch Collection</a>
@@ -28,7 +29,7 @@
   </nav>
 </header>
 
-<main>
+<main id="main">
   <div class="page-head">
     <h1>Collection</h1>
     <p class="help">Every lot in the sale, with what it made against its estimate.</p>
@@ -71,7 +72,7 @@
           <dt>Sold for</dt><dd class="price" id="lot-dialog-sold"></dd>
           <dt>Against estimate midpoint</dt><dd class="price" id="lot-dialog-multiple"></dd>
         </dl>
-        <a id="lot-dialog-source">View the listing on Julien’s Auctions</a>
+        <a class="link-block" id="lot-dialog-source">View the listing on Julien’s Auctions</a>
       </div>
     </div>
   </dialog>

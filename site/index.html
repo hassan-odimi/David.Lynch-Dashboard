@@ -16,6 +16,7 @@
 <script src="app.js" defer></script>
 </head>
 <body data-page="overview">
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <nav aria-label="Main">
     <a class="site-name" href="index.html">The David Lynch Collection</a>
@@ -28,7 +29,7 @@
   </nav>
 </header>
 
-<main>
+<main id="main">
   <section class="hero">
     <figure>
       <img class="object" src="img/lots/15.webp" alt="Cover of the Ronnie Rocket screenplay, with a hand-drawn target and arrows">
@@ -54,7 +55,7 @@
     <div>
       <h2 class="section-title">The one that sold below estimate</h2>
       <p>The Vladimir Kagan Swan Back Sofa carried an estimate of $8,000 to $10,000 and sold for <span class="price">$6,500</span>. No other lot in the sale fell short of its low estimate.</p>
-      <p><a href="collection.html?lot=129">See the sofa</a></p>
+      <p><a class="link-block" href="collection.html?lot=129">See the sofa</a></p>
     </div>
   </section>
   <section class="wall" id="wall">
@@ -67,7 +68,7 @@
     </div>
     <div class="plot" id="plot"></div>
     <p class="wall-detail" aria-live="polite"><span id="wall-detail"></span> <a id="wall-link" hidden>See this lot</a></p>
-    <p><a href="collection.html">Browse all 441 lots in the Collection</a></p>
+    <p><a class="link-block" href="collection.html">Browse all 441 lots in the Collection</a></p>
   </section>
 
   <section class="guess" id="guess">
