@@ -1,34 +1,29 @@
 # The David Lynch Collection
 
-**David Lynch's world, in 441 objects.** An interactive study of every lot in his estate sale at Julien's Auctions: what each one was estimated at, what it sold for, and how far the room went past the estimate.
+A study of the 441 lots in David Lynch's estate sale at Julien's Auctions: the estimate, the sold price and the multiple for every lot.
 
-**[Visit the live site →](https://lynch.hassan-odimi.se)**
+Live site: [lynch.hassan-odimi.se](https://lynch.hassan-odimi.se)
 
-<p align="center">
-  <a href="https://lynch.hassan-odimi.se"><img src="docs/screenshots/story-hero.jpg" alt="The opening screen: the headline “David Lynch’s world, in 441 objects” beside a black-and-white portrait of Lynch" width="100%"></a>
-</p>
+<a href="https://lynch.hassan-odimi.se"><img src="docs/screenshots/story-hero.jpg" alt="The opening screen: the headline “David Lynch’s world, in 441 objects” beside a black-and-white portrait of Lynch" width="100%"></a>
 
 ## The sale at a glance
 
-| | |
-|---|---|
-| **$4,245,930** | sold in total, across **441 lots** |
-| **18.2×** | median sold price against the midpoint of the estimate |
-| **440 of 441** | lots sold above their high estimate |
-| **$195,000** | top price, a tie between the *Ronnie Rocket* and *Lost Highway* scripts, each 780× its midpoint |
-| **1** | lot below estimate: a Vladimir Kagan Swan Back Sofa, $6,500 against $8,000 to $10,000 |
+- $4,245,930 in total across 441 lots.
+- The median lot sold for 18.2 times the midpoint of its estimate.
+- 440 of 441 lots sold above their high estimate. The exception was a Vladimir Kagan sofa: $6,500 against $8,000 to $10,000.
+- The top price was $195,000, a tie between the *Ronnie Rocket* and *Lost Highway* scripts.
 
-It is not known whether the sold prices include buyer's premium.
+Whether sold prices include buyer's premium is not known.
 
 ## What's on the site
 
 | Page | What it does |
 |---|---|
-| **Story** | Six chapters (Wrote, Filmed, Painted, Built and furnished, Played, Read). Each one asks you to bid on a lot before showing what it sold for. |
-| **The wall** | All 441 lots in one picture. You can arrange it by price, as a chart, by colour, or as a portrait of Lynch. |
-| **Collection** | Every lot, with search, category and price filters, and a detail view for each one. |
-| **Library** | The 287 books in the sale, shelved by subject and linked to Open Library. |
-| **Dashboards** | Six tabs (Overview, Findings, Prices, Categories, Films, Books), each with its own shareable URL. |
+| Story | Six chapters. Bid on a lot in each, then see what it sold for. |
+| The wall | All 441 lots in one picture, arranged by price, as a chart, by colour or as a portrait. |
+| Collection | Every lot, with search and filters. |
+| Library | The 287 books in the sale, by subject. |
+| Dashboards | Six tabs of charts, each with its own URL. |
 
 ## A tour
 
