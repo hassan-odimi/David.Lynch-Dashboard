@@ -15,75 +15,275 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  } catch { /* The page stays light. */ }
+</script>
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
-<body data-page="overview">
+<body data-page="story">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <nav aria-label="Main">
     <a class="site-name" href="index.html">The David Lynch Collection</a>
     <div class="site-links">
+      <a href="index.html" aria-current="page">Story</a>
       <a href="collection.html">Collection</a>
-      <a href="index.html#guess">Guess the price</a>
+      <a href="index.html#wall">The wall</a>
       <a href="library.html">Library</a>
+      <a href="dashboards.html">Dashboards</a>
       <a href="about.html">About</a>
     </div>
   </nav>
 </header>
 
 <main id="main">
-  <section class="hero">
-    <figure>
-      <img class="object" src="img/lots/15.webp" alt="Cover of the Ronnie Rocket screenplay, with a hand-drawn target and arrows">
-      <figcaption>“Ronnie Rocket” unfinished film screenplays, one annotated</figcaption>
+  <svg class="defs" width="0" height="0" aria-hidden="true"><defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+    <symbol id="coffee-ring" viewBox="0 0 400 400"><g filter="url(#rough)" fill="none" stroke="currentColor">
+      <circle cx="196" cy="204" r="166" stroke-width="9" opacity=".42" stroke-dasharray="620 60 240 124"/>
+      <circle cx="196" cy="204" r="158" stroke-width="2" opacity=".3"/>
+      <circle cx="262" cy="150" r="118" stroke-width="5" opacity=".2" stroke-dasharray="300 440"/>
+    </g></symbol>
+  </defs></svg>
+  <section class="story-open">
+    <figure class="open-portrait">
+      <img src="img/portrait-2016.webp" width="1200" height="1685" alt="David Lynch in 2016, in black and white, looking at the camera." fetchpriority="high">
+      <figcaption>David Lynch, 2016. Photo by <a href="https://commons.wikimedia.org/wiki/File:David_Lynch_2016.jpg">Msubrizi</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, turned black and white. Sale figures: <a href="https://au.variety.com/2025/film/news/david-lynch-auction-directors-chair-ronnie-rocket-23993">Variety</a>.</figcaption>
     </figure>
-    <div>
-      <p class="overline">441 lots. One sale. Julien’s Auctions.</p>
-      <p class="hero-estimate">Estimate $200 to $300</p>
-      <h1>$195,000</h1>
-      <p class="hero-text">780 times the middle of its estimate. So was the “Lost Highway” script. Across the whole sale, the typical lot made 18 times its estimate, and only one sold below it.</p>
+    <div class="open-text">
+    <h1>David Lynch’s world, in 441 objects</h1>
+    <p>His estate’s 441 lots sold at Julien’s Auctions in June 2025 for <span class="price">$4,245,930</span>. Bid on six of them, then see what the room paid.</p>
+    <a class="button" href="#wrote" id="begin">Begin</a>
     </div>
   </section>
 
-  <section class="figures" aria-label="Key figures">
-    <div><div class="figure-value">$4,245,930</div><div class="figure-label">total sold</div></div>
-    <div><div class="figure-value">$5,200</div><div class="figure-label">median sale</div></div>
-    <div><div class="figure-value">18×</div><div class="figure-label">median sale against estimate midpoint</div></div>
-    <div><div class="figure-value">440 of 441</div><div class="figure-label">sold above the high estimate</div></div>
-  </section>
-
-  <section class="exception">
-    <img class="object" src="img/lots/129.webp" alt="Long grey-green sofa with a curved back, on metal legs" loading="lazy">
-    <div>
-      <h2 class="section-title">The one that sold below estimate</h2>
-      <p>The Vladimir Kagan Swan Back Sofa carried an estimate of $8,000 to $10,000 and sold for <span class="price">$6,500</span>. No other lot in the sale fell short of its low estimate.</p>
-      <p><a class="link-block" href="collection.html?lot=129">See the sofa</a></p>
+  <section class="chapter pinned" id="wrote">
+    <div class="spread" data-lots="107,110,335,16,214,367">
+      <div class="spread-title"><p class="overline">Chapter 1 of 6</p><h2>Wrote</h2></div>
     </div>
-  </section>
-  <section class="wall" id="wall">
-    <div class="wall-head">
-      <div>
-        <h2 class="section-title">Every object in the sale</h2>
-        <p class="help" id="wall-help">Most expensive first. Select any object.</p>
+    <div class="stage" data-lot="15">
+      <figure class="plate"><img class="object" src="img/lots/15.webp" width="983" height="1200" alt="Bound script cover for Ronnie Rocket with a circular ink drawing, the earlier date crossed out and Feb. 22, 1991 written in blue ink"></figure>
+      <div class="stage-copy">
+        <div class="beat"><p class="lede reveal">Lynch began <cite>Ronnie Rocket</cite> after <cite>Eraserhead</cite>, and it was never made. Backers came and went, and he set it aside to direct <cite>The Elephant Man</cite>. However, he did not let it go: in 2014 he said that he had never found “the big idea” for it.</p></div>
+        <div class="beat">
+          <p class="overline">The lot</p>
+          <h3>“Ronnie Rocket” screenplays</h3>
+          <p>Eleven scripts for a film that does not exist. Two are undated, and the rest are dated 1988, 1991 and 2012, a span of 24 years. One is annotated and dated 22 February 1991 in blue ink.</p>
+          <p class="lot-estimate"></p>
+          <div class="bid-controls"></div>
+        </div>
+        <div class="after beat" tabindex="-1" hidden>
+      <p class="overline">What it showed</p>
+      <h3>Eleven lots took nearly a fifth of the money</h3>
+      <p>The “Ronnie Rocket” scripts sold level with the <a href="collection.html?lot=278">“Lost Highway” script</a>, at the highest price in the sale. These 11 lots of scripts and papers are fewer than 3% of the sale by count, yet they took 19% of the money (<span class="price">$792,025</span>).</p>
+      <div class="finding-chart" data-finding="wrote"></div>
+      <a class="link-block" href="collection.html?cat=Scripts%20%26%20Papers">See the 11 lots</a>
+      <details class="sources"><summary>Sources</summary><p><a href="https://www.juliensauctions.com/en/items/1426291/david-lynch-ronnie-rocket-unfinished-film-screenplays-one-annotated">Julien’s Auctions, lot 15.</a> <a href="https://en.wikipedia.org/wiki/Ronnie_Rocket">Wikipedia, Ronnie Rocket,</a> citing Rodley and Lynch (2005) and The Daily Beast (2014).</p></details>
+        </div>
       </div>
-      <button class="button" type="button" id="wall-toggle">Turn the wall into a chart</button>
     </div>
-    <div class="plot" id="plot"></div>
-    <p class="wall-detail"><span id="wall-detail"></span> <a id="wall-link" hidden>See this lot</a></p>
-    <p><a class="link-block" href="collection.html">Browse all 441 lots in the Collection</a></p>
+    <p class="lead-on reveal">Many of those ideas are said to have started over coffee.</p>
   </section>
 
-  <section class="findings" id="findings">
+  <section class="interlude">
+    <a class="interlude-lot ring-art" href="collection.html?lot=01"><svg class="reveal" viewBox="0 0 400 400" aria-hidden="true"><use href="#coffee-ring"/></svg><img class="object" src="img/lots/01.webp" alt="Speckled white mug with a gold handle and a painting of the Log Lady" loading="lazy"></a>
     <div>
-      <h2 class="section-title">Eleven script lots took nearly a fifth of the money</h2>
-      <p class="help">Total sold and median multiple by category. Categories are this study’s own grouping of lot titles. Select one to see its lots.</p>
-      <table class="bars" id="category-bars">
-        <thead><tr><th scope="col">Category</th><th scope="col">Lots</th><th scope="col">Total sold</th><th scope="col">Median multiple</th></tr></thead>
-        <tbody></tbody>
+      <div class="cups" role="img" aria-label="First of three cups"><i class="full"></i><i></i><i></i></div>
+      <p class="overline">Coffee, first cup</p>
+      <p class="reveal">For seven years in the 1980s, Lynch is reported to have had lunch at Bob’s Big Boy every day: a chocolate milkshake, sweet coffee, and ideas written on the napkins.</p>
+      <details class="sources"><summary>Sources</summary><p><a href="https://bobs.net/pages/hall-of-fame-david-lynch">Bob’s Big Boy.</a> A 1999 Los Angeles Times article, as <a href="https://boffosocko.com/?p=55728330">reprinted here.</a></p></details>
+      <p class="lead-on reveal">The writing was the plan. Then came the camera.</p>
+    </div>
+  </section>
+
+  <section class="chapter pinned" id="filmed">
+    <div class="spread" data-lots="51,56,272,19,22,25">
+      <div class="spread-title"><p class="overline">Chapter 2 of 6</p><h2>Filmed</h2></div>
+    </div>
+    <div class="stage" data-lot="124">
+      <figure class="plate"><img class="object" src="img/lots/124.webp" width="1200" height="740" alt="Five film reels, three stacked and labelled in marker, beside two silver hexagonal film cases"></figure>
+      <div class="stage-copy">
+        <div class="beat"><p class="lede reveal"><cite>Eraserhead</cite> was filmed on and off over five years in the early 1970s, with the assistance of the American Film Institute. The sale held his own print of it, along with 41 lots of cameras and film gear.</p><div class="aside-lots"><a class="aside-lot" href="collection.html?lot=50"><img class="object" src="img/thumbs/50.webp" width="400" height="400" alt="" loading="lazy"><span>Linhof Master Technika camera</span></a><a class="aside-lot" href="collection.html?lot=118"><img class="object" src="img/thumbs/118.webp" width="400" height="400" alt="" loading="lazy"><span>“Lynch/Frost” walkie talkies</span></a></div></div>
+        <div class="beat">
+          <p class="overline">The lot</p>
+          <h3>Personal 35mm print of “Eraserhead”</h3>
+          <p>Five reels in two cases, with date codes from 1996. This print was screened at the CineVegas Film Festival in 2004, when Lynch received its Vanguard Director Award. The handwriting on the cases reads “Davd Lynch’s Eraserhead”.</p>
+          <p class="lot-estimate"></p>
+          <div class="bid-controls"></div>
+        </div>
+        <div class="after beat" tabindex="-1" hidden>
+      <p class="overline">What it showed</p>
+      <h3>The typical lot here made 21 times its estimate</h3>
+      <p>The 41 lots of cameras and film gear made <span class="price">$405,600</span>. With the film memorabilia included, the typical lot in this chapter sold for 21 times its estimate, a little above the sale as a whole at 18 times.</p>
+      <div class="finding-chart" data-finding="filmed"></div>
+      <a class="link-block" href="collection.html?cat=Cameras%20%26%20Film%20Gear">See the cameras and film gear</a>
+      <details class="sources"><summary>Sources</summary><p><a href="https://www.juliensauctions.com/en/items/1426357/david-lynch-personal-35mm-print-of-eraserhead">Julien’s Auctions, lot 124.</a></p></details>
+        </div>
+      </div>
+    </div>
+    <p class="lead-on reveal">Painting came first, and it never stopped.</p>
+  </section>
+
+  <section class="chapter pinned" id="painted">
+    <div class="spread" data-lots="224,225,215,212,17,208">
+      <div class="spread-title"><p class="overline">Chapter 3 of 6</p><h2>Painted</h2></div>
+    </div>
+    <div class="stage" data-lot="216">
+      <figure class="plate"><img class="object" src="img/lots/216.webp" width="1200" height="1179" alt="Very large rust-red steel easel on wheels, built as an open grid" loading="lazy"></figure>
+      <div class="stage-copy">
+        <div class="beat"><p class="lede reveal">Before film there was painting. Lynch studied at the Pennsylvania Academy of the Fine Arts, and he has described seeing a painting seem to move, which led to the idea of a “moving painting” and to his first film, <cite>Six Men Getting Sick</cite> (1967). He never stopped painting after it.</p><div class="aside-lots"><a class="aside-lot" href="collection.html?lot=203"><img class="object" src="img/thumbs/203.webp" width="400" height="400" alt="" loading="lazy"><span>Man Ray “Two Hands” print</span></a><a class="aside-lot" href="collection.html?lot=317"><img class="object" src="img/thumbs/317.webp" width="400" height="400" alt="" loading="lazy"><span>Hasui Kawase “Tengu Rock” print</span></a></div></div>
+        <div class="beat">
+          <p class="overline">The lot</p>
+        <h3>Monumental Steel Easel</h3>
+        <p>A steel easel on wheels from his outdoor art studio, 129.5 inches at its longest. Lynch can be seen using it in the documentary <cite>David Lynch: The Art Life</cite> (2016).</p>
+        <p class="lot-estimate"></p>
+        <div class="bid-controls"></div>
+        </div>
+        <div class="after beat" tabindex="-1" hidden>
+      <p class="overline">What it showed</p>
+      <h3>Art sold for 31 times its estimate</h3>
+      <p>The typical lot of art and prints sold for 31 times its estimate, well above the sale’s 18 times.</p>
+      <div class="finding-chart" data-finding="painted"></div>
+      <a class="link-block" href="collection.html?cat=Art%20%26%20Prints">See the 42 lots of art and prints</a>
+      <details class="sources"><summary>Sources</summary><p><a href="https://www.juliensauctions.com/en/items/1426386/david-lynch-monumental-steel-easel">Julien’s Auctions, lot 216.</a> <a href="https://www.pafa.org/news/pafa-presents-david-lynch-unified-field">Pennsylvania Academy of the Fine Arts.</a> <a href="https://www.artforum.com/columns/david-lynch-in-philadelphia-222468/">Artforum.</a></p></details>
+        </div>
+      </div>
+    </div>
+    <p class="lead-on reveal">Time for another cup.</p>
+  </section>
+
+  <section class="interlude">
+    <a class="interlude-lot ring-art" href="collection.html?lot=270"><svg class="reveal" viewBox="0 0 400 400" aria-hidden="true"><use href="#coffee-ring"/></svg><img class="object" src="img/lots/270.webp" alt="Open box holding a small electric espresso maker, two orange cups and two spoons" loading="lazy"></a>
+    <div>
+      <div class="cups" role="img" aria-label="Second of three cups"><i class="full"></i><i class="full"></i><i></i></div>
+      <p class="overline">Coffee, second cup</p>
+      <p class="reveal">Lynch later sold coffee under his own name. The David Lynch Signature Cup range included organic house and espresso blends. The sale held an older way of making it: an electric espresso maker from around the early 1970s, which sold for <span class="price">$1,950</span>.</p>
+      <details class="sources"><summary>Sources</summary><p><a href="https://thedieline.com/?p=482739">The Dieline.</a></p></details>
+      <p class="lead-on reveal">From the canvas to the workbench.</p>
+    </div>
+  </section>
+
+  <section class="chapter pinned" id="built">
+    <div class="spread" data-lots="262,265,263,10,276,18">
+      <div class="spread-title"><p class="overline">Chapter 4 of 6</p><h2>Built and furnished</h2></div>
+    </div>
+    <div class="stage" data-lot="213">
+      <figure class="plate"><img class="object" src="img/lots/213.webp" width="1200" height="1182" alt="A smooth head of layered wood beside a smaller white plaster head with hollow eyes" loading="lazy"></figure>
+      <div class="stage-copy">
+        <div class="beat"><p class="lede reveal">Lynch presented a furniture collection at the Salone del Mobile in Milan in April 1997, and some of his designs appear in <cite>Lost Highway</cite>. This chapter holds both what he made and what he lived with, and only a few of its 104 lots are described as homemade or handmade, and for the rest the maker is not stated.</p><div class="aside-lots"><a class="aside-lot" href="collection.html?lot=131"><img class="object" src="img/thumbs/131.webp" width="400" height="400" alt="" loading="lazy"><span>George Nelson Coconut chair</span></a><a class="aside-lot" href="collection.html?lot=07"><img class="object" src="img/thumbs/07.webp" width="400" height="400" alt="" loading="lazy"><span>Hot pink velvet sofa</span></a></div></div>
+        <div class="beat">
+          <p class="overline">The lot</p>
+        <h3>Homemade Figural Head Sculptures</h3>
+        <p>One is plaster, labelled underneath “For David, who made it”. The other is layered wood, labelled “Lynch Brothers, 1971”.</p>
+        <p class="lot-estimate"></p>
+        <div class="bid-controls"></div>
+        </div>
+        <div class="after beat" tabindex="-1" hidden>
+      <p class="overline">What it showed</p>
+      <h3>Lots marked homemade went further</h3>
+      <p>The 9 lots here with homemade or handmade in the title typically sold for 23 times their estimate, against 10 times for the other 95. It may be that buyers paid for his hand, although 9 lots is a small sample. This chapter also holds the one lot in the sale that sold below its estimate, <a href="collection.html?lot=129">a Vladimir Kagan sofa</a>.</p>
+      <div class="finding-chart" data-finding="built"></div>
+      <a class="link-block" href="collection.html?q=homemade">See the homemade lots</a>
+      <details class="sources"><summary>Sources</summary><p><a href="https://www.juliensauctions.com/en/items/1426385/david-lynch-homemade-figural-head-sculptures">Julien’s Auctions, lot 213.</a> <a href="https://filmandfurniture.com/?p=15209">Film and Furniture.</a></p></details>
+        </div>
+      </div>
+    </div>
+    <p class="lead-on reveal">The workshop was not the only studio.</p>
+  </section>
+
+  <section class="chapter pinned" id="played">
+    <div class="spread" data-lots="249,78,409,340,77,72">
+      <div class="spread-title"><p class="overline">Chapter 5 of 6</p><h2>Played</h2></div>
+    </div>
+    <div class="stage" data-lot="76">
+      <figure class="plate"><img class="object" src="img/lots/76.webp" width="1200" height="1009" alt="Black console guitar with five parallel necks on a low frame" loading="lazy"></figure>
+      <div class="stage-copy">
+        <div class="beat"><p class="lede reveal">Lynch released <cite>Crazy Clown Time</cite> in 2011 and <cite>The Big Dream</cite> in 2013, and he played guitar his own way. “I taught myself and I play upside down and backwards, like a lap guitar,” he said in 2001.</p><div class="aside-lots"><a class="aside-lot" href="collection.html?lot=79"><img class="object" src="img/thumbs/79.webp" width="400" height="400" alt="" loading="lazy"><span>Fernandes 8 string bass</span></a><a class="aside-lot" href="collection.html?lot=256"><img class="object" src="img/thumbs/256.webp" width="400" height="400" alt="" loading="lazy"><span>Lap steel gifted by Moby</span></a></div></div>
+        <div class="beat">
+          <p class="overline">The lot</p>
+        <h3>Danny Ferrington five neck console guitar</h3>
+        <p>Built in 2012 by the luthier Danny Ferrington to Lynch’s own console steel design, with four standard necks and a fifth baritone neck. Julien’s describes it as designed and played by Lynch in his home studio.</p>
+        <p class="lot-estimate"></p>
+        <div class="bid-controls"></div>
+        </div>
+        <div class="after beat" tabindex="-1" hidden>
+      <p class="overline">What it showed</p>
+      <h3>The guitars made $214,825</h3>
+      <p>The 22 guitar and bass lots made <span class="price">$214,825</span>, and the typical one sold for 15 times its estimate.</p>
+      <div class="finding-chart" data-finding="played"></div>
+      <a class="link-block" href="collection.html?cat=Music%20%26%20Audio">See the music and audio lots</a>
+      <details class="sources"><summary>Sources</summary><p><a href="https://www.juliensauctions.com/en/items/1426191/david-lynch-danny-ferrington-custom-five-neck-console-guitar-designed-and-studio-played-by-david-lyn">Julien’s Auctions, lot 76,</a> quoting Sam Molineaux in Boss Users Group Magazine, 2001.</p></details>
+        </div>
+      </div>
+    </div>
+    <p class="lead-on reveal">Between all of this, he read.</p>
+  </section>
+
+  <section class="chapter pinned" id="read">
+    <div class="spread" data-lots="385,388,122,93,171,295">
+      <div class="spread-title"><p class="overline">Chapter 6 of 6</p><h2>Read</h2></div>
+    </div>
+    <div class="stage" data-lot="123">
+      <figure class="plate"><img class="object" src="img/lots/123.webp" width="980" height="1200" alt="Green cloth-bound book with a pink flower emblem, titled I Will Build My Church" loading="lazy"></figure>
+      <div class="stage-copy">
+        <div class="beat"><p class="lede reveal">In 1986 Lynch said that one artist who could be his brother was Franz Kafka. <a href="library.html?q=kafka">Works by Kafka</a> were in the sale, in a lot of paperback fiction, and another lot held a book called <cite>Kafka Goes to the Movies</cite>. The sale listed 287 books across 38 lots, and <a href="library.html">the Library</a> lets you browse them.</p><div class="aside-lots"><a class="aside-lot" href="collection.html?lot=47"><img class="object" src="img/thumbs/47.webp" width="400" height="400" alt="" loading="lazy"><span>Hollywood biography and reference books</span></a><a class="aside-lot" href="collection.html?lot=386"><img class="object" src="img/thumbs/386.webp" width="400" height="400" alt="" loading="lazy"><span>Literary fiction books</span></a></div></div>
+        <div class="beat">
+          <p class="overline">The lot</p>
+        <h3>Signed copy of “I Will Build My Church”</h3>
+        <p>Amy Lillie’s book, published in Philadelphia in 1950, carries a “Studio David Lynch” stamp. It is signed in pencil “David K. Lynch”, with a phone number and an address written beside the name.</p>
+        <p class="lot-estimate"></p>
+        <div class="bid-controls"></div>
+        </div>
+        <div class="after beat" tabindex="-1" hidden>
+      <p class="overline">What it showed</p>
+      <h3>Books took the smallest share</h3>
+      <p>Books took 9% of the money, the smallest share of the six chapters. Curiously, the 10 signed or inscribed book lots typically rose less (6 times) than the others (16 times). The reason is not known from this data.</p>
+      <div class="finding-chart" data-finding="read"></div>
+      <a class="link-block" href="library.html">Browse the Library by subject</a>
+      <details class="sources"><summary>Sources</summary><p><a href="https://www.juliensauctions.com/en/items/1426512/david-lynch-lynch-signed-amy-lillie-i-will-build-my-church-book">Julien’s Auctions, lot 123.</a> <a href="https://faroutmagazine.co.uk/why-david-lynch-thought-franz-kafka-could-be-his-brother/">Far Out,</a> quoting the 1986 David Chute interview.</p></details>
+        </div>
+      </div>
+    </div>
+    <p class="lead-on reveal">One last cup.</p>
+  </section>
+
+  <section class="interlude last-cup">
+    <div class="cups" role="img" aria-label="Last of three cups"><i class="full"></i><i class="full"></i><i class="full"></i></div>
+    <p class="overline">Coffee, last cup</p>
+    <h2>Three machines, each estimated at $2,000 to $3,000</h2>
+    <p class="help">Each machine is drawn at a size that matches what it sold for.</p>
+    <div class="machines">
+      <svg class="last-ring" viewBox="0 0 400 400" aria-hidden="true"><use href="#coffee-ring"/></svg>
+      <a class="machine" href="collection.html?lot=03" style="--size:1"><img class="object" src="img/lots/03.webp" alt="La Marzocco GS/3 espresso machine" loading="lazy"><span class="price">$45,500</span><span class="machine-note">Lot 3, 18× the estimate</span></a><a class="machine" href="collection.html?lot=269" style="--size:0.6"><img class="object" src="img/lots/269.webp" alt="La Marzocco GS/3 espresso machine" loading="lazy"><span class="price">$16,250</span><span class="machine-note">Lot 269, 6.5× the estimate</span></a><a class="machine" href="collection.html?lot=420" style="--size:0.51"><img class="object" src="img/lots/420.webp" alt="La Marzocco GS/3 espresso machine with its accessories" loading="lazy"><span class="price">$11,700</span><span class="machine-note">Lot 420, 4.7× the estimate</span></a>
+    </div>
+    <p>Julien’s describes all three as used by Lynch daily, with small differences in the accessories.</p>
+    <details class="sources"><summary>Sources</summary><p>Julien’s Auctions, lots <a href="https://www.juliensauctions.com/en/items/1426565/david-lynch-la-marzocco-gs-3-home-espresso-machine-a">3,</a> <a href="https://www.juliensauctions.com/en/items/1426489/david-lynch-la-marzocco-gs-3-home-espresso-machine-b">269</a> and <a href="https://www.juliensauctions.com/en/items/1426296/david-lynch-la-marzocco-gs-3-home-espresso-machine-c">420.</a></p></details>
+  </section>
+
+  <section class="result" id="result">
+    <p class="overline" id="result-label">Your sale result</p>
+    <h2 id="result-title">Place a bid in any chapter and your result appears here.</h2>
+    <div id="result-body" hidden>
+      <p class="result-text" id="result-text"></p>
+      <table class="result-sheet">
+        <thead><tr><th scope="col">Lot</th><th scope="col">Bid</th><th scope="col">Sold for</th></tr></thead>
+        <tbody id="result-rows"></tbody>
       </table>
     </div>
-    <div>
+    <div class="bid-actions">
+      <button class="button" type="button" id="result-share" hidden>Share your result</button>
+      <a class="choice" href="#wall">See the wall</a>
+      <button class="choice" type="button" id="result-reset" hidden>Start the bids again</button>
+    </div>
+    <p class="help" id="result-shared" role="status"></p>
+  </section>
+
+
+  <section class="wall" id="wall">
+    <div class="finale-chart">
       <h2 class="section-title">The lowest estimates ran furthest</h2>
       <p class="help">Median multiple, grouped by the midpoint of each lot’s estimate. The top groups hold few lots.</p>
       <table class="bars" id="estimate-bars">
@@ -91,46 +291,57 @@
         <tbody></tbody>
       </table>
     </div>
-  </section>
-
-  <section class="guess" id="guess">
-    <h2 class="section-title">Guess the price</h2>
-    <p class="help">Five lots. Drag to bid what you think each one sold for. The closer you get, the more points, up to 100 a lot.</p>
-    <ol class="guess-steps" id="guess-steps" aria-hidden="true"></ol>
-    <div class="guess-round" id="guess-round">
-      <img class="object" id="guess-image" alt="">
-      <div id="guess-copy">
-        <p class="overline" id="guess-count"></p>
-        <h3 id="guess-title"></h3>
-        <p class="guess-estimate" id="guess-estimate"></p>
-        <label class="overline" for="guess-slider">Your bid</label>
-        <p class="guess-bid" id="guess-bid" aria-hidden="true"></p>
-        <div class="bid-scale">
-          <span class="bid-band" id="guess-band"></span>
-          <input type="range" id="guess-slider" min="0" max="400" step="1">
-          <span class="bid-marker" id="guess-marker" hidden></span>
-        </div>
-        <div class="bid-ticks" id="guess-ticks" aria-hidden="true"></div>
-        <button class="button" type="button" id="guess-place">Place bid</button>
-        <p class="guess-sold price" id="guess-sold" aria-hidden="true" hidden></p>
-        <p class="guess-reveal" id="guess-reveal" aria-live="polite"></p>
-        <button class="button" type="button" id="guess-next" hidden></button>
+    <div class="wall-head">
+      <div>
+        <h2 class="section-title">The wall</h2>
+        <p class="wall-lead">All 441 lots in one picture. The typical lot sold for 18 times its estimate. Only one sold for less.</p>
+        <p class="help" id="wall-help"></p>
+        <p class="help" id="wall-yours" role="status"></p>
+      </div>
+      <div class="wall-controls">
+      <div class="wall-views" id="wall-views" role="group" aria-label="Arrange the wall"><button class="choice" type="button" data-view="wall">By price</button><button class="choice" type="button" data-view="chart">As a chart</button><button class="choice" type="button" data-view="colour">By colour</button><button class="choice" type="button" data-view="portrait">Portrait</button></div>
+        <button class="choice colour-melt off" type="button" id="colour-melt" aria-pressed="false" disabled>Melt into colour</button>
       </div>
     </div>
-    <div class="guess-score" id="guess-done" hidden>
-      <p id="guess-score"></p>
-      <table class="guess-sheet" id="guess-sheet">
-        <thead><tr><th scope="col">Lot</th><th scope="col">Your bid</th><th scope="col">Sold</th><th scope="col">Points</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="guess-actions">
-        <button class="button" type="button" id="guess-again">Play again</button>
-        <button class="choice" type="button" id="guess-share">Share your score</button>
-      </div>
-      <p class="help" id="guess-shared" role="status"></p>
-    </div>
+    <div class="plot" id="plot"></div>
+    <p class="wall-detail"><span id="wall-detail"></span> <a id="wall-link" hidden>See this lot</a></p>
+    <p class="catalogue-link"><a class="button" href="collection.html">Open the Collection</a></p>
   </section>
+  <dialog class="lot-dialog" id="lot-dialog" aria-labelledby="lot-dialog-title">
+    <div class="lot-dialog-body">
+      <button class="choice lot-dialog-close" type="button" id="lot-dialog-close">Close</button>
+      <img class="object" id="lot-dialog-image" alt="">
+      <div>
+        <p class="overline" id="lot-dialog-category"></p>
+        <h2 id="lot-dialog-title"></h2>
+        <dl>
+          <dt>Estimate</dt><dd id="lot-dialog-estimate"></dd>
+          <dt>Sold for</dt><dd class="price" id="lot-dialog-sold"></dd>
+          <dt>Against estimate midpoint</dt><dd class="price" id="lot-dialog-multiple"></dd>
+        </dl>
+        <a class="link-block" id="lot-dialog-collection" href="collection.html">Browse the Collection</a>
+        <a class="link-block" id="lot-dialog-source">View the listing on Julien’s Auctions</a>
+      </div>
+    </div>
+  </dialog>
 </main>
+
+<template id="bid-controls">
+  <label class="overline">Your bid</label>
+  <p class="bid-value" aria-hidden="true"></p>
+  <div class="bid-scale">
+    <span class="bid-band"></span>
+    <input type="range" min="0" max="400" step="1">
+    <span class="bid-marker" hidden></span>
+  </div>
+  <div class="bid-ticks" aria-hidden="true"></div>
+  <div class="bid-actions">
+    <button class="button" type="button" data-place>Place bid</button>
+    <button class="choice" type="button" data-skip>Skip this bid</button>
+  </div>
+  <p class="bid-sold price" aria-hidden="true" hidden></p>
+  <p class="bid-reveal" aria-live="polite"></p>
+</template>
 
 <footer class="site-footer">
   <p>Independent study by Hassan Odimi. Not affiliated with Julien’s Auctions. Multiples compare sold price with the midpoint of the estimate.</p>

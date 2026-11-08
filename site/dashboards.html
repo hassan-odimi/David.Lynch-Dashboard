@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Dashboards: The David Lynch Collection</title>
+<meta name="description" content="Dashboards for the David Lynch sale at Julien's Auctions: totals, prices, categories, films and books.">
+<meta property="og:title" content="Dashboards: The David Lynch Collection">
+<meta property="og:description" content="The whole sale in numbers: prices, categories, films and books.">
+<meta property="og:image" content="https://lynch.hassan-odimi.se/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  } catch { /* The page stays light. */ }
+</script>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body data-page="dashboards">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav aria-label="Main">
+    <a class="site-name" href="index.html">The David Lynch Collection</a>
+    <div class="site-links">
+      <a href="index.html">Story</a>
+      <a href="collection.html">Collection</a>
+      <a href="index.html#wall">The wall</a>
+      <a href="library.html">Library</a>
+      <a href="dashboards.html" aria-current="page">Dashboards</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <h1>Dashboards</h1>
+    <p class="help">The whole sale in numbers. Every tab has its own address, so you can share it.</p>
+  </div>
+  <div class="dash-tabs" role="tablist" aria-label="Dashboards">
+    <button class="dash-tab" type="button" role="tab" id="tab-overview" aria-controls="panel-overview" data-tab="overview">Overview</button>
+    <button class="dash-tab" type="button" role="tab" id="tab-findings" aria-controls="panel-findings" data-tab="findings">Findings</button>
+    <button class="dash-tab" type="button" role="tab" id="tab-prices" aria-controls="panel-prices" data-tab="prices">Prices</button>
+    <button class="dash-tab" type="button" role="tab" id="tab-categories" aria-controls="panel-categories" data-tab="categories">Categories</button>
+    <button class="dash-tab" type="button" role="tab" id="tab-films" aria-controls="panel-films" data-tab="films">Films</button>
+    <button class="dash-tab" type="button" role="tab" id="tab-books" aria-controls="panel-books" data-tab="books">Books</button>
+  </div>
+
+  <section class="dash-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" hidden>
+    <div class="dash-head"><h2 id="d-title">All 441 lots</h2></div>
+    <div class="chips" id="d-chips" role="group" aria-label="Show one category"></div>
+    <div class="kpis" id="d-kpis"></div>
+    <div class="dash-cell dash-wide">
+      <h3>A few sheets of paper outweigh the furniture</h3>
+      <p class="help" id="map-say"></p>
+      <div class="money-map" id="sale-map"></div>
+    </div>
+    <div class="dash-cell dash-wide">
+      <h3>The 10 highest prices</h3>
+      <div class="pic-bars" id="d-top"></div>
+      <a class="link-block" id="d-more" href="collection.html">See these lots in the Collection</a>
+    </div>
+    <p class="dash-next">See how estimates compared with prices on the <a href="?tab=prices" data-tab-link="prices">Prices tab</a>.</p>
+  </section>
+
+  <section class="dash-panel findings" role="tabpanel" id="panel-findings" aria-labelledby="tab-findings" hidden>
+    <h2 class="visually-hidden">What the sale showed</h2>
+    <div class="insight">
+      <h3>A film that was never made outsold “Mulholland Drive”</h3>
+      <p>Each column is a career moment, built from the lots that name it. The taller the column, the more its lots made. Choose a film to open its pages.</p>
+      <div class="career" id="career" role="group" aria-label="Lots by film, in order of release" tabindex="0"></div>
+      <div class="film-detail" id="film-detail" role="status"></div>
+      <p class="help">Counts lots that name the film in their title. “Blue Velvet” has one lot, a group of record albums, so this measures what was offered, not what each film is worth.</p>
+    </div>
+
+    <div class="insight">
+      <h3 id="same-title"></h3>
+      <p>Further right, it sold for more. Nothing about the estimate told these lots apart.</p>
+      <div id="same-estimate"></div>
+    </div>
+
+    <div class="insight">
+      <h3>Same price, two worlds</h3>
+      <p>The room paid exactly the same for each of these pairs.</p>
+      <div class="twins" id="twins"></div>
+    </div>
+
+    <div class="insight">
+      <h3>Five of the six biggest rises are scripts. All six smallest carry another maker’s name.</h3>
+      <p>High estimates also leave less room to rise, so this is a pattern, not a proof.</p>
+      <h4>Rose most</h4>
+      <div class="rose" id="rose-most"></div>
+      <h4>Rose least</h4>
+      <div class="rose" id="rose-least"></div>
+    </div>
+  </section>
+
+  <section class="dash-panel" role="tabpanel" id="panel-prices" aria-labelledby="tab-prices" hidden>
+    <h2 class="visually-hidden">Prices</h2>
+    <div class="kpis" id="p-kpis"></div>
+    <div class="dash-cell">
+      <h3>Estimate against sold price</h3>
+      <p class="help">Each mark is a lot. Higher sold for more; further right had a higher estimate. The diagonals mark a sale at the estimate, at 10 times and at 100 times it. Hover over a mark to see the object.</p>
+      <p class="legend"><span><i class="key-dot"></i>One lot</span><span><i class="key-pic"></i>One of the 20 highest prices</span></p>
+      <div class="scatter wide" id="d-scatter" role="img" aria-label="Scatter chart of all 441 lots, estimate midpoint against sold price. All but one lot sold above its estimate, and the typical lot sold for 18 times it."></div>
+    </div>
+    <div class="dash-grid even">
+      <div class="dash-cell">
+        <h3>What the lots sold for</h3>
+        <p class="help">Number of lots in each price range.</p>
+        <div class="histogram" id="p-prices"></div>
+      </div>
+      <div class="dash-cell">
+        <h3>How far each lot went past its estimate</h3>
+        <p class="help">Number of lots in each range. Only one sold below its estimate.</p>
+        <div class="histogram" id="d-multiples"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dash-panel" role="tabpanel" id="panel-categories" aria-labelledby="tab-categories" hidden>
+    <h2 class="visually-hidden">Categories</h2>
+    <p class="help">Choose a column heading to sort. Choose a category to open its lots in the Collection.</p>
+    <table class="dash-table sortable" id="c-table">
+      <thead><tr>
+        <th scope="col"><button type="button" data-sort="name">Category</button></th>
+        <th scope="col"><button type="button" data-sort="count">Lots</button></th>
+        <th scope="col"><button type="button" data-sort="total">Sold for in total</button></th>
+        <th scope="col"><button type="button" data-sort="share">Share of the money</button></th>
+        <th scope="col"><button type="button" data-sort="median">Median price</button></th>
+        <th scope="col"><button type="button" data-sort="multiple">Typical multiple</button></th>
+        <th scope="col">Highest price</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="dash-panel" role="tabpanel" id="panel-films" aria-labelledby="tab-films" hidden>
+    <h2 class="visually-hidden">Films</h2>
+    <p class="help">Lots whose titles name a film or series. Some lots name more than one, and most lots name none. The bar under each film compares its total with the largest.</p>
+    <ol class="film-grid" id="f-films" aria-label="Films, by what their lots sold for"></ol>
+    <p class="help">Film posters from <a href="https://www.themoviedb.org/">TMDB</a>. This site uses the TMDB API but is not endorsed or certified by TMDB.</p>
+  </section>
+
+  <section class="dash-panel" role="tabpanel" id="panel-books" aria-labelledby="tab-books" hidden>
+    <h2 class="visually-hidden">Books</h2>
+    <div class="kpis" id="b-kpis"></div>
+    <div class="dash-cell">
+      <h3>Art filled more of his shelves than film</h3>
+      <p class="help">Each spine is one book, shelved by subject. Hover over a spine to see it, and choose one to open its lot. Choose a subject to see its books in the Library.</p>
+      <ol class="shelf" id="b-shelf" aria-label="Books by subject"></ol>
+    </div>
+    <div class="dash-cell">
+      <h3>The book lots that sold highest</h3>
+      <div class="pic-bars" id="b-top"></div>
+    </div>
+    <h3>Most frequent authors</h3>
+    <p class="help">The authors with two or more books in the sale. Choose a name to search the Library.</p>
+    <ol class="film-grid" id="b-authors" aria-label="Authors, by number of books"></ol>
+    <p class="help">Author photos from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>, credited under each one.</p>
+  </section>
+  <dialog class="lot-dialog" id="lot-dialog" aria-labelledby="lot-dialog-title">
+    <div class="lot-dialog-body">
+      <button class="choice lot-dialog-close" type="button" id="lot-dialog-close">Close</button>
+      <img class="object" id="lot-dialog-image" alt="">
+      <div>
+        <p class="overline" id="lot-dialog-category"></p>
+        <h2 id="lot-dialog-title"></h2>
+        <dl>
+          <dt>Estimate</dt><dd id="lot-dialog-estimate"></dd>
+          <dt>Sold for</dt><dd class="price" id="lot-dialog-sold"></dd>
+          <dt>Against estimate midpoint</dt><dd class="price" id="lot-dialog-multiple"></dd>
+        </dl>
+        <a class="link-block" id="lot-dialog-collection" href="collection.html">Browse the Collection</a>
+        <a class="link-block" id="lot-dialog-source">View the listing on Julien’s Auctions</a>
+      </div>
+    </div>
+  </dialog>
+</main>
+
+<footer class="site-footer">
+  <p>Independent study by Hassan Odimi. Not affiliated with Julien’s Auctions. Multiples compare sold price with the midpoint of the estimate.</p>
+</footer>
+</body>
+</html>

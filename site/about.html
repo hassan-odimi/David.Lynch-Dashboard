@@ -15,6 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  } catch { /* The page stays light. */ }
+</script>
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
@@ -24,9 +29,11 @@
   <nav aria-label="Main">
     <a class="site-name" href="index.html">The David Lynch Collection</a>
     <div class="site-links">
+      <a href="index.html">Story</a>
       <a href="collection.html">Collection</a>
-      <a href="index.html#guess">Guess the price</a>
+      <a href="index.html#wall">The wall</a>
       <a href="library.html">Library</a>
+      <a href="dashboards.html">Dashboards</a>
       <a href="about.html" aria-current="page">About</a>
     </div>
   </nav>
@@ -38,7 +45,10 @@
   </div>
 
   <section class="about-split">
-    <img src="img/lynch.webp" alt="Black and white portrait of David Lynch looking into the camera" width="1024" height="683">
+    <figure>
+      <img src="img/portrait-2016.webp" alt="David Lynch in 2016, in black and white, looking at the camera." width="1200" height="1685">
+      <figcaption>David Lynch, 2016. Photo by <a href="https://commons.wikimedia.org/wiki/File:David_Lynch_2016.jpg">Msubrizi</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, turned black and white and cropped.</figcaption>
+    </figure>
     <div class="prose">
       <h2>A personal reflection</h2>
       <p>I am fascinated by cinema that defies convention and invites deeper reflection. Few have done so like David Lynch. I have always admired his wonderfully strange personality, which reminds me of my grandfather’s eccentric spirit. His work, with its surreal imagery and layered narratives, has profoundly influenced modern art and cinema.</p>
@@ -57,6 +67,7 @@
     </ul>
     <h2>Source</h2>
     <p>All auction data and lot images come from <a href="https://www.juliensauctions.com/en/auctions/julien-s-auctions-turner-classic-movies-present-the-david-lynch-collection">Julien’s Auctions</a>. The images are hosted on this site with credit to that source. This site is an independent study and is not affiliated with Julien’s Auctions.</p>
+    <p>The portrait on the opening page, on this page and in the wall’s Portrait view is <a href="https://commons.wikimedia.org/wiki/File:David_Lynch_2016.jpg">“David Lynch 2016”</a> by Msubrizi, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. It has been turned black and white and cropped, and the changed version is shared under the same licence.</p>
   </section>
 
   <section class="about-creator">

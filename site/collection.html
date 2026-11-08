@@ -15,6 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  } catch { /* The page stays light. */ }
+</script>
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
@@ -24,9 +29,11 @@
   <nav aria-label="Main">
     <a class="site-name" href="index.html">The David Lynch Collection</a>
     <div class="site-links">
+      <a href="index.html">Story</a>
       <a href="collection.html" aria-current="page">Collection</a>
-      <a href="index.html#guess">Guess the price</a>
+      <a href="index.html#wall">The wall</a>
       <a href="library.html">Library</a>
+      <a href="dashboards.html">Dashboards</a>
       <a href="about.html">About</a>
     </div>
   </nav>

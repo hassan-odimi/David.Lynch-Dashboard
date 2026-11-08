@@ -15,6 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  } catch { /* The page stays light. */ }
+</script>
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
@@ -24,9 +29,11 @@
   <nav aria-label="Main">
     <a class="site-name" href="index.html">The David Lynch Collection</a>
     <div class="site-links">
+      <a href="index.html">Story</a>
       <a href="collection.html">Collection</a>
-      <a href="index.html#guess">Guess the price</a>
+      <a href="index.html#wall">The wall</a>
       <a href="library.html" aria-current="page">Library</a>
+      <a href="dashboards.html">Dashboards</a>
       <a href="about.html">About</a>
     </div>
   </nav>
@@ -42,15 +49,32 @@
     <label class="field">Search titles and authors
       <input type="search" id="search" autocomplete="off">
     </label>
-    <fieldset class="filter"><legend>Category</legend><div id="categories"></div></fieldset>
+    <fieldset class="filter"><legend>Subject</legend><div id="categories"></div></fieldset>
   </form>
 
   <div class="summary">
     <p id="summary" role="status"></p>
     <button class="choice" type="button" id="reset">Reset</button>
   </div>
-  <ul class="books" id="books"></ul>
+  <div id="books"></div>
   <p class="empty" id="empty" hidden>No books match. Try fewer words, or reset the filters.</p>
+  <dialog class="lot-dialog" id="lot-dialog" aria-labelledby="lot-dialog-title">
+    <div class="lot-dialog-body">
+      <button class="choice lot-dialog-close" type="button" id="lot-dialog-close">Close</button>
+      <img class="object" id="lot-dialog-image" alt="">
+      <div>
+        <p class="overline" id="lot-dialog-category"></p>
+        <h2 id="lot-dialog-title"></h2>
+        <dl>
+          <dt>Estimate</dt><dd id="lot-dialog-estimate"></dd>
+          <dt>Sold for</dt><dd class="price" id="lot-dialog-sold"></dd>
+          <dt>Against estimate midpoint</dt><dd class="price" id="lot-dialog-multiple"></dd>
+        </dl>
+        <a class="link-block" id="lot-dialog-collection" href="collection.html">Browse the Collection</a>
+        <a class="link-block" id="lot-dialog-source">View the listing on Julien’s Auctions</a>
+      </div>
+    </div>
+  </dialog>
 </main>
 
 <footer class="site-footer">
